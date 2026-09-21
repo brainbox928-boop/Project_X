@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment & Order History | brainboxX</title>
+    <meta
+      name="description"
+      content="Secure payment page for bank transfer, card payment, mobile wallet, and crypto wallet options with order history and confirmation details."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav">
+        <div class="brand" aria-label="brainboxX checkout">
+          <span>brainboxX</span>
+        </div>
+
+        <p class="cart-item-meta">Secure checkout</p>
+      </div>
+    </header>
+
+    <main class="payment-page">
+      <div class="container">
+        <div class="section-head center">
+          <p class="tagline">Payment Page</p>
+          <h2>Secure checkout and order confirmation.</h2>
+        </div>
+
+        <!-- Order History Section -->
+        <div class="order-card mb-16">
+          <h3>Order History</h3>
+          <div id="orderHistoryList" class="order-history-list"></div>
+        </div>
+
+        <!-- Checkout & Summary Layout -->
+        <div class="payment-layout">
+          <section class="checkout-card">
+            <h3>Checkout</h3>
+            <form class="checkout-form" id="checkoutForm">
+              <div class="field">
+                <label for="fullName">Full name</label>
+                <input id="fullName" type="text" placeholder="Your full name" required />
+              </div>
+
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" type="email" placeholder="you@example.com" required />
+              </div>
+
+              <div class="field">
+                <label for="phone">Phone number</label>
+                <input id="phone" type="tel" placeholder="+234..." required />
+              </div>
+
+              <div class="field">
+                <label for="address">Delivery/service address</label>
+                <textarea id="address" placeholder="Enter your delivery or service address" required></textarea>
+              </div>
+
+              <div class="field">
+                <label for="notes">Special instructions</label>
+                <textarea id="notes" placeholder="Any instructions for your order"></textarea>
+              </div>
+
+              <button type="submit" class="primary-btn btn-block">Confirm Checkout</button>
+            </form>
+          </section>
+
+          <aside class="summary-card">
+            <h3>Order Confirmation</h3>
+            <div id="cartSummaryList" class="cart-list">
+              <div class="empty-note">No items in cart yet.</div>
+            </div>
+
+            <div class="summary-row">
+              <span>Subtotal</span>
+              <span id="subtotalAmount">₦0</span>
+            </div>
+            <div class="summary-row">
+              <span>Service fee</span>
+              <span id="feeAmount">₦0</span>
+            </div>
+            <div class="summary-row total">
+              <span>Total</span>
+              <span id="totalAmount">₦0</span>
+            </div>
+          </aside>
+        </div>
+
+        <!-- Payment Methods Section -->
+        <div class="payment-card mt-28">
+          <h3>Payment Method</h3>
+          <div class="payment-methods">
+            <label class="payment-option active">
+              <span class="payment-option-left">
+                <input type="radio" name="payment" checked />
+                <span>Bank Transfer</span>
+              </span>
+              <span>🏦</span>
+            </label>
+
+            <label class="payment-option">
+              <span class="payment-option-left">
+                <input type="radio" name="payment" />
+                <span>Card Payment</span>
+              </span>
+              <span>💳</span>
+            </label>
+
+            <label class="payment-option">
+              <span class="payment-option-left">
+                <input type="radio" name="payment" />
+                <span>Crypto Wallet</span>
+              </span>
+              <span>₿</span>
+            </label>
+
+            <label class="payment-option">
+              <span class="payment-option-left">
+                <input type="radio" name="payment" />
+                <span>Mobile Wallet</span>
+              </span>
+              <span>📱</span>
+            </label>
+          </div>
+
+          <div class="qr-box">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=brainboxX%20payment%20details%20bank%20transfer" alt="QR code payment" />
+          </div>
+
+          <div class="mt-18">
+            <p><strong>Bank details:</strong> GTBank • 0123456789 • brainboxX Services</p>
+            <p><strong>Card payment:</strong> Use your debit or credit card securely after checkout.</p>
+            <p><strong>Crypto wallet:</strong> Send payment to the wallet address indicated on confirmation.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <span>brainboxX</span>
+        </div>
+
+      </div>
+
+      <div class="container footer-bottom">
+        <p>© 2026 brainboxX. All rights reserved.</p>
+        <p>Trusted digital services for Nigeria.</p>
+      </div>
+    </footer>
+
+    <script src="marketplace.js"></script>
+    <script src="script.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        renderSummary();
+        renderOrders();
+      });
+
+      function renderSummary() {
+        const cart = cartManager.cart;
+        const subtotalAmount = document.getElementById('subtotalAmount');
+        const feeAmount = document.getElementById('feeAmount');
+        const totalAmount = document.getElementById('totalAmount');
+        const cartSummaryList = document.getElementById('cartSummaryList');
+
+        if (!cart.length) {
+          cartSummaryList.innerHTML = '<div class="empty-note">No items in cart yet.</div>';
+          subtotalAmount.textContent = formatMoney(0);
+          feeAmount.textContent = formatMoney(0);
+          totalAmount.textContent = formatMoney(0);
+          return;
+        }
+
+        const subtotal = cartManager.getTotal();
+        const fee = subtotal > 0 ? MARKETPLACE_CONFIG.serviceFee : 0;
+        const total = subtotal + fee;
+
+        cartSummaryList.innerHTML = cart.map(item => `
+          <div class="cart-item">
+            <div>
+              <div class="cart-item-name">${item.name}</div>
+              <div class="cart-item-meta">Qty: ${item.qty}</div>
+            </div>
+            <div class="cart-item-total">${formatMoney(item.price * item.qty)}</div>
+          </div>
+        `).join('');
+
+        subtotalAmount.textContent = formatMoney(subtotal);
+        feeAmount.textContent = formatMoney(fee);
+        totalAmount.textContent = formatMoney(total);
+      }
+
+      function renderOrders() {
+        const orderHistory = cartManager.getOrderHistory();
+        const orderHistoryList = document.getElementById('orderHistoryList');
+
+        if (!orderHistory.length) {
+          orderHistoryList.innerHTML = '<div class="empty-note">No completed orders yet.</div>';
+          return;
+        }
+
+        orderHistoryList.innerHTML = orderHistory.map(order => `
+          <div class="order-history-item">
+            <div class="order-meta">
+              <strong>#${order.id}</strong>
+              <span class="status-pill">${order.status}</span>
+            </div>
+            <div class="cart-item-meta">${new Date(order.date).toLocaleString()} • ${order.customer}</div>
+            <div style="margin-top: 10px;">Items: ${order.items.map(item => `${item.name} x${item.qty}`).join(', ')}</div>
+            <div style="margin-top: 8px; font-weight: 800;">${formatMoney(order.total)}</div>
+          </div>
+        `).join('');
+      }
+
+      document.getElementById('checkoutForm').addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        if (!cartManager.cart.length) {
+          alert('Please add items to your cart before confirming checkout.');
+          return;
+        }
+
+        const name = document.getElementById('fullName').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const address = document.getElementById('address').value.trim();
+        const notes = document.getElementById('notes').value.trim();
+        const paymentMethod = document.querySelector('input[name="payment"]:checked')?.value || 'bank';
+
+        if (!name || !email || !phone) {
+          alert('Please fill in all required fields.');
+          return;
+        }
+
+        const order = cartManager.createOrder({
+          name,
+          email,
+          phone,
+          address,
+          notes,
+          paymentMethod
+        });
+
+        renderOrders();
+        renderSummary();
+        document.getElementById('checkoutForm').reset();
+        
+        alert(`Order #${order.id} placed successfully!\n\nOrder Reference: ${order.reference}`);
+      });
+
+      document.querySelectorAll('.payment-option').forEach((option) => {
+        option.addEventListener('click', () => {
+          document.querySelectorAll('.payment-option').forEach((item) => item.classList.remove('active'));
+          option.classList.add('active');
+          option.querySelector('input').checked = true;
+        });
+      });
+    </script>
+  </body>
+</html>

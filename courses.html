@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tech Courses | brainboxX Marketplace</title>
+    <meta name="description" content="Professional Tech Training, Bootcamps, Certification, and Mentoring on brainboxX" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      :root {
+        --primary: #f5c76b;
+        --primary-dark: #d9a73f;
+        --bg: #f5fbff;
+        --surface: #ffffff;
+        --surface-alt: #eaf7ff;
+        --text: #1a2733;
+        --text-muted: #5f6f7a;
+        --border: #dfeaf4;
+        --error: #ff6b6b;
+        --success: #4ade80;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%);
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      a { color: inherit; text-decoration: none; }
+
+      .header {
+        position: sticky; top: 0; z-index: 40;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .header-content {
+        display: flex; align-items: center; justify-content: space-between;
+        gap: 20px; padding: 16px 24px; max-width: 1400px; margin: 0 auto;
+      }
+
+      .logo { font-size: 1.5rem; font-weight: 800; color: var(--text); }
+
+      .nav-center {
+        display: flex; gap: 20px; flex: 1; justify-content: center; flex-wrap: wrap;
+      }
+
+      .nav-center a { font-weight: 600; color: var(--text-muted); transition: color 0.2s; font-size: 0.9rem; }
+      .nav-center a:hover, .nav-center a.active { color: var(--primary-dark); }
+
+      .nav-right { display: flex; align-items: center; gap: 16px; }
+
+      .wishlist-btn {
+        border: 1px solid var(--border); background: var(--surface); color: var(--text);
+        padding: 9px 14px; border-radius: 999px; font-weight: 700; cursor: pointer;
+      }
+      .wishlist-btn.active, .wishlist-btn:hover { border-color: var(--primary-dark); color: var(--primary-dark); }
+
+      .cart-btn {
+        position: relative; display: flex; align-items: center; gap: 8px;
+        background: linear-gradient(135deg, var(--primary), #ffd886); color: var(--text);
+        border: none; padding: 10px 20px; border-radius: 999px; font-weight: 700; cursor: pointer;
+      }
+
+      .cart-badge {
+        position: absolute; top: -8px; right: -8px; background: var(--error); color: white;
+        width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center;
+        justify-content: center; font-size: 0.75rem; font-weight: 700;
+      }
+
+      .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+
+      .hero {
+        background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+        color: var(--text); padding: 60px 24px; text-align: center;
+      }
+
+      .hero h1 { font-size: 2.5rem; margin: 0 0 16px; font-weight: 800; letter-spacing: -0.02em; }
+      .hero p { font-size: 1.1rem; margin: 0 auto; max-width: 600px; opacity: 0.95; }
+
+      .filters {
+        display: flex; flex-wrap: wrap; gap: 12px; padding: 30px 24px; justify-content: center; border-bottom: 1px solid var(--border);
+      }
+
+      .marketplace-search { position: relative; width: min(680px, 100%); margin: 0 auto 20px; }
+      .marketplace-search input { width: 100%; min-height: 52px; padding: 12px 48px 12px 18px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text); font-size: 1rem; }
+      .marketplace-search-icon { position: absolute; top: 50%; right: 18px; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; }
+
+      .filter-tools { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; margin-bottom: 10px; }
+      .sort-select { min-height: 44px; padding: 8px 34px 8px 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text); font-weight: 600; }
+
+      .filter-btn { padding: 10px 20px; border: 2px solid var(--border); background: var(--surface); color: var(--text); border-radius: 999px; font-weight: 600; cursor: pointer; font-size: 0.9rem; }
+      .filter-btn:hover, .filter-btn.active { border-color: var(--primary); background: var(--primary); color: var(--text); }
+
+      .category-section { padding: 40px 24px; border-bottom: 1px solid var(--border); }
+      .category-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+      .category-icon { font-size: 2.5rem; }
+      .category-info h2 { margin: 0; font-size: 1.8rem; font-weight: 800; }
+      .category-info p { margin: 4px 0 0; color: var(--text-muted); font-size: 0.95rem; }
+
+      .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+
+      .product-card {
+        background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px;
+        display: flex; flex-direction: column; gap: 12px; transition: all 0.3s; cursor: pointer;
+      }
+      .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(26, 39, 51, 0.12); border-color: var(--primary); }
+
+      .product-image { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; background: var(--surface-alt); }
+      .product-card-topline { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+      .product-category-label, .delivery-time { color: var(--text-muted); font-size: 0.82rem; font-weight: 600; }
+
+      .wishlist-icon { width: 36px; height: 36px; flex: 0 0 36px; border: 1px solid var(--border); border-radius: 50%; background: var(--surface); color: var(--text-muted); font-size: 1.15rem; cursor: pointer; }
+      .wishlist-icon.saved { border-color: var(--primary-dark); color: var(--primary-dark); background: #fff8e5; }
+
+      .rating-summary { color: #a86f00; font-size: 0.84rem; font-weight: 700; }
+      .product-name { font-size: 1.1rem; font-weight: 700; color: var(--text); }
+      .product-desc { font-size: 0.9rem; color: var(--text-muted); flex-grow: 1; }
+      .product-price { font-size: 1.4rem; font-weight: 800; color: var(--primary-dark); }
+
+      .product-actions { display: flex; gap: 8px; margin-top: 8px; }
+      .qty-input { width: 70px; padding: 8px; border: 1px solid var(--border); border-radius: 8px; text-align: center; font-weight: 600; }
+
+      .add-btn { flex: 1; padding: 10px 16px; background: linear-gradient(135deg, var(--primary), #ffd886); color: var(--text); border: none; border-radius: 8px; font-weight: 700; cursor: pointer; }
+      .add-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(245, 199, 107, 0.3); }
+
+      .view-details-btn { padding: 0; border: 0; background: none; color: var(--primary-dark); font-weight: 700; text-align: left; cursor: pointer; }
+
+      /* Modals and Cart Drawer */
+      .cart-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); opacity: 0; visibility: hidden; transition: all 0.3s; z-index: 99; }
+      .cart-overlay.visible { opacity: 1; visibility: visible; }
+      .cart-sidebar { position: fixed; right: 0; top: 0; height: 100vh; width: 420px; background: var(--surface); box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1); z-index: 100; transform: translateX(100%); transition: transform 0.3s; display: flex; flex-direction: column; }
+      .cart-sidebar.visible { transform: translateX(0); }
+      .cart-header { display: flex; align-items: center; justify-content: space-between; padding: 20px; border-bottom: 1px solid var(--border); }
+      .cart-close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted); }
+      .cart-items { flex: 1; overflow-y: auto; padding: 20px; }
+      .cart-item { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+      .cart-item-name { font-weight: 600; font-size: 0.95rem; }
+      .cart-item-qty { font-size: 0.85rem; color: var(--text-muted); }
+      .cart-item-price { font-weight: 700; white-space: nowrap; }
+      .cart-remove-btn { background: var(--error); color: white; border: none; border-radius: 4px; padding: 4px 8px; font-size: 0.75rem; font-weight: 600; cursor: pointer; }
+      .cart-footer { padding: 20px; border-top: 1px solid var(--border); background: var(--surface-alt); }
+      .cart-total { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; font-size: 1.2rem; font-weight: 800; }
+      .checkout-btn { width: 100%; padding: 12px; background: linear-gradient(135deg, var(--primary), #ffd886); color: var(--text); border: none; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; }
+
+      .product-modal { position: fixed; inset: 0; display: grid; place-items: center; padding: 24px; background: rgba(26, 39, 51, 0.64); opacity: 0; pointer-events: none; transition: opacity 0.2s; z-index: 110; }
+      .product-modal.visible { opacity: 1; pointer-events: auto; }
+      .product-modal-content { position: relative; width: min(960px, 100%); max-height: min(760px, calc(100vh - 48px)); overflow-y: auto; padding: 28px; border-radius: 12px; background: var(--surface); box-shadow: 0 24px 70px rgba(0, 0, 0, 0.25); }
+      .modal-close-btn { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; border: 0; border-radius: 50%; background: var(--surface-alt); color: var(--text); font-size: 1.35rem; cursor: pointer; }
+      .product-detail-layout { display: grid; grid-template-columns: minmax(240px, 0.9fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+      .product-detail-image { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px; background: var(--surface-alt); }
+      .detail-category { margin: 0 0 8px; color: var(--primary-dark); font-size: 0.9rem; font-weight: 800; }
+      .detail-title { margin: 0; font-size: 1.9rem; line-height: 1.2; }
+      .detail-description { color: var(--text-muted); }
+      .detail-price { margin: 16px 0; color: var(--primary-dark); font-size: 1.6rem; font-weight: 800; }
+      .detail-meta { margin: 0 0 18px; color: var(--text-muted); font-size: 0.95rem; }
+
+      @media (max-width: 640px) {
+        .header-content { padding: 12px 16px; }
+        .logo { font-size: 1.2rem; }
+        .hero h1 { font-size: 1.8rem; }
+        .cart-sidebar { width: 100%; bottom: 0; height: auto; max-height: 80vh; }
+        .products-grid { grid-template-columns: 1fr; }
+        .product-detail-layout { grid-template-columns: 1fr; }
+      }
+    </style>
+</head>
+<body>
+    <header class="header">
+      <div class="header-content">
+        <a href="brainboxtools.html" class="logo"><span>brainboxX</span></a>
+        <nav class="nav-center">
+          <a href="marketplace.html">All Categories</a>
+          <a href="communication.html">Communication</a>
+          <a href="courses.html" class="active">Courses</a>
+          <a href="crypto.html">Crypto</a>
+          <a href="gifts-delivery.html">Gifts & Delivery</a>
+          <a href="launchforge.html">LaunchForge</a>
+          <a href="marketing.html">Marketing</a>
+          <a href="professional.html">Professional</a>
+          <a href="telecom.html">Telecom</a>
+        </nav>
+        <div class="nav-right">
+          <button class="wishlist-btn" id="wishlistToggle" type="button" onclick="toggleWishlistFilter()" aria-pressed="false">♡ Saved <span id="wishlistCount">0</span></button>
+          <button class="cart-btn" onclick="toggleCart()">🛒 Cart <span class="cart-badge" id="cartCount">0</span></button>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="container">
+        <h1>🎓 Tech Courses & Training</h1>
+        <p>Master in-demand digital skills with hands-on bootcamps, certifications, and 1-on-1 tech mentoring</p>
+      </div>
+    </section>
+
+    <main id="marketplace">
+      <div class="filters">
+        <div class="marketplace-search">
+          <input id="marketplaceSearch" type="search" placeholder="Search tech courses..." aria-label="Search tech courses" oninput="filterPageProducts()" />
+          <span class="marketplace-search-icon" aria-hidden="true">⌕</span>
+        </div>
+        <div class="filter-tools">
+          <button class="filter-btn" id="savedFilterBtn" type="button" onclick="toggleWishlistFilter()">♡ Saved items</button>
+          <label>Sort <select class="sort-select" id="sortSelect" onchange="sortPageProducts(this.value)"><option value="name">A-Z</option><option value="price-low">Price: low to high</option><option value="price-high">Price: high to low</option></select></label>
+        </div>
+        <a href="marketplace.html" class="filter-btn">← All Categories</a>
+        <a href="communication.html" class="filter-btn">📱 Communication</a>
+        <a href="courses.html" class="filter-btn active">🎓 Courses</a>
+        <a href="crypto.html" class="filter-btn">₿ Crypto</a>
+        <a href="gifts-delivery.html" class="filter-btn">🎁 Gifts & Delivery</a>
+        <a href="launchforge.html" class="filter-btn">🚀 LaunchForge</a>
+        <a href="marketing.html" class="filter-btn">📢 Marketing</a>
+        <a href="professional.html" class="filter-btn">👔 Professional</a>
+        <a href="telecom.html" class="filter-btn">📴 Telecom</a>
+      </div>
+
+      <p class="search-summary" id="searchSummary" aria-live="polite" style="text-align: center; color: var(--text-muted); margin-top: 10px;"></p>
+
+      <section class="category-section">
+        <div class="category-header">
+          <div class="category-icon">🎓</div>
+          <div class="category-info">
+            <h2>Tech Courses</h2>
+            <p>Professional training and skill development</p>
+          </div>
+        </div>
+
+        <div class="products-grid" id="productsGrid">
+          <!-- EDITABLE PRODUCT CARDS START HERE -->
+
+          <article class="product-card" data-product-id="c001" onclick="openProductDetails('c001')">
+            <img class="product-image" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=80" alt="Web Development Bootcamp" loading="lazy" />
+            <div class="product-card-topline">
+              <div class="product-category-label">🎓 Tech Courses</div>
+              <button class="wishlist-icon" type="button" onclick="event.stopPropagation(); toggleWishlist('c001')" aria-label="Save item">♡</button>
+            </div>
+            <div class="product-name">Web Development Bootcamp</div>
+            <div class="rating-summary">★ 4.9 (35)</div>
+            <div class="product-desc">HTML, CSS, JavaScript with real project practice</div>
+            <div class="delivery-time">Fulfilment: Immediate access after payment</div>
+            <div class="product-price">₦10,000</div>
+            <button class="view-details-btn" type="button" onclick="event.stopPropagation(); openProductDetails('c001')">View product details</button>
+            <div class="product-actions">
+              <input type="number" class="qty-input" id="qty-c001" value="1" min="1" max="99" onclick="event.stopPropagation()" />
+              <button class="add-btn" onclick="event.stopPropagation(); addToCartFromDOM('c001', 'Web Development Bootcamp', 10000, 'qty-c001')">Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="product-card" data-product-id="c002" onclick="openProductDetails('c002')">
+            <img class="product-image" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=80" alt="AI Tools Mastery" loading="lazy" />
+            <div class="product-card-topline">
+              <div class="product-category-label">🎓 Tech Courses</div>
+              <button class="wishlist-icon" type="button" onclick="event.stopPropagation(); toggleWishlist('c002')" aria-label="Save item">♡</button>
+            </div>
+            <div class="product-name">AI Tools Mastery</div>
+            <div class="rating-summary">★ 4.8 (28)</div>
+            <div class="product-desc">ChatGPT, Midjourney, automation tools for business</div>
+            <div class="delivery-time">Fulfilment: Immediate access after payment</div>
+            <div class="product-price">₦15,000</div>
+            <button class="view-details-btn" type="button" onclick="event.stopPropagation(); openProductDetails('c002')">View product details</button>
+            <div class="product-actions">
+              <input type="number" class="qty-input" id="qty-c002" value="1" min="1" max="99" onclick="event.stopPropagation()" />
+              <button class="add-btn" onclick="event.stopPropagation(); addToCartFromDOM('c002', 'AI Tools Mastery', 15000, 'qty-c002')">Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="product-card" data-product-id="c003" onclick="openProductDetails('c003')">
+            <img class="product-image" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=80" alt="Digital Marketing Certification" loading="lazy" />
+            <div class="product-card-topline">
+              <div class="product-category-label">🎓 Tech Courses</div>
+              <button class="wishlist-icon" type="button" onclick="event.stopPropagation(); toggleWishlist('c003')" aria-label="Save item">♡</button>
+            </div>
+            <div class="product-name">Digital Marketing Certification</div>
+            <div class="rating-summary">★ 4.7 (22)</div>
+            <div class="product-desc">SEO, SEM, social media marketing masterclass</div>
+            <div class="delivery-time">Fulfilment: Immediate access after payment</div>
+            <div class="product-price">₦12,000</div>
+            <button class="view-details-btn" type="button" onclick="event.stopPropagation(); openProductDetails('c003')">View product details</button>
+            <div class="product-actions">
+              <input type="number" class="qty-input" id="qty-c003" value="1" min="1" max="99" onclick="event.stopPropagation()" />
+              <button class="add-btn" onclick="event.stopPropagation(); addToCartFromDOM('c003', 'Digital Marketing Certification', 12000, 'qty-c003')">Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="product-card" data-product-id="c004" onclick="openProductDetails('c004')">
+            <img class="product-image" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=80" alt="Python Programming Course" loading="lazy" />
+            <div class="product-card-topline">
+              <div class="product-category-label">🎓 Tech Courses</div>
+              <button class="wishlist-icon" type="button" onclick="event.stopPropagation(); toggleWishlist('c004')" aria-label="Save item">♡</button>
+            </div>
+            <div class="product-name">Python Programming Course</div>
+            <div class="rating-summary">★ 4.8 (30)</div>
+            <div class="product-desc">Beginner to intermediate Python coding</div>
+            <div class="delivery-time">Fulfilment: Immediate access after payment</div>
+            <div class="product-price">₦14,000</div>
+            <button class="view-details-btn" type="button" onclick="event.stopPropagation(); openProductDetails('c004')">View product details</button>
+            <div class="product-actions">
+              <input type="number" class="qty-input" id="qty-c004" value="1" min="1" max="99" onclick="event.stopPropagation()" />
+              <button class="add-btn" onclick="event.stopPropagation(); addToCartFromDOM('c004', 'Python Programming Course', 14000, 'qty-c004')">Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="product-card" data-product-id="c005" onclick="openProductDetails('c005')">
+            <img class="product-image" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=80" alt="Mobile App Development" loading="lazy" />
+            <div class="product-card-topline">
+              <div class="product-category-label">🎓 Tech Courses</div>
+              <button class="wishlist-icon" type="button" onclick="event.stopPropagation(); toggleWishlist('c005')" aria-label="Save item">♡</button>
+            </div>
+            <div class="product-name">Mobile App Development</div>
+            <div class="rating-summary">★ 4.7 (19)</div>
+            <div class="product-desc">React Native and Flutter basics</div>
+            <div class="delivery-time">Fulfilment: Immediate access after payment</div>
+            <div class="product-price">₦16,000</div>
+            <button class="view-details-btn" type="button" onclick="event.stopPropagation(); openProductDetails('c005')">View product details</button>
+            <div class="product-actions">
+              <input type="number" class="qty-input" id="qty-c005" value="1" min="1" max="99" onclick="event.stopPropagation()" />
+              <button class="add-btn" onclick="event.stopPropagation(); addToCartFromDOM('c005', 'Mobile App Development', 16000, 'qty-c005')">Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="product-card" data-product-id="c006" onclick="openProductDetails('c006')">
+            <img class="product-image" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=80" alt="Graphic Design Masterclass" loading="lazy" />
+            <div class="product-card-topline">
+              <div class="product-category-label">🎓 Tech Courses</div>
+              <button class="wishlist-icon" type="button" onclick="event.stopPropagation(); toggleWishlist('c006')" aria-label="Save item">♡</button>
+            </div>
+            <div class="product-name">Graphic Design Masterclass</div>
+            <div class="rating-summary">★ 4.9 (24)</div>
+            <div class="product-desc">Canva, Figma, and core design principles</div>
+            <div class="delivery-time">Fulfilment: Immediate access after payment</div>
+            <div class="product-price">₦13,000</div>
+            <button class="view-details-btn" type="button" onclick="event.stopPropagation(); openProductDetails('c006')">View product details</button>
+            <div class="product-actions">
+              <input type="number" class="qty-input" id="qty-c006" value="1" min="1" max="99" onclick="event.stopPropagation()" />
+              <button class="add-btn" onclick="event.stopPropagation(); addToCartFromDOM('c006', 'Graphic Design Masterclass', 13000, 'qty-c006')">Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="product-card" data-product-id="c007" onclick="openProductDetails('c007')">
+            <img class="product-image" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=80" alt="Video Editing Pro" loading="lazy" />
+            <div class="product-card-topline">
+              <div class="product-category-label">🎓 Tech Courses</div>
+              <button class="wishlist-icon" type="button" onclick="event.stopPropagation(); toggleWishlist('c007')" aria-label="Save item">♡</button>
+            </div>
+            <div class="product-name">Video Editing Pro</div>
+            <div class="rating-summary">★ 4.8 (17)</div>
+            <div class="product-desc">Adobe Premiere and DaVinci Resolve training</div>
+            <div class="delivery-time">Fulfilment: Immediate access after payment</div>
+            <div class="product-price">₦11,000</div>
+            <button class="view-details-btn" type="button" onclick="event.stopPropagation(); openProductDetails('c007')">View product details</button>
+            <div class="product-actions">
+              <input type="number" class="qty-input" id="qty-c007" value="1" min="1" max="99" onclick="event.stopPropagation()" />
+              <button class="add-btn" onclick="event.stopPropagation(); addToCartFromDOM('c007', 'Video Editing Pro', 11000, 'qty-c007')">Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="product-card" data-product-id="c008" onclick="openProductDetails('c008')">
+            <img class="product-image" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=80" alt="Data Analytics Bootcamp" loading="lazy" />
+            <div class="product-card-topline">
+              <div class="product-category-label">🎓 Tech Courses</div>
+              <button class="wishlist-icon" type="button" onclick="event.stopPropagation(); toggleWishlist('c008')" aria-label="Save item">♡</button>
+            </div>
+            <div class="product-name">Data Analytics Bootcamp</div>
+            <div class="rating-summary">★ 4.7 (21)</div>
+            <div class="product-desc">Google Analytics, Excel, and Tableau analytics</div>
+            <div class="delivery-time">Fulfilment: Immediate access after payment</div>
+            <div class="product-price">₦18,000</div>
+            <button class="view-details-btn" type="button" onclick="event.stopPropagation(); openProductDetails('c008')">View product details</button>
+            <div class="product-actions">
+              <input type="number" class="qty-input" id="qty-c008" value="1" min="1" max="99" onclick="event.stopPropagation()" />
+              <button class="add-btn" onclick="event.stopPropagation(); addToCartFromDOM('c008', 'Data Analytics Bootcamp', 18000, 'qty-c008')">Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="product-card" data-product-id="c009" onclick="openProductDetails('c009')">
+            <img class="product-image" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=80" alt="1-on-1 Tech Mentoring (5 sessions)" loading="lazy" />
+            <div class="product-card-topline">
+              <div class="product-category-label">🎓 Tech Courses</div>
+              <button class="wishlist-icon" type="button" onclick="event.stopPropagation(); toggleWishlist('c009')" aria-label="Save item">♡</button>
+            </div>
+            <div class="product-name">1-on-1 Tech Mentoring (5 sessions)</div>
+            <div class="rating-summary">★ 5.0 (15)</div>
+            <div class="product-desc">Personalized technical coaching and career guidance</div>
+            <div class="delivery-time">Fulfilment: Scheduled 1-on-1 sessions</div>
+            <div class="product-price">₦20,000</div>
+            <button class="view-details-btn" type="button" onclick="event.stopPropagation(); openProductDetails('c009')">View product details</button>
+            <div class="product-actions">
+              <input type="number" class="qty-input" id="qty-c009" value="1" min="1" max="99" onclick="event.stopPropagation()" />
+              <button class="add-btn" onclick="event.stopPropagation(); addToCartFromDOM('c009', '1-on-1 Tech Mentoring (5 sessions)', 20000, 'qty-c009')">Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="product-card" data-product-id="c010" onclick="openProductDetails('c010')">
+            <img class="product-image" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=80" alt="E-Commerce Success Guide" loading="lazy" />
+            <div class="product-card-topline">
+              <div class="product-category-label">🎓 Tech Courses</div>
+              <button class="wishlist-icon" type="button" onclick="event.stopPropagation(); toggleWishlist('c010')" aria-label="Save item">♡</button>
+            </div>
+            <div class="product-name">E-Commerce Success Guide</div>
+            <div class="rating-summary">★ 4.6 (12)</div>
+            <div class="product-desc">Building and scaling profitable online stores</div>
+            <div class="delivery-time">Fulfilment: Immediate access after payment</div>
+            <div class="product-price">₦8,000</div>
+            <button class="view-details-btn" type="button" onclick="event.stopPropagation(); openProductDetails('c010')">View product details</button>
+            <div class="product-actions">
+              <input type="number" class="qty-input" id="qty-c010" value="1" min="1" max="99" onclick="event.stopPropagation()" />
+              <button class="add-btn" onclick="event.stopPropagation(); addToCartFromDOM('c010', 'E-Commerce Success Guide', 8000, 'qty-c010')">Add to Cart</button>
+            </div>
+          </article>
+
+          <!-- EDITABLE PRODUCT CARDS END HERE -->
+        </div>
+      </section>
+    </main>
+
+    <div class="cart-overlay" id="cartOverlay" onclick="if(event.target === this) toggleCart()"></div>
+    <aside class="cart-sidebar" id="cartSidebar">
+      <div class="cart-header">
+        <h3 style="margin: 0;">Your Cart</h3>
+        <button class="cart-close-btn" onclick="toggleCart()">✕</button>
+      </div>
+      <div class="cart-items" id="cartItemsContainer">
+        <div style="text-align: center; color: var(--text-muted); padding: 20px;">Your cart is empty</div>
+      </div>
+      <div class="cart-footer">
+        <div class="cart-total">
+          <span>Total</span>
+          <span id="cartTotal">₦0</span>
+        </div>
+        <button class="checkout-btn" id="checkoutBtn" onclick="proceedToCheckout()">Proceed to Checkout</button>
+      </div>
+    </aside>
+
+    <div class="product-modal" id="productModal" onclick="if (event.target === this) closeProductDetails()">
+      <section class="product-modal-content" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+        <button class="modal-close-btn" type="button" onclick="closeProductDetails()" aria-label="Close product details">&times;</button>
+        <div id="productDetailsContent"></div>
+      </section>
+    </div>
+
+    <script src="marketplace.js"></script>
+    <script>
+      let showWishlistOnly = false;
+      const wishlistKey = 'brainboxx-wishlist';
+      const wishlist = new Set(JSON.parse(localStorage.getItem(wishlistKey) || '[]'));
+
+      document.addEventListener('DOMContentLoaded', () => {
+        updateCartUI();
+        updateWishlistUI();
+      });
+
+      function addToCartFromDOM(productId, defaultName, defaultPrice, qtyInputId) {
+        const card = document.querySelector(`[data-product-id="${productId}"]`);
+        let name = defaultName;
+        let price = defaultPrice;
+        if (card) {
+          const nameEl = card.querySelector('.product-name');
+          const priceEl = card.querySelector('.product-price');
+          if (nameEl && nameEl.textContent.trim()) name = nameEl.textContent.trim();
+          if (priceEl) {
+            const parsed = parseInt(priceEl.textContent.replace(/[^0-9]/g, ''));
+            if (!isNaN(parsed)) price = parsed;
+          }
+        }
+        const qtyInput = document.getElementById(qtyInputId || `qty-${productId}`);
+        const qty = parseInt(qtyInput ? qtyInput.value : 1) || 1;
+        cartManager.addItem(productId, name, price, qty);
+        updateCartUI();
+        if (qtyInput) qtyInput.value = '1';
+        alert(`${name} added to cart!`);
+      }
+
+      function updateCartUI() {
+        const cart = cartManager.cart;
+        const total = cartManager.getTotal();
+        const itemCount = cartManager.getItemCount();
+        document.getElementById('cartCount').textContent = itemCount || '0';
+        document.getElementById('cartTotal').textContent = formatMoney(total);
+
+        const container = document.getElementById('cartItemsContainer');
+        if (cart.length === 0) {
+          container.innerHTML = '<div style="text-align: center; color: var(--text-muted); padding: 20px;">Your cart is empty</div>';
+          document.getElementById('checkoutBtn').disabled = true;
+        } else {
+          container.innerHTML = cart.map(item => `
+            <div class="cart-item">
+              <div class="cart-item-info">
+                <div class="cart-item-name">${item.name}</div>
+                <div class="cart-item-qty">Qty: ${item.qty}</div>
+              </div>
+              <div class="cart-item-price">${formatMoney(item.price * item.qty)}</div>
+              <button class="cart-remove-btn" onclick="removeFromCart('${item.id}')">Remove</button>
+            </div>
+          `).join('');
+          document.getElementById('checkoutBtn').disabled = false;
+        }
+      }
+
+      function removeFromCart(productId) {
+        cartManager.removeItem(productId);
+        updateCartUI();
+      }
+
+      function toggleCart() {
+        document.getElementById('cartOverlay').classList.toggle('visible');
+        document.getElementById('cartSidebar').classList.toggle('visible');
+      }
+
+      function proceedToCheckout() {
+        if (cartManager.cart.length === 0) {
+          alert('Your cart is empty!');
+          return;
+        }
+        window.location.href = 'payment.html';
+      }
+
+      function toggleWishlist(productId) {
+        wishlist.has(productId) ? wishlist.delete(productId) : wishlist.add(productId);
+        localStorage.setItem(wishlistKey, JSON.stringify([...wishlist]));
+        updateWishlistUI();
+      }
+
+      function toggleWishlistFilter() {
+        showWishlistOnly = !showWishlistOnly;
+        updateWishlistUI();
+        filterPageProducts();
+      }
+
+      function updateWishlistUI() {
+        document.getElementById('wishlistCount').textContent = wishlist.size;
+        document.getElementById('wishlistToggle').classList.toggle('active', showWishlistOnly);
+        document.getElementById('savedFilterBtn').classList.toggle('active', showWishlistOnly);
+        document.querySelectorAll('.product-card').forEach(card => {
+          const id = card.dataset.productId;
+          const btn = card.querySelector('.wishlist-icon');
+          if (btn) {
+            btn.classList.toggle('saved', wishlist.has(id));
+            btn.textContent = wishlist.has(id) ? '♥' : '♡';
+          }
+        });
+      }
+
+      function filterPageProducts() {
+        const query = (document.getElementById('marketplaceSearch').value || '').toLowerCase().trim();
+        const cards = Array.from(document.querySelectorAll('.product-card'));
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+          const id = card.dataset.productId;
+          const name = (card.querySelector('.product-name')?.textContent || '').toLowerCase();
+          const desc = (card.querySelector('.product-desc')?.textContent || '').toLowerCase();
+          const matchesSearch = !query || name.includes(query) || desc.includes(query);
+          const matchesWishlist = !showWishlistOnly || wishlist.has(id);
+
+          if (matchesSearch && matchesWishlist) {
+            card.style.display = 'flex';
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        const summary = document.getElementById('searchSummary');
+        summary.textContent = query || showWishlistOnly ? `Showing ${visibleCount} item(s)` : '';
+      }
+
+      function sortPageProducts(sortType) {
+        const grid = document.getElementById('productsGrid');
+        const cards = Array.from(grid.querySelectorAll('.product-card'));
+
+        cards.sort((a, b) => {
+          const nameA = a.querySelector('.product-name')?.textContent.trim() || '';
+          const nameB = b.querySelector('.product-name')?.textContent.trim() || '';
+          const priceA = parseInt((a.querySelector('.product-price')?.textContent || '0').replace(/[^0-9]/g, '')) || 0;
+          const priceB = parseInt((b.querySelector('.product-price')?.textContent || '0').replace(/[^0-9]/g, '')) || 0;
+
+          if (sortType === 'price-low') return priceA - priceB;
+          if (sortType === 'price-high') return priceB - priceA;
+          return nameA.localeCompare(nameB);
+        });
+
+        cards.forEach(card => grid.appendChild(card));
+      }
+
+      function openProductDetails(productId) {
+        const card = document.querySelector(`[data-product-id="${productId}"]`);
+        const productFromCatalog = getProductById(productId);
+        const name = card?.querySelector('.product-name')?.textContent || productFromCatalog?.name || 'Product Details';
+        const desc = card?.querySelector('.product-desc')?.textContent || productFromCatalog?.desc || '';
+        const priceText = card?.querySelector('.product-price')?.textContent || (productFromCatalog ? formatMoney(productFromCatalog.price) : '₦0');
+        const priceVal = parseInt(priceText.replace(/[^0-9]/g, '')) || (productFromCatalog?.price || 0);
+        const imgSrc = card?.querySelector('.product-image')?.src || 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=80';
+        const fulfilment = card?.querySelector('.delivery-time')?.textContent || 'Fulfilment: Immediate access after payment';
+
+        document.getElementById('productDetailsContent').innerHTML = `
+          <div class="product-detail-layout">
+            <img class="product-detail-image" src="${imgSrc}" alt="${name}" />
+            <div>
+              <p class="detail-category">🎓 Tech Courses</p>
+              <h2 class="detail-title" id="detailTitle">${name}</h2>
+              <p class="detail-description">${desc}</p>
+              <p class="detail-price">${priceText}</p>
+              <p class="detail-meta">${fulfilment}</p>
+              <div class="product-actions">
+                <input type="number" class="qty-input" id="qty-modal-${productId}" value="1" min="1" max="99" />
+                <button class="add-btn" type="button" onclick="addToCartFromDOM('${productId}', '${name.replace(/'/g, "\\'")}', ${priceVal}, 'qty-modal-${productId}'); closeProductDetails()">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+        `;
+        document.getElementById('productModal').classList.add('visible');
+      }
+
+      function closeProductDetails() {
+        document.getElementById('productModal').classList.remove('visible');
+      }
+    </script>
+</body>
+</html>

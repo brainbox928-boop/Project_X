@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delivery & Logistics | brainboxX Marketplace</title>
+    <script>
+        window.location.href = 'marketplace.html?category=delivery';
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+      :root {
+        --gold: #f5c76b;
+        --charcoal: #1a2733;
+        --sky: #eaf7ff;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(180deg, #f5fbff 0%, #ffffff 100%);
+        color: var(--charcoal);
+      }
+      .navbar { background: rgba(255, 255, 255, 0.94); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); }
+      .navbar-brand img { height: 45px; }
+      .product-card { background: white; border: 1px solid #dfeaf4; border-radius: 16px; padding: 18px; transition: transform 0.3s; height: 100%; display: flex; flex-direction: column; }
+      .product-card:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(26, 39, 51, 0.12); }
+      .product-icon { font-size: 2rem; margin-bottom: 10px; }
+      .product-name { font-size: 1.1rem; font-weight: 700; margin: 10px 0; }
+      .product-desc { font-size: 0.9rem; color: #5f6f7a; margin-bottom: 12px; flex-grow: 1; }
+      .product-price { font-size: 1.3rem; font-weight: 800; color: var(--charcoal); margin: 10px 0; }
+      .product-footer { display: flex; gap: 8px; margin-top: auto; }
+      .qty-input { width: 60px; padding: 6px; border: 1px solid #dfeaf4; border-radius: 8px; text-align: center; }
+      .add-cart-btn, .checkout-btn, .pay-btn { background: linear-gradient(135deg, var(--gold), #ffd886); color: var(--charcoal); border: none; border-radius: 8px; padding: 8px 14px; font-weight: 700; cursor: pointer; }
+      .add-cart-btn:hover, .checkout-btn:hover, .pay-btn:hover { transform: translateY(-2px); }
+      .cart-sidebar { position: fixed; right: -450px; top: 0; width: 450px; height: 100vh; background: white; box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1); z-index: 1000; transition: right 0.3s; overflow-y: auto; padding: 20px; }
+      .cart-sidebar.open { right: 0; }
+      .cart-close { position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 1.5rem; cursor: pointer; }
+      .cart-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #dfeaf4; }
+      .cart-item-info { flex: 1; }
+      .cart-item-name { font-weight: 600; font-size: 0.95rem; }
+      .cart-item-qty { font-size: 0.85rem; color: #5f6f7a; }
+      .cart-item-price { font-weight: 700; }
+      .cart-remove { background: #ff6b6b; color: white; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 0.75rem; }
+      .cart-total { background: var(--sky); padding: 16px; border-radius: 12px; margin: 20px 0; text-align: center; }
+      .total-label { color: #5f6f7a; font-size: 0.9rem; }
+      .total-amount { font-size: 2rem; font-weight: 800; color: var(--charcoal); }
+      .checkout-form { background: var(--sky); padding: 20px; border-radius: 16px; margin-bottom: 30px; }
+      .form-group { margin-bottom: 14px; }
+      .form-group label { font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px; }
+      .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #dfeaf4; border-radius: 8px; font-family: inherit; }
+      .payment-methods { background: white; padding: 20px; border-radius: 16px; border: 1px solid #dfeaf4; margin-bottom: 20px; }
+      .payment-method { display: flex; align-items: center; gap: 12px; padding: 12px; border: 2px solid #dfeaf4; border-radius: 12px; cursor: pointer; margin-bottom: 10px; }
+      .payment-method.active { border-color: var(--gold); background: rgba(245, 199, 107, 0.08); }
+      .payment-method input { cursor: pointer; margin: 0; }
+      .payment-label { flex: 1; font-weight: 600; }
+      .order-history { background: white; padding: 20px; border-radius: 16px; border: 1px solid #dfeaf4; margin-top: 30px; }
+      .order-item { background: var(--sky); padding: 15px; border-radius: 12px; margin-bottom: 12px; }
+      .order-date { font-size: 0.85rem; color: #5f6f7a; }
+      .order-details { font-size: 0.9rem; margin: 8px 0; }
+      .order-total { font-weight: 700; color: var(--charcoal); }
+      .cart-badge { position: absolute; top: 10px; right: 10px; background: #ff6b6b; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; }
+      .section-title { text-align: center; margin: 40px 0 30px; }
+      .section-title h2 { font-size: 2rem; letter-spacing: -0.04em; }
+      .section-title p { color: #5f6f7a; }
+      @media (max-width: 768px) { .cart-sidebar { width: 100%; right: -100%; } }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg sticky-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="brainboxtools.html">
+          <img src="logo.png" alt="brainboxX" />
+          <span class="ms-2">brainboxX</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="brainboxtools.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link active" href="delivery&logistics.html">Delivery & Logistics</a></li>
+            <li class="nav-item"><a class="nav-link" href="digitalservices.html">Digital Services</a></li>
+            <li class="nav-item"><a class="nav-link" href="trading.html">Trading</a></li>
+          </ul>
+        </div>
+        <button class="btn btn-outline-warning position-relative ms-3" id="cartBtn" onclick="toggleCart()">
+          🛒 Cart <span class="cart-badge" id="cartCount">0</span>
+        </button>
+      </div>
+    </nav>
+
+    <main class="container my-5">
+      <div class="section-title">
+        <span style="background: rgba(245, 199, 107, 0.15); padding: 8px 14px; border-radius: 999px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase;">Delivery & Logistics</span>
+        <h2>Gift Orders, Delivery & Logistics Services</h2>
+        <p>Browse our complete delivery solutions and order instantly</p>
+      </div>
+
+      <div class="mb-5">
+        <h3 class="mb-4">🎁 Gift Orders Nationwide</h3>
+        <div class="row g-4" id="giftOrdersContainer"></div>
+      </div>
+
+      <div class="mb-5">
+        <h3 class="mb-4">📄 Active Despatcher Service</h3>
+        <div class="row g-4" id="dispatcherContainer"></div>
+      </div>
+
+      <div class="mb-5">
+        <h3 class="mb-4">🚚 Courier Service & Delivery</h3>
+        <div class="row g-4" id="courierContainer"></div>
+      </div>
+
+      <div class="mb-5">
+        <h3 class="mb-4">✈️ Trackable Flight Service</h3>
+        <div class="row g-4" id="flightContainer"></div>
+      </div>
+
+      <div class="checkout-form mt-5">
+        <h3 class="mb-4">📦 Checkout</h3>
+        <form id="checkoutForm">
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" id="customerName" placeholder="Your full name" required />
+          </div>
+          <div class="form-group">
+            <label>Email *</label>
+            <input type="email" id="customerEmail" placeholder="your@email.com" required />
+          </div>
+          <div class="form-group">
+            <label>Phone Number *</label>
+            <input type="tel" id="customerPhone" placeholder="+234" required />
+          </div>
+          <div class="form-group">
+            <label>Delivery Address *</label>
+            <textarea id="deliveryAddress" placeholder="Enter full delivery address" rows="3" required></textarea>
+          </div>
+          <div class="form-group">
+            <label>Delivery Date</label>
+            <input type="date" id="deliveryDate" />
+          </div>
+          <div class="form-group">
+            <label>Special Instructions</label>
+            <textarea id="instructions" placeholder="Any special delivery notes..." rows="2"></textarea>
+          </div>
+          <button type="button" class="btn btn-primary w-100" onclick="proceedToPayment()">Proceed to Payment</button>
+        </form>
+      </div>
+
+      <div class="payment-methods">
+        <h4 class="mb-3">💳 Select Payment Method</h4>
+        <div class="payment-method active" onclick="selectPayment(this, 'bank')">
+          <input type="radio" name="payment" id="bankTransfer" value="bank" checked />
+          <label class="payment-label">Bank Transfer</label>
+          <span>🏦</span>
+        </div>
+        <div class="payment-method" onclick="selectPayment(this, 'card')">
+          <input type="radio" name="payment" id="cardPayment" value="card" />
+          <label class="payment-label">Debit/Credit Card</label>
+          <span>💳</span>
+        </div>
+        <div class="payment-method" onclick="selectPayment(this, 'wallet')">
+          <input type="radio" name="payment" id="walletPayment" value="wallet" />
+          <label class="payment-label">Mobile Wallet</label>
+          <span>📱</span>
+        </div>
+        <div class="payment-method" onclick="selectPayment(this, 'crypto')">
+          <input type="radio" name="payment" id="cryptoPayment" value="crypto" />
+          <label class="payment-label">Cryptocurrency</label>
+          <span>₿</span>
+        </div>
+        <button class="pay-btn w-100 mt-3" onclick="completePayment()">Complete Payment</button>
+      </div>
+
+      <div class="order-history">
+        <h4 class="mb-3">📋 Order History</h4>
+        <div id="orderHistoryContainer"><p style="color: #5f6f7a; text-align: center;">No orders yet</p></div>
+      </div>
+    </main>
+
+    <div class="cart-sidebar" id="cartSidebar">
+      <button class="cart-close" onclick="toggleCart()">✕</button>
+      <h3>Your Cart</h3>
+      <div id="cartItemsContainer"></div>
+      <div class="cart-total">
+        <div class="total-label">Total Amount</div>
+        <div class="total-amount" id="cartTotal">₦0</div>
+      </div>
+      <button class="checkout-btn w-100" onclick="scrollToCheckout()">Proceed to Checkout</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const products = {
+        giftOrders: [
+          { id: 1, name: "Birthday Gift Hamper", price: 8500, desc: "Premium gift box with chocolates & wine" },
+          { id: 2, name: "Corporate Gift Package", price: 12000, desc: "Professional gifts for business" },
+          { id: 3, name: "Wedding Gift Set", price: 15000, desc: "Elegant wedding present" },
+          { id: 4, name: "Anniversary Deluxe", price: 10000, desc: "Special anniversary surprise" },
+          { id: 5, name: "Baby Welcome Gift", price: 9000, desc: "New baby gift collection" },
+          { id: 6, name: "Graduation Present", price: 11000, desc: "Success celebration gift" },
+          { id: 7, name: "Flowers & Chocolate Box", price: 6500, desc: "Fresh flowers with premium chocolates" },
+          { id: 8, name: "Romantic Dinner Package", price: 18000, desc: "Evening dinner arrangement" },
+          { id: 9, name: "Luxury Watch Gift", price: 25000, desc: "High-end designer watch" },
+          { id: 10, name: "Executive Briefcase", price: 14000, desc: "Premium leather briefcase" }
+        ],
+        dispatcher: [
+          { id: 101, name: "Letters Dispatch", price: 2500, desc: "Official letter delivery" },
+          { id: 102, name: "Check Delivery", price: 3000, desc: "Secure check transportation" },
+          { id: 103, name: "Certificate Dispatch", price: 2000, desc: "Official certificate delivery" },
+          { id: 104, name: "Document Bulk", price: 8000, desc: "Multiple documents dispatch" },
+          { id: 105, name: "Certified Mail", price: 4500, desc: "Registered certified delivery" },
+          { id: 106, name: "Legal Documents", price: 5000, desc: "Secure legal document transport" },
+          { id: 107, name: "Express Dispatch", price: 6000, desc: "Next day delivery" },
+          { id: 108, name: "Same-Day Dispatch", price: 7500, desc: "Same day delivery service" },
+          { id: 109, name: "International Document", price: 12000, desc: "Cross-border dispatch" },
+          { id: 110, name: "Batch Processing", price: 15000, desc: "Large batch handling" }
+        ],
+        courier: [
+          { id: 201, name: "Within Lagos", price: 1500, desc: "Intra-Lagos delivery" },
+          { id: 202, name: "Lagos to Ibadan", price: 3500, desc: "Interstate courier" },
+          { id: 203, name: "Nationwide Standard", price: 5000, desc: "All Nigeria delivery" },
+          { id: 204, name: "Express Nationwide", price: 8000, desc: "Fast nationwide service" },
+          { id: 205, name: "Heavy Load", price: 6500, desc: "Large package delivery" },
+          { id: 206, name: "Fragile Items", price: 7000, desc: "Careful handling delivery" },
+          { id: 207, name: "Tracked Delivery", price: 4000, desc: "GPS tracked shipment" },
+          { id: 208, name: "Bulk Shipment", price: 12000, desc: "Multiple items delivery" },
+          { id: 209, name: "Weekend Delivery", price: 6000, desc: "Saturday/Sunday service" },
+          { id: 210, name: "Overnight Delivery", price: 9500, desc: "Next morning delivery" }
+        ],
+        flight: [
+          { id: 301, name: "Domestic Flight - Economy", price: 35000, desc: "Budget domestic flights" },
+          { id: 302, name: "Domestic Flight - Premium", price: 55000, desc: "Business class domestic" },
+          { id: 303, name: "International - Americas", price: 150000, desc: "USA/Canada routes" },
+          { id: 304, name: "International - Europe", price: 180000, desc: "European routes" },
+          { id: 305, name: "International - Asia", price: 120000, desc: "Asian routes" },
+          { id: 306, name: "Round Trip Package", price: 65000, desc: "Return flight booking" },
+          { id: 307, name: "Group Booking", price: 130000, desc: "Family/group rates" },
+          { id: 308, name: "Multi-City Tour", price: 200000, desc: "Multiple destination package" },
+          { id: 309, name: "Flight + Hotel Bundle", price: 250000, desc: "Complete travel package" },
+          { id: 310, name: "Visa & Flight Package", price: 180000, desc: "Visa processing + flight" }
+        ]
+      };
+
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      let orderHistory = JSON.parse(localStorage.getItem('orderHistory')) || [];
+
+      function renderProducts() {
+        const template = (products, emoji) => products.map(p => `
+          <div class="col-md-6 col-lg-4">
+            <div class="product-card">
+              <div class="product-icon">${emoji}</div>
+              <div class="product-name">${p.name}</div>
+              <div class="product-desc">${p.desc}</div>
+              <div class="product-price">₦${p.price.toLocaleString()}</div>
+              <div class="product-footer">
+                <input type="number" class="qty-input" value="1" id="qty-${p.id}" min="1" />
+                <button class="add-cart-btn" onclick="addToCart(${p.id}, '${p.name}', ${p.price}, document.getElementById('qty-${p.id}').value)">Add to Cart</button>
+                <button class="add-cart-btn" style="background: linear-gradient(135deg, #0d7f4a, #0a5c39); color: white;" onclick="buyNow(${p.id}, '${p.name}', ${p.price}, document.getElementById('qty-${p.id}').value)">Buy Now</button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+
+        document.getElementById('giftOrdersContainer').innerHTML = template(products.giftOrders, '🎁');
+        document.getElementById('dispatcherContainer').innerHTML = template(products.dispatcher, '📄');
+        document.getElementById('courierContainer').innerHTML = template(products.courier, '🚚');
+        document.getElementById('flightContainer').innerHTML = template(products.flight, '✈️');
+      }
+
+      function addToCart(id, name, price, qty) {
+        const quantity = parseInt(qty) || 1;
+        const existing = cart.find(item => item.id === id);
+        if (existing) { existing.qty += quantity; }
+        else { cart.push({ id, name, price, qty: quantity }); }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCart();
+        alert(name + ' added to cart!');
+      }
+
+      function updateCart() {
+        document.getElementById('cartCount').textContent = cart.length > 0 ? cart.reduce((sum, item) => sum + item.qty, 0) : '0';
+        document.getElementById('cartItemsContainer').innerHTML = cart.map(item => `
+          <div class="cart-item">
+            <div class="cart-item-info">
+              <div class="cart-item-name">${item.name}</div>
+              <div class="cart-item-qty">Qty: ${item.qty}</div>
+            </div>
+            <div class="cart-item-price">₦${(item.price * item.qty).toLocaleString()}</div>
+            <button class="cart-remove" onclick="removeFromCart(${item.id})">Remove</button>
+          </div>
+        `).join('');
+        const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+        document.getElementById('cartTotal').textContent = '₦' + total.toLocaleString();
+      }
+
+      function removeFromCart(id) {
+        cart = cart.filter(item => item.id !== id);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCart();
+      }
+
+      function buyNow(id, name, price, qty) {
+        const quantity = parseInt(qty) || 1;
+        const existing = cart.find(item => item.id === id);
+        if (existing) { existing.qty += quantity; }
+        else { cart.push({ id, name, price, qty: quantity }); }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        // Redirect to payment page
+        window.location.href = 'payment.html';
+      }
+
+      function toggleCart() { document.getElementById('cartSidebar').classList.toggle('open'); }
+      function scrollToCheckout() { toggleCart(); document.getElementById('checkoutForm').scrollIntoView({ behavior: 'smooth' }); }
+      function proceedToPayment() {
+        if (cart.length === 0) { alert('Your cart is empty!'); return; }
+        document.querySelector('.payment-methods').scrollIntoView({ behavior: 'smooth' });
+      }
+
+      function selectPayment(element, method) {
+        document.querySelectorAll('.payment-method').forEach(el => el.classList.remove('active'));
+        element.classList.add('active');
+        document.getElementById(method + 'Payment').checked = true;
+      }
+
+      function completePayment() {
+        const name = document.getElementById('customerName').value;
+        const email = document.getElementById('customerEmail').value;
+        const phone = document.getElementById('customerPhone').value;
+        const address = document.getElementById('deliveryAddress').value;
+        const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+
+        if (!name || !email || !phone || !address) { alert('Please fill all required fields'); return; }
+
+        const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+        const order = {
+          id: Date.now(),
+          date: new Date().toLocaleString(),
+          customer: name,
+          email, phone, address,
+          items: [...cart],
+          total,
+          paymentMethod,
+          status: 'Pending'
+        };
+
+        orderHistory.push(order);
+        localStorage.setItem('orderHistory', JSON.stringify(orderHistory));
+        cart = [];
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCart();
+        renderOrderHistory();
+        alert('Order placed successfully!');
+        document.getElementById('checkoutForm').reset();
+      }
+
+      function renderOrderHistory() {
+        if (orderHistory.length === 0) {
+          document.getElementById('orderHistoryContainer').innerHTML = '<p style="color: #5f6f7a; text-align: center;">No orders yet</p>';
+          return;
+        }
+        document.getElementById('orderHistoryContainer').innerHTML = orderHistory.map(order => `
+          <div class="order-item">
+            <div class="order-date">Order #${order.id} - ${order.date}</div>
+            <div class="order-details">
+              <strong>${order.customer}</strong><br>
+              Items: ${order.items.map(i => i.name).join(', ')}<br>
+              Payment: ${order.paymentMethod.toUpperCase()} | Status: <strong>${order.status}</strong>
+            </div>
+            <div class="order-total">Total: ₦${order.total.toLocaleString()}</div>
+          </div>
+        `).join('');
+      }
+
+      renderProducts();
+      updateCart();
+      renderOrderHistory();
+    </script>
+  </body>
+</html>
