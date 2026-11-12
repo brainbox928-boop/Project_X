@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paystack Integration Checklist | brainboxX</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1a2733 0%, #0f1619 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #f5c76b 0%, #f4b84f 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: #1a2733;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a2733;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #f5c76b;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title span {
+            font-size: 24px;
+        }
+
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 15px;
+            margin-bottom: 12px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid #e0e0e0;
+            transition: all 0.3s;
+        }
+
+        .checklist-item:hover {
+            background: #f5f5f5;
+            border-left-color: #f5c76b;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 15px;
+            margin-top: 2px;
+            cursor: pointer;
+            accent-color: #f5c76b;
+            flex-shrink: 0;
+        }
+
+        .checklist-item input[type="checkbox"]:checked {
+            accent-color: #10b981;
+        }
+
+        .checklist-item input[type="checkbox"]:checked ~ .item-content {
+            opacity: 0.6;
+        }
+
+        .checklist-item input[type="checkbox"]:checked ~ .item-content .item-title {
+            text-decoration: line-through;
+            color: #999;
+        }
+
+        .item-content {
+            flex: 1;
+        }
+
+        .item-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a2733;
+            margin-bottom: 5px;
+        }
+
+        .item-description {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .code-block {
+            background: #1a2733;
+            color: #00ff00;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            margin-top: 8px;
+            overflow-x: auto;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #1565c0;
+        }
+
+        .success-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #2e7d32;
+        }
+
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #e65100;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #f5c76b 0%, #f4b84f 100%);
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: #f5c76b;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .footer {
+            background: #f9f9f9;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .completion-message {
+            display: none;
+            background: linear-gradient(135deg, #4caf50 0%, #10b981 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .completion-message.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .section-title {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✅ Paystack Integration Checklist</h1>
+            <p>Complete setup for brainboxX payment processing</p>
+        </div>
+
+        <div class="content">
+            <!-- Completion Message -->
+            <div class="completion-message" id="completionMessage">
+                🎉 Congratulations! You've completed all setup steps. Start accepting payments! 🎉
+            </div>
+
+            <!-- Progress -->
+            <div style="margin-bottom: 30px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <span style="font-weight: 600; color: #1a2733;">Setup Progress</span>
+                    <span style="color: #666;"><span id="completedCount">0</span>/<span id="totalCount">20</span> Complete</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-bar-fill" id="progressFill"></div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="percentComplete">0%</div>
+                    <div class="stat-label">Complete</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="remainingCount">20</div>
+                    <div class="stat-label">Remaining</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">~30 min</div>
+                    <div class="stat-label">Time to Complete</div>
+                </div>
+            </div>
+
+            <!-- Phase 1: Account Setup -->
+            <div class="section">
+                <div class="section-title">
+                    <span>📋</span>
+                    Phase 1: Account Setup
+                </div>
+                
+                <div class="warning-box">
+                    ⚠️ You must have a Paystack account to proceed with payment integration.
+                </div>
+
+                <ul class="checklist" id="phase1">
+                    <li class="checklist-item">
+                        <input type="checkbox" id="task-1">
+                        <div class="item-content">
+                            <div class="item-title">Create Paystack Account</div>
+                            <div class="item-description">
+                                Visit https://paystack.com and sign up for a free account. Takes about 5 minutes.
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" id="task-2">
+                        <div class="item-content">
+                            <div class="item-title">Verify Email Address</div>
+                            <div class="item-description">
+                                Check your email and click the verification link from Paystack.
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" id="task-3">
+                        <div class="item-content">
+                            <div class="item-title">Complete KYC (Business Info)</div>
+                            <div class="item-description">
+                                Fill in your business name, type, phone, and address in the Paystack dashboard.
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Phase 2: Get API Keys -->
+            <div class="section">
+                <div class="section-title">
+                    <span>🔑</span>
+                    Phase 2: Get Your API Keys
+                </div>
+
+                <div class="info-box">
+                    ℹ️ API Keys are unique codes that connect your website to Paystack. You'll need the Public Key (safe) and Secret Key (keep private).
+                </div>
+
+                <ul class="checklist" id="phase2">
+                    <li class="checklist-item">
+                        <input type="checkbox" id="task-4">
+                        <div class="item-content">
+                            <div class="item-title">Go to Paystack Dashboard</div>
+                            <div class="item-description">
+                                Navigate to https://dashboard.paystack.com and log in with your account.
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" id="task-5">
+                        <div class="item-content">
+                            <div class="item-title">Find API Keys Section</div>
+                            <div class="item-description">
+                                Click Settings (⚙️) → Developers → API Keys
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" id="task-6">
+                        <div class="item-content">
+                            <div class="item-title">Copy Test Public Key</div>
+                            <div class="item-description">
+                                Find the key starting with "pk_test_" and copy it. This is what you'll use for testing.
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" id="task-7">
+                        <div class="item-content">
+                            <div class="item-title">Copy Test Secret Key</div>
+                            <div class="item-description">
+                                Find the key starting with "sk_test_" and save it safely. KEEP THIS PRIVATE - never share or commit to git!
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Phase 3: Configure Files -->
+            <div class="section">
+                <div class="section-title">
+                    <span>⚙️</span>
+                    Phase 3: Configuration
+                </div>
+
+                <div class="success-box">
+                    ✅ All required files have been created. Now just add your keys!
+                </div>
+
+                <ul class="checklist" id="phase3">
+                    <li class="checklist-item">
+                        <input type="checkbox" id="task-8">
+                        <div class="item-content">
+                            <div class="item-title">Open paystack-config.js</div>
+                            <div class="item-description">
+                                Open the file "paystack-config.js" in your code editor.
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" id="task-9">
+                        <div class="item-content">
+                            <div class="item-title">Find Line 11 (Public Key)</div>
+                            <div class="item-description">
+                                Look for: <div class="code-block">publicKey: 'pk_test_YOUR_PUBLIC_KEY_HERE'</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" id="task-10">
+                        <div class="item-content">
+                            <div class="item-title">Replace with Your Public Key</div>
+                            <div class="item-description">
+                                Replace 'pk_test_YOUR_PUBLIC_KEY_HERE' with your actual public key.
+                                <div class="code-block">publicKey: 'pk_test_4a7f7k2x9c1b8d5e'</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" id="task-11">
+                        <div class="item-content">
+                            <div class="item-title">Save paystack-config.js</div>
+                            <div class="item-description">
+                                Save the file. Your configuration is now updated!
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Phase 4: Test Payment -->
+            <div class="section">
+                <div class="section-title">
+                    <span>🧪</span>
+                    Phase 4: Test Payment
+                </div>
+
+                <div class="warning-box">
+                    ⚠️ Use the test cards below - they're safe and won't charge any real money!
+                </div>
+
+                <ul class="checklist" id="phase4">
+                    <li class="checklist-item">
+                        <input type="checkbox" id="task-12">
+                        <div class="item-content">
+                            <div class="item-title">Open checkout-paystack.html</div>
+                            <div class="item-description">
+                                Open the file "checkout-paystack.html" in your web browser.
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" id="task-13">
+                        <div class="item-content">
+                            <div class="item-title">Fill Customer Information</div>
+                            <div class="item-description">
+                                Enter test details:
+                                <div class="code-block">
+Name: Test Customer
+Email: test@example.com
+Phone: +234 801 234 5678
+Address: Test Address
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" id="task-14">
+                        <div class="item-content">
+                            <div class="item-title">Click "Pay with Paystack"</div>
+                            <div class="item-description">
+                                Click the yellow payment button to open Paystack popup.
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" id="task-15">
+                        <div class="item-content">
+                            <div class="item-title">Use Test Card (Success)</div>
+                            <div class="item-description">
+                                Card Number: <strong>4084084084084081</strong><br>
+                                Expiry: <strong>12/25</strong> (any future date)<br>
+                                CVV: <strong>123</strong> (any 3 digits)<br>
+                                OTP: <strong>123456</strong>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" id="task-16">
+                        <div class="item-content">
+                            <div class="item-title">Verify Success Page</div>
+                            <div class="item-description">
+                                After payment, you should see the success page showing your payment reference and amount.
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Phase 5: Backend Setup -->
+            <div class="section">
+                <div class="section-title">
+                    <span>🖥️</span>
+                    Phase 5: Backend Setup (Production Ready)
+                </div>
+
+                <div class="info-box">
+                    ℹ️ This ensures payments are verified securely on your server. Required before going live!
+                </div>
+
+                <ul class="checklist" id="phase5">
+                    <li class="checklist-item">
+                        <input type="checkbox" id="task-17">
+                        <div class="item-content">
+                            <div class="item-title">Upload payment-verify.php to Server</div>
+                            <div class="item-description">
+                                Upload the "payment-verify.php" file to your web server's root directory.
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" id="task-18">
+                        <div class="item-content">
+                            <div class="item-title">Update Secret Key in payment-verify.php</div>
+                            <div class="item-description">
+                                Open payment-verify.php on your server and replace the secret key on line 19:
+                                <div class="code-block">$PAYSTACK_SECRET_KEY = 'sk_test_YOUR_SECRET_KEY_HERE';</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" id="task-19">
+                        <div class="item-content">
+                            <div class="item-title">Set Up Database for Orders</div>
+                            <div class="item-description">
+                                Create a database table to store orders. Update payment-verify.php to insert order data after payment verification.
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Phase 6: Going Live -->
+            <div class="section">
+                <div class="section-title">
+                    <span>🚀</span>
+                    Phase 6: Going Live
+                </div>
+
+                <div class="success-box">
+                    ✅ You're ready for production! These steps prepare you for real payments.
+                </div>
+
+                <ul class="checklist" id="phase6">
+                    <li class="checklist-item">
+                        <input type="checkbox" id="task-20">
+                        <div class="item-content">
+                            <div class="item-title">Request Paystack Live Account Activation</div>
+                            <div class="item-description">
+                                Go to your Paystack dashboard and follow prompts to activate your live account. You'll need to provide business documents. Approval typically takes 2-3 days.
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" id="task-final">
+                        <div class="item-content">
+                            <div class="item-title">Update Keys with Live Keys</div>
+                            <div class="item-description">
+                                Once approved, Paystack will give you live keys (pk_live_* and sk_live_*). Update both paystack-config.js (frontend) and payment-verify.php (backend) with these live keys.
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Resources -->
+            <div class="section">
+                <div class="section-title">
+                    <span>📚</span>
+                    Additional Resources
+                </div>
+
+                <div style="background: #f9f9f9; padding: 15px; border-radius: 8px;">
+                    <p style="margin-bottom: 10px; font-weight: 600;">Documentation Files:</p>
+                    <ul style="margin-left: 20px; color: #666; font-size: 13px; line-height: 1.8;">
+                        <li><strong>PAYSTACK_SETUP_GUIDE.md</strong> - Complete step-by-step guide (15+ pages)</li>
+                        <li><strong>PAYSTACK_QUICK_REFERENCE.md</strong> - Quick reference cheat sheet</li>
+                        <li><strong>PAYSTACK_INTEGRATION_COMPLETE.md</strong> - Overview of integration</li>
+                    </ul>
+                    
+                    <p style="margin-top: 15px; margin-bottom: 10px; font-weight: 600;">External Links:</p>
+                    <ul style="margin-left: 20px; color: #0066cc; font-size: 13px; line-height: 1.8;">
+                        <li><a href="https://paystack.com" target="_blank">Paystack Official Site →</a></li>
+                        <li><a href="https://dashboard.paystack.com" target="_blank">Paystack Dashboard →</a></li>
+                        <li><a href="https://paystack.com/docs" target="_blank">Paystack API Documentation →</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Paystack Integration Checklist for brainboxX | Version 1.0</p>
+            <p>Complete all tasks above to ensure smooth payment processing ✅</p>
+        </div>
+    </div>
+
+    <script>
+        // Get all checkboxes
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        const totalCount = checkboxes.length;
+        document.getElementById('totalCount').textContent = totalCount;
+
+        // Update progress when checkbox changes
+        function updateProgress() {
+            const checkedCount = document.querySelectorAll('input[type="checkbox"]:checked').length;
+            const percentage = Math.round((checkedCount / totalCount) * 100);
+            
+            document.getElementById('completedCount').textContent = checkedCount;
+            document.getElementById('remainingCount').textContent = totalCount - checkedCount;
+            document.getElementById('percentComplete').textContent = percentage + '%';
+            document.getElementById('progressFill').style.width = percentage + '%';
+
+            // Show completion message when all tasks done
+            if (checkedCount === totalCount) {
+                document.getElementById('completionMessage').classList.add('show');
+            } else {
+                document.getElementById('completionMessage').classList.remove('show');
+            }
+
+            // Save progress to localStorage
+            const progress = Array.from(checkboxes).map(cb => ({
+                id: cb.id,
+                checked: cb.checked
+            }));
+            localStorage.setItem('paystack-checklist-progress', JSON.stringify(progress));
+        }
+
+        // Add event listeners to all checkboxes
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateProgress);
+        });
+
+        // Load saved progress from localStorage
+        function loadProgress() {
+            const saved = localStorage.getItem('paystack-checklist-progress');
+            if (saved) {
+                try {
+                    const progress = JSON.parse(saved);
+                    progress.forEach(item => {
+                        const checkbox = document.getElementById(item.id);
+                        if (checkbox) {
+                            checkbox.checked = item.checked;
+                        }
+                    });
+                    updateProgress();
+                } catch (e) {
+                    console.error('Error loading progress:', e);
+                }
+            }
+        }
+
+        // Load progress on page load
+        loadProgress();
+    </script>
+</body>
+</html>
