@@ -1,621 +1,1273 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Marketing & Promotion | brainboxX Marketplace</title>
-    <meta name="description" content="Digital Marketing, Social Media Ads, Campaigns, Content Creation, and Video Promotion on brainboxX" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promotion & Marketing Services | brainboxX</title>
+    <meta name="description" content="Professional promotion and marketing services including social media boosting, adverts placement, and follower growth">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
     <style>
-      :root {
-        --primary: #f5c76b;
-        --primary-dark: #d9a73f;
-        --bg: #f5fbff;
-        --surface: #ffffff;
-        --surface-alt: #eaf7ff;
-        --text: #1a2733;
-        --text-muted: #5f6f7a;
-        --border: #dfeaf4;
-        --error: #ff6b6b;
-        --success: #4ade80;
-      }
+        :root {
+            --primary: #1a1f2e;
+            --primary-light: #2a3142;
+            --accent: #00d9ff;
+            --accent-secondary: #ff006e;
+            --gold: #ffd700;
+            --text-light: #e8eef5;
+            --text-muted: #a0aac7;
+            --bg-dark: #0f1419;
+            --bg-darker: #0a0e16;
+            --border: #1e2433;
+            --success: #00ff41;
+            --warning: #ffa500;
+            --tier-a-accent: #10b981;
+            --tier-b-accent: #8b92a9;
+        }
 
-      * { box-sizing: border-box; }
+        * { box-sizing: border-box; }
 
-      body {
-        margin: 0;
-        font-family: 'Inter', sans-serif;
-        background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%);
-        color: var(--text);
-        line-height: 1.6;
-      }
+        body {
+            margin: 0;
+            font-family: "DM Sans", sans-serif;
+            color: var(--text-light);
+            background: linear-gradient(135deg, var(--bg-darker) 0%, #1a2540 25%, var(--bg-dark) 50%, #1a2540 75%, var(--bg-darker) 100%);
+            background-attachment: fixed;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
 
-      a { color: inherit; text-decoration: none; }
+        a { color: inherit; text-decoration: none; }
 
-      .header {
-        position: sticky; top: 0; z-index: 40;
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid var(--border);
-      }
+        /* Header */
+        .header {
+            background: linear-gradient(180deg, var(--primary-light) 0%, var(--primary) 100%);
+            border-bottom: 2px solid var(--accent);
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 8px 32px rgba(0, 217, 255, 0.1);
+        }
 
-      .header-content {
-        display: flex; align-items: center; justify-content: space-between;
-        gap: 20px; padding: 16px 24px; max-width: 1400px; margin: 0 auto;
-      }
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
 
-      .logo { font-size: 1.5rem; font-weight: 800; color: var(--text); }
+        .logo {
+            font-family: "Playfair Display", serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-      .nav-center { display: flex; gap: 20px; flex: 1; justify-content: center; flex-wrap: wrap; }
-      .nav-center a { font-weight: 600; color: var(--text-muted); transition: color 0.2s; font-size: 0.9rem; }
-      .nav-center a:hover, .nav-center a.active { color: var(--primary-dark); }
+        .nav {
+            display: flex;
+            gap: 30px;
+            flex: 1;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
 
-      .nav-right { display: flex; align-items: center; gap: 16px; }
+        .nav a {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            transition: all 0.3s;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 5px;
+        }
 
-      .wishlist-btn {
-        border: 1px solid var(--border); background: var(--surface); color: var(--text);
-        padding: 9px 14px; border-radius: 999px; font-weight: 700; cursor: pointer;
-      }
-      .wishlist-btn.active, .wishlist-btn:hover { border-color: var(--primary-dark); color: var(--primary-dark); }
+        .nav a:hover {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
 
-      .cart-btn {
-        position: relative; display: flex; align-items: center; gap: 8px;
-        background: linear-gradient(135deg, var(--primary), #ffd886); color: var(--text);
-        border: none; padding: 10px 20px; border-radius: 999px; font-weight: 700; cursor: pointer;
-      }
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1a3a52 0%, var(--primary) 50%, #0f1419 100%);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
 
-      .cart-badge {
-        position: absolute; top: -8px; right: -8px; background: var(--error); color: white;
-        width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center;
-        justify-content: center; font-size: 0.75rem; font-weight: 700;
-      }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 217, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255, 0, 110, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
 
-      .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
 
-      .hero {
-        background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
-        color: var(--text); padding: 60px 24px; text-align: center;
-      }
+        .hero h1 {
+            font-family: "Playfair Display", serif;
+            font-size: 3.5rem;
+            margin: 0 0 20px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-      .hero h1 { font-size: 2.5rem; margin: 0 0 16px; font-weight: 800; letter-spacing: -0.02em; }
-      .hero p { font-size: 1.1rem; margin: 0 auto; max-width: 600px; opacity: 0.95; }
+        .hero p {
+            font-size: 1.2rem;
+            margin: 0 0 30px;
+            opacity: 0.95;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-      .filters { display: flex; flex-wrap: wrap; gap: 12px; padding: 30px 24px; justify-content: center; border-bottom: 1px solid var(--border); }
-      .marketplace-search { position: relative; width: min(680px, 100%); margin: 0 auto 20px; }
-      .marketplace-search input { width: 100%; min-height: 52px; padding: 12px 48px 12px 18px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text); font-size: 1rem; }
-      .marketplace-search-icon { position: absolute; top: 50%; right: 18px; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; }
+        /* Service Grid */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
 
-      .filter-tools { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; margin-bottom: 10px; }
-      .sort-select { min-height: 44px; padding: 8px 34px 8px 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text); font-weight: 600; }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 50px;
+            color: var(--text-light);
+            background: linear-gradient(135deg, var(--accent) 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-      .filter-btn { padding: 10px 20px; border: 2px solid var(--border); background: var(--surface); color: var(--text); border-radius: 999px; font-weight: 600; cursor: pointer; font-size: 0.9rem; }
-      .filter-btn:hover, .filter-btn.active { border-color: var(--primary); background: var(--primary); color: var(--text); }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
 
-      .category-section { padding: 40px 24px; border-bottom: 1px solid var(--border); }
-      .category-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
-      .category-icon { font-size: 2.5rem; }
-      .category-info h2 { margin: 0; font-size: 1.8rem; font-weight: 800; }
-      .category-info p { margin: 4px 0 0; color: var(--text-muted); font-size: 0.95rem; }
+        .service-card {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
 
-      .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent 0%, rgba(0, 217, 255, 0.2) 50%, transparent 100%);
+            transition: left 0.5s;
+        }
 
-      .product-card {
-        background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px;
-        display: flex; flex-direction: column; gap: 12px; transition: all 0.3s; cursor: pointer;
-      }
-      .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(26, 39, 51, 0.12); border-color: var(--primary); }
+        .service-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 8px 32px rgba(0, 217, 255, 0.2), inset 0 1px 0 rgba(0, 217, 255, 0.1);
+            transform: translateY(-4px);
+        }
 
-      .product-image { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; background: var(--surface-alt); }
-      .product-card-topline { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-      .product-category-label, .delivery-time { color: var(--text-muted); font-size: 0.82rem; font-weight: 600; }
+        .service-card:hover::before {
+            left: 100%;
+        }
 
-      .wishlist-icon { width: 36px; height: 36px; flex: 0 0 36px; border: 1px solid var(--border); border-radius: 50%; background: var(--surface); color: var(--text-muted); font-size: 1.15rem; cursor: pointer; }
-      .wishlist-icon.saved { border-color: var(--primary-dark); color: var(--primary-dark); background: #fff8e5; }
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
 
-      .rating-summary { color: #a86f00; font-size: 0.84rem; font-weight: 700; }
-      .product-name { font-size: 1.1rem; font-weight: 700; color: var(--text); }
-      .product-desc { font-size: 0.9rem; color: var(--text-muted); flex-grow: 1; }
-      .product-price { font-size: 1.4rem; font-weight: 800; color: var(--primary-dark); }
+        .service-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
 
-      .product-actions { display: flex; gap: 8px; margin-top: 8px; }
-      .qty-input { width: 70px; padding: 8px; border: 1px solid var(--border); border-radius: 8px; text-align: center; font-weight: 600; }
+        .service-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
 
-      .add-btn { flex: 1; padding: 10px 16px; background: linear-gradient(135deg, var(--primary), #ffd886); color: var(--text); border: none; border-radius: 8px; font-weight: 700; cursor: pointer; }
-      .add-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(245, 199, 107, 0.3); }
+        .service-price {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
 
-      .view-details-btn { padding: 0; border: 0; background: none; color: var(--primary-dark); font-weight: 700; text-align: left; cursor: pointer; }
+        /* Order Form Section */
+        .order-section {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 50px;
+            margin-bottom: 60px;
+            box-shadow: 0 8px 32px rgba(0, 217, 255, 0.15);
+        }
 
-      .cart-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); opacity: 0; visibility: hidden; transition: all 0.3s; z-index: 99; }
-      .cart-overlay.visible { opacity: 1; visibility: visible; }
-      .cart-sidebar { position: fixed; right: 0; top: 0; height: 100vh; width: 420px; background: var(--surface); box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1); z-index: 100; transform: translateX(100%); transition: transform 0.3s; display: flex; flex-direction: column; }
-      .cart-sidebar.visible { transform: translateX(0); }
-      .cart-header { display: flex; align-items: center; justify-content: space-between; padding: 20px; border-bottom: 1px solid var(--border); }
-      .cart-close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted); }
-      .cart-items { flex: 1; overflow-y: auto; padding: 20px; }
-      .cart-item { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
-      .cart-item-name { font-weight: 600; font-size: 0.95rem; }
-      .cart-item-qty { font-size: 0.85rem; color: var(--text-muted); }
-      .cart-item-price { font-weight: 700; white-space: nowrap; }
-      .cart-remove-btn { background: var(--error); color: white; border: none; border-radius: 4px; padding: 4px 8px; font-size: 0.75rem; font-weight: 600; cursor: pointer; }
-      .cart-footer { padding: 20px; border-top: 1px solid var(--border); background: var(--surface-alt); }
-      .cart-total { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; font-size: 1.2rem; font-weight: 800; }
-      .checkout-btn { width: 100%; padding: 12px; background: linear-gradient(135deg, var(--primary), #ffd886); color: var(--text); border: none; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; }
+        .form-section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: var(--text-light);
+            text-align: center;
+        }
 
-      .product-modal { position: fixed; inset: 0; display: grid; place-items: center; padding: 24px; background: rgba(26, 39, 51, 0.64); opacity: 0; pointer-events: none; transition: opacity 0.2s; z-index: 110; }
-      .product-modal.visible { opacity: 1; pointer-events: auto; }
-      .product-modal-content { position: relative; width: min(960px, 100%); max-height: min(760px, calc(100vh - 48px)); overflow-y: auto; padding: 28px; border-radius: 12px; background: var(--surface); box-shadow: 0 24px 70px rgba(0, 0, 0, 0.25); }
-      .modal-close-btn { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; border: 0; border-radius: 50%; background: var(--surface-alt); color: var(--text); font-size: 1.35rem; cursor: pointer; }
-      .product-detail-layout { display: grid; grid-template-columns: minmax(240px, 0.9fr) minmax(0, 1fr); gap: 28px; align-items: start; }
-      .product-detail-image { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px; background: var(--surface-alt); }
-      .detail-category { margin: 0 0 8px; color: var(--primary-dark); font-size: 0.9rem; font-weight: 800; }
-      .detail-title { margin: 0; font-size: 1.9rem; line-height: 1.2; }
-      .detail-description { color: var(--text-muted); }
-      .detail-price { margin: 16px 0; color: var(--primary-dark); font-size: 1.6rem; font-weight: 800; }
-      .detail-meta { margin: 0 0 18px; color: var(--text-muted); font-size: 0.95rem; }
+        /* Quality Tier Selection */
+        .tier-selection {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+            padding-bottom: 40px;
+            border-bottom: 2px solid var(--border);
+        }
 
-      @media (max-width: 640px) {
-        .header-content { padding: 12px 16px; }
-        .logo { font-size: 1.2rem; }
-        .hero h1 { font-size: 1.8rem; }
-        .cart-sidebar { width: 100%; bottom: 0; height: auto; max-height: 80vh; }
-        .products-grid { grid-template-columns: 1fr; }
-        .product-detail-layout { grid-template-columns: 1fr; }
-      }
+        .tier-card {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f1419 100%);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tier-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .tier-card:hover::before {
+            opacity: 1;
+        }
+
+        .tier-card input[type="radio"] {
+            position: absolute;
+            width: 0;
+            height: 0;
+            opacity: 0;
+        }
+
+        .tier-card input[type="radio"]:checked + .tier-content {
+            color: white;
+        }
+
+        .tier-card input[type="radio"]:checked + .tier-content .tier-name {
+            color: var(--accent);
+        }
+
+        .tier-card input[type="radio"]:checked {
+            outline: none;
+        }
+
+        .tier-card.tier-a {
+            border-color: var(--tier-a-accent);
+        }
+
+        .tier-card.tier-a input[type="radio"]:checked + .tier-content {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, transparent 100%);
+        }
+
+        .tier-card.tier-b {
+            border-color: var(--tier-b-accent);
+        }
+
+        .tier-card.tier-b input[type="radio"]:checked + .tier-content {
+            background: linear-gradient(135deg, rgba(139, 146, 169, 0.2) 0%, transparent 100%);
+        }
+
+        .tier-badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tier-a .tier-badge {
+            background: rgba(16, 185, 129, 0.3);
+            color: var(--tier-a-accent);
+            border: 1px solid var(--tier-a-accent);
+        }
+
+        .tier-b .tier-badge {
+            background: rgba(139, 146, 169, 0.3);
+            color: var(--tier-b-accent);
+            border: 1px solid var(--tier-b-accent);
+        }
+
+        .tier-content {
+            padding: 0;
+            cursor: pointer;
+            transition: background 0.3s;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .tier-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-light);
+            transition: color 0.3s;
+        }
+
+        .tier-description {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .tier-attributes {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            font-size: 0.85rem;
+        }
+
+        .tier-attributes li {
+            padding: 6px 0;
+            color: var(--text-muted);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .tier-attributes li:before {
+            content: '? ';
+            color: var(--success);
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        .tier-attributes li:last-child {
+            border-bottom: none;
+        }
+
+        /* Form Grid */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .form-group label .required {
+            color: var(--accent);
+            margin-left: 4px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s;
+            background: linear-gradient(135deg, rgba(45, 95, 141, 0.2) 0%, rgba(26, 31, 46, 0.2) 100%);
+            color: var(--text-light);
+        }
+
+        .form-group input::placeholder,
+        .form-group select::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.2);
+            background: linear-gradient(135deg, rgba(45, 95, 141, 0.4) 0%, rgba(26, 31, 46, 0.4) 100%);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Dual Controls - Quantity and Duration */
+        .dual-control {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(0, 217, 255, 0.05);
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            border-radius: 8px;
+        }
+
+        .dual-control .form-group label::before {
+            content: '';
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            background: rgba(0, 217, 255, 0.2);
+            border-radius: 4px;
+            text-align: center;
+            line-height: 24px;
+            font-weight: 700;
+            color: var(--accent);
+            vertical-align: middle;
+        }
+
+        .dual-control .form-group:first-child label::before {
+            content: '1';
+        }
+
+        .dual-control .form-group:last-child label::before {
+            content: '2';
+        }
+
+        /* Platform and Service Selection */
+        .selector-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .platform-btn, .service-checkbox {
+            position: relative;
+            display: none;
+        }
+
+        .platform-btn + label, .service-checkbox + label {
+            display: block;
+            padding: 12px 16px;
+            background: linear-gradient(135deg, var(--primary) 0%, #0f1419 100%);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s;
+            user-select: none;
+        }
+
+        .platform-btn:checked + label, .service-checkbox:checked + label {
+            border-color: var(--accent);
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.2) 0%, rgba(0, 217, 255, 0.1) 100%);
+            color: var(--accent);
+            box-shadow: 0 0 12px rgba(0, 217, 255, 0.3);
+        }
+
+        .platform-btn + label:hover, .service-checkbox + label:hover {
+            border-color: var(--accent);
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1) 0%, transparent 100%);
+        }
+
+        /* Process Steps */
+        .process-section {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            border: 2px solid var(--border);
+            padding: 60px 20px;
+            margin-bottom: 60px;
+            border-radius: 12px;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 40px auto 0;
+        }
+
+        .step {
+            text-align: center;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--gold) 100%);
+            color: var(--bg-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin: 0 auto 20px;
+            box-shadow: 0 4px 20px rgba(0, 217, 255, 0.3);
+        }
+
+        .step-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+
+        .step-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent) 0%, #00ffcc 100%);
+            color: var(--bg-dark);
+            width: 100%;
+            font-weight: 700;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 32px rgba(0, 217, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--accent-secondary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 4px 16px rgba(255, 0, 110, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            max-width: 900px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+        }
+
+        .faq-item {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+            border-color: var(--accent);
+            box-shadow: 0 4px 16px rgba(0, 217, 255, 0.15);
+        }
+
+        .faq-question {
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: all 0.3s;
+            color: var(--text-light);
+        }
+
+        .faq-question:hover {
+            background: linear-gradient(135deg, #2a3142 0%, #1a1f2e 100%);
+            color: var(--accent);
+        }
+
+        .faq-answer {
+            padding: 20px;
+            background: rgba(0, 217, 255, 0.05);
+            color: var(--text-muted);
+            display: none;
+            border-top: 1px solid var(--border);
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(180deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+            color: var(--text-light);
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 80px;
+            border-top: 2px solid var(--border);
+        }
+
+        .footer p {
+            margin: 0;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .services-grid { grid-template-columns: 1fr; }
+            .order-section { padding: 30px; }
+            .form-grid { grid-template-columns: 1fr; }
+            .tier-selection { grid-template-columns: 1fr; }
+            .dual-control { grid-template-columns: 1fr; }
+            .selector-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+            .section-title { font-size: 1.8rem; }
+        }
+
+        /* Validation Styles */
+        .form-error {
+            border-color: #ff4757 !important;
+        }
+
+        .error-message {
+            color: #ff4757;
+            font-size: 0.85rem;
+            margin-top: 6px;
+            display: none;
+        }
+
+        .form-error + .error-message,
+        .form-group.has-error .error-message {
+            display: block;
+        }
+
+        /* Success State */
+        .form-success {
+            display: none;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, transparent 100%);
+            border: 1px solid var(--tier-a-accent);
+            border-radius: 8px;
+            margin-bottom: 30px;
+            color: var(--tier-a-accent);
+            text-align: center;
+        }
+
+        .form-success.show {
+            display: block;
+        }
     </style>
+
 </head>
 <body>
+    <!-- Header -->
     <header class="header">
-      <div class="header-content">
-        <a href="brainboxtools.html" class="logo"><span>brainboxX</span></a>
-        <nav class="nav-center">
-          <a href="marketplace.html">All Categories</a>
-          <a href="communication.html">Communication</a>
-          <a href="courses.html">Courses</a>
-          <a href="crypto.html">Crypto</a>
-          <a href="gifts-delivery.html">Gifts & Delivery</a>
-          <a href="launchforge.html">LaunchForge</a>
-          <a href="marketing.html" class="active">Marketing</a>
-          <a href="professional.html">Professional</a>
-          <a href="telecom.html">Telecom</a>
-        </nav>
-        <div class="nav-right">
-          <button class="wishlist-btn" id="wishlistToggle" type="button" onclick="toggleWishlistFilter()" aria-pressed="false">♡ Saved <span id="wishlistCount">0</span></button>
-          <button class="cart-btn" onclick="toggleCart()">🛒 Cart <span class="cart-badge" id="cartCount">0</span></button>
+        <div class="header-content">
+            <div class="logo">brainboxX</div>
+            <nav class="nav">
+                <a href="brainboxtools.html">Home</a>
+                <a href="marketplace.html">Marketplace</a>
+                <a href="gifts-delivery.html">Gifts</a>
+                <a href="marketing.html" class="active">Marketing</a>
+            </nav>
         </div>
-      </div>
     </header>
 
+    <!-- Hero Section -->
     <section class="hero">
-      <div class="container">
-        <h1>📢 Marketing & Promotion</h1>
-        <p>Boost your brand visibility with Instagram ads, TikTok viral campaigns, Google Ads, content creation, and influencer marketing</p>
-      </div>
+        <div class="hero-content">
+            <h1>Promotion & Marketing Services</h1>
+            <p>Professional social media marketing, promotions, and adverts placement. We handle everything - from followers to targeted ads on all major platforms.</p>
+        </div>
     </section>
 
-    <main id="marketplace">
-      <div class="filters">
-        <div class="marketplace-search">
-          <input id="marketplaceSearch" type="search" placeholder="Search marketing services..." aria-label="Search marketing services" oninput="filterPageProducts()" />
-          <span class="marketplace-search-icon" aria-hidden="true">⌕</span>
+    <!-- Services Section -->
+    <section class="container">
+        <h2 class="section-title">Our Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">??</div>
+                <div class="service-name">Followers Boost</div>
+                <div class="service-desc">Real and responsive followers for your social media accounts</div>
+                <div class="service-price">From ?5,000</div>
+                <button class="btn btn-secondary">Order Now</button>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">??</div>
+                <div class="service-name">Facebook Ads</div>
+                <div class="service-desc">Targeted Facebook advertisements to reach your audience</div>
+                <div class="service-price">From ?10,000</div>
+                <button class="btn btn-secondary">Order Now</button>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">??</div>
+                <div class="service-name">WhatsApp Marketing</div>
+                <div class="service-desc">Direct marketing campaigns on WhatsApp</div>
+                <div class="service-price">From ?8,000</div>
+                <button class="btn btn-secondary">Order Now</button>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">??</div>
+                <div class="service-name">Engagement Boost</div>
+                <div class="service-desc">Increase likes, comments, and engagement on your posts</div>
+                <div class="service-price">From ?3,000</div>
+                <button class="btn btn-secondary">Order Now</button>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">??</div>
+                <div class="service-name">Video Promotion</div>
+                <div class="service-desc">Promote your videos across multiple platforms</div>
+                <div class="service-price">From ?12,000</div>
+                <button class="btn btn-secondary">Order Now</button>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">??</div>
+                <div class="service-name">Business Promotion</div>
+                <div class="service-desc">Complete business promotion and marketing strategy</div>
+                <div class="service-price">From ?20,000</div>
+                <button class="btn btn-secondary">Order Now</button>
+            </div>
         </div>
-        <div class="filter-tools">
-          <button class="filter-btn" id="savedFilterBtn" type="button" onclick="toggleWishlistFilter()">♡ Saved items</button>
-          <label>Sort <select class="sort-select" id="sortSelect" onchange="sortPageProducts(this.value)"><option value="name">A-Z</option><option value="price-low">Price: low to high</option><option value="price-high">Price: high to low</option></select></label>
+    </section>
+
+    <!-- Order Form Section -->
+    <section class="container">
+        <div class="order-section">
+            <h2 class="form-section-title">Place Your Comprehensive Order</h2>
+            
+            <!-- Quality Tier Selection -->
+            <div style="margin-bottom: 30px;">
+                <div style="text-align: center; margin-bottom: 25px;">
+                    <h3 style="color: var(--text-light); margin: 0 0 10px 0;">Select Your Tier</h3>
+                    <p style="color: var(--text-muted); margin: 0;">Choose between Real Followers (Premium) or Robotic Followers (Budget)</p>
+                </div>
+                <div class="tier-selection">
+                    <div class="tier-card tier-a">
+                        <input type="radio" id="tierA" name="tier" value="tier-a" required>
+                        <div class="tier-content">
+                            <div class="tier-badge">? Recommended</div>
+                            <div class="tier-name">Tier A: Real & Responsive</div>
+                            <div class="tier-description">Premium quality followers with active engagement and high retention</div>
+                            <ul class="tier-attributes">
+                                <li>100% Active Profiles</li>
+                                <li>High Retention (No Drop)</li>
+                                <li>Safe from Platform Bans</li>
+                                <li>Organic Engagement</li>
+                                <li>Perfect for Business/Influencers</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="tier-card tier-b">
+                        <input type="radio" id="tierB" name="tier" value="tier-b" required>
+                        <div class="tier-content">
+                            <div class="tier-badge">?? Budget Option</div>
+                            <div class="tier-name">Tier B: Robotic/System</div>
+                            <div class="tier-description">Fast delivery with high-quality avatars for social proof building</div>
+                            <ul class="tier-attributes">
+                                <li>Fast Delivery (24-48 Hours)</li>
+                                <li>High-Quality Avatars</li>
+                                <li>Low Cost</li>
+                                <li>Non-Drop Protection</li>
+                                <li>Best for Raw Numbers Only</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <form id="orderForm">
+                <!-- Client Identification Section -->
+                <div style="padding: 20px; background: rgba(0, 217, 255, 0.05); border-radius: 8px; margin-bottom: 30px; border: 1px solid rgba(0, 217, 255, 0.1);">
+                    <h4 style="color: var(--accent); margin-top: 0; margin-bottom: 20px;">?? Client Identification</h4>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="fullName">Full Name <span class="required">*</span></label>
+                            <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+                            <span class="error-message">Full name is required</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="whatsapp">WhatsApp Number with Country Code <span class="required">*</span></label>
+                            <input type="tel" id="whatsapp" name="whatsapp" placeholder="+234 (Nigeria example)" required>
+                            <span class="error-message">Valid WhatsApp number required</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                            <span class="error-message">Valid email is required</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="socialHandle">Social Media Handle/Link <span class="required">*</span></label>
+                            <input type="text" id="socialHandle" name="socialHandle" placeholder="@yourusername or profile URL" required>
+                            <span class="error-message">Social media handle is required</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Platform Selection Section -->
+                <div style="margin-bottom: 30px;">
+                    <h4 style="color: var(--accent); margin-top: 0; margin-bottom: 15px;">?? Platform Selection</h4>
+                    <div class="selector-grid">
+                        <input type="radio" id="platform-instagram" name="platform" value="Instagram" class="platform-btn">
+                        <label for="platform-instagram">?? Instagram</label>
+
+                        <input type="radio" id="platform-facebook" name="platform" value="Facebook" class="platform-btn">
+                        <label for="platform-facebook">?? Facebook</label>
+
+                        <input type="radio" id="platform-tiktok" name="platform" value="TikTok" class="platform-btn">
+                        <label for="platform-tiktok">?? TikTok</label>
+
+                        <input type="radio" id="platform-youtube" name="platform" value="YouTube" class="platform-btn">
+                        <label for="platform-youtube">?? YouTube</label>
+
+                        <input type="radio" id="platform-linkedin" name="platform" value="LinkedIn" class="platform-btn">
+                        <label for="platform-linkedin">?? LinkedIn</label>
+
+                        <input type="radio" id="platform-x" name="platform" value="X (Twitter)" class="platform-btn">
+                        <label for="platform-x">?? X (Twitter)</label>
+                    </div>
+                    <span id="platform-error" class="error-message" style="display: block; margin-top: 8px;">Please select a platform</span>
+                </div>
+
+                <!-- Service Type Selection -->
+                <div style="margin-bottom: 30px;">
+                    <h4 style="color: var(--accent); margin-top: 0; margin-bottom: 15px;">?? Service Type (Select All That Apply)</h4>
+                    <div class="selector-grid">
+                        <input type="checkbox" id="service-organic" name="service" value="Organic Page Boosting" class="service-checkbox">
+                        <label for="service-organic">Organic Boosting</label>
+
+                        <input type="checkbox" id="service-followers" name="service" value="Follower / Subscriber Growth" class="service-checkbox">
+                        <label for="service-followers">Follower Growth</label>
+
+                        <input type="checkbox" id="service-engagement" name="service" value="Engagement Pack" class="service-checkbox">
+                        <label for="service-engagement">Engagement Pack</label>
+
+                        <input type="checkbox" id="service-revamp" name="service" value="Account Revamp & Bio Optimization" class="service-checkbox">
+                        <label for="service-revamp">Account Revamp</label>
+
+                        <input type="checkbox" id="service-ads" name="service" value="Targeted Ad Placement Management" class="service-checkbox">
+                        <label for="service-ads">Ad Placement</label>
+                    </div>
+                    <span id="service-error" class="error-message" style="display: block; margin-top: 8px;">Please select at least one service</span>
+                </div>
+
+                <!-- Quantity and Duration (Separate Controls) -->
+                <div class="dual-control">
+                    <div class="form-group">
+                        <label for="quantity">Quantity (Followers/Views/Engagement) <span class="required">*</span></label>
+                        <select id="quantity" name="quantity" required>
+                            <option value="">-- Select Quantity --</option>
+                            <option value="500">500</option>
+                            <option value="1000">1,000</option>
+                            <option value="5000">5,000</option>
+                            <option value="10000">10,000</option>
+                            <option value="25000">25,000</option>
+                            <option value="50000">50,000+</option>
+                            <option value="custom">Custom Amount</option>
+                        </select>
+                        <span class="error-message">Please select a quantity</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="duration">Delivery Speed/Duration <span class="required">*</span></label>
+                        <select id="duration" name="duration" required>
+                            <option value="">-- Select Duration --</option>
+                            <option value="instant">Instant Boost (24-48 Hours)</option>
+                            <option value="drip">Drip-Feed (7 Days)</option>
+                            <option value="standard">Standard (14 Days)</option>
+                            <option value="monthly">Monthly Retainer (30 Days)</option>
+                        </select>
+                        <span class="error-message">Please select a delivery speed</span>
+                    </div>
+                </div>
+
+                <!-- Additional Details -->
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="budget">Budget/Payment Amount (?) <span class="required">*</span></label>
+                        <input type="number" id="budget" name="budget" placeholder="Enter amount in Naira" min="1000" required>
+                        <span class="error-message">Valid amount required (minimum ?1,000)</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="targetAudience">Target Audience (Optional)</label>
+                        <input type="text" id="targetAudience" name="targetAudience" placeholder="e.g., 18-35, Female, Nigeria">
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group full">
+                        <label for="description">Project Description/Goals <span class="required">*</span></label>
+                        <textarea id="description" name="description" placeholder="Tell us about your project, goals, target audience, and any specific requirements..." required></textarea>
+                        <span class="error-message">Project description is required</span>
+                    </div>
+                </div>
+
+                <!-- Success Message -->
+                <div class="form-success" id="successMessage">
+                    <h3 style="margin: 0; color: var(--tier-a-accent);">? Order Submitted Successfully!</h3>
+                    <p id="orderId" style="margin: 10px 0 0 0;"></p>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit Order for Manual Review</button>
+                <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 15px;">? Our team will verify your order and send confirmation via email</p>
+            </form>
         </div>
-        <a href="marketplace.html" class="filter-btn">← All Categories</a>
-        <a href="communication.html" class="filter-btn">📱 Communication</a>
-        <a href="courses.html" class="filter-btn">🎓 Courses</a>
-        <a href="crypto.html" class="filter-btn">₿ Crypto</a>
-        <a href="gifts-delivery.html" class="filter-btn">🎁 Gifts & Delivery</a>
-        <a href="launchforge.html" class="filter-btn">🚀 LaunchForge</a>
-        <a href="marketing.html" class="filter-btn active">📢 Marketing</a>
-        <a href="professional.html" class="filter-btn">👔 Professional</a>
-        <a href="telecom.html" class="filter-btn">📴 Telecom</a>
-      </div>
+    </section>
 
-      <p class="search-summary" id="searchSummary" aria-live="polite" style="text-align: center; color: var(--text-muted); margin-top: 10px;"></p>
-
-      <section class="category-section">
-        <div class="category-header">
-          <div class="category-icon">📢</div>
-          <div class="category-info">
-            <h2>Marketing & Promotion</h2>
-            <p>Digital marketing and brand promotion</p>
-          </div>
+    <!-- Process Section -->
+    <section class="process-section">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Submit Order</div>
+                    <div class="step-desc">Fill out the order form with your service details and account information</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Manual Verification</div>
+                    <div class="step-desc">Our team reviews your order to ensure it meets our legitimate business standards</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Payment & Confirmation</div>
+                    <div class="step-desc">Make payment and receive email confirmation before we start the work</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-title">Work Execution</div>
+                    <div class="step-desc">Our team completes your order with real, responsive results</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-title">Final Confirmation</div>
+                    <div class="step-desc">Receive email confirmation with completion details and results</div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="products-grid" id="productsGrid">
-          <!-- EDITABLE PRODUCT CARDS START HERE -->
-
-          <article class="product-card" data-product-id="m001" onclick="openProductDetails('m001')">
-            <img class="product-image" src="Project_X images/PX/PX logo/WhatsApp Image 2026-08-29 at 9.49.36 PM (2).jpeg" alt="Instagram Ads Campaign" loading="lazy" />
-            <div class="product-card-topline">
-              <div class="product-category-label">📢 Marketing & Promotion</div>
-              <button class="wishlist-icon" type="button" onclick="event.stopPropagation(); toggleWishlist('m001')" aria-label="Save item">♡</button>
+    <!-- FAQ Section -->
+    <section class="container">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="faq-section">
+            <div class="faq-item">
+                <div class="faq-question">
+                    Are the followers real? <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Yes! We provide both real followers and responsive accounts. All our services are legitimate and comply with platform guidelines.
+                </div>
             </div>
-            <div class="product-name">Instagram Ads Campaign</div>
-            <div class="rating-summary">★ 4.8 (25)</div>
-            <div class="product-desc">Targeted Instagram advertising management (1 month)</div>
-            <div class="delivery-time">Fulfilment: 5-10 business days</div>
-            <div class="product-price">₦15,000</div>
-            <button class="view-details-btn" type="button" onclick="event.stopPropagation(); openProductDetails('m001')">View product details</button>
-            <div class="product-actions">
-              <input type="number" class="qty-input" id="qty-m001" value="1" min="1" max="99" onclick="event.stopPropagation()" />
-              <button class="add-btn" onclick="event.stopPropagation(); addToCartFromDOM('m001', 'Instagram Ads Campaign', 15000, 'qty-m001')">Add to Cart</button>
+            <div class="faq-item">
+                <div class="faq-question">
+                    How long does delivery take? <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Delivery times vary by service. Followers usually start appearing within 24-48 hours. Campaign results can take 3-7 days depending on scope.
+                </div>
             </div>
-          </article>
-
-          <article class="product-card" data-product-id="m002" onclick="openProductDetails('m002')">
-            <img class="product-image" src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80" alt="Facebook Marketing Package" loading="lazy" />
-            <div class="product-card-topline">
-              <div class="product-category-label">📢 Marketing & Promotion</div>
-              <button class="wishlist-icon" type="button" onclick="event.stopPropagation(); toggleWishlist('m002')" aria-label="Save item">♡</button>
+            <div class="faq-item">
+                <div class="faq-question">
+                    What payment methods do you accept? <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    We accept bank transfers, card payments, and mobile money transfers. Payment must be completed before work begins.
+                </div>
             </div>
-            <div class="product-name">Facebook Marketing Package</div>
-            <div class="rating-summary">★ 4.7 (20)</div>
-            <div class="product-desc">Facebook ads management and funnel optimization</div>
-            <div class="delivery-time">Fulfilment: 5-10 business days</div>
-            <div class="product-price">₦12,000</div>
-            <button class="view-details-btn" type="button" onclick="event.stopPropagation(); openProductDetails('m002')">View product details</button>
-            <div class="product-actions">
-              <input type="number" class="qty-input" id="qty-m002" value="1" min="1" max="99" onclick="event.stopPropagation()" />
-              <button class="add-btn" onclick="event.stopPropagation(); addToCartFromDOM('m002', 'Facebook Marketing Package', 12000, 'qty-m002')">Add to Cart</button>
+            <div class="faq-item">
+                <div class="faq-question">
+                    What if I'm not satisfied? <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    We stand behind our work. If results don't meet expectations, contact our support team within 7 days for resolution.
+                </div>
             </div>
-          </article>
-
-          <article class="product-card" data-product-id="m003" onclick="openProductDetails('m003')">
-            <img class="product-image" src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80" alt="TikTok Viral Campaign" loading="lazy" />
-            <div class="product-card-topline">
-              <div class="product-category-label">📢 Marketing & Promotion</div>
-              <button class="wishlist-icon" type="button" onclick="event.stopPropagation(); toggleWishlist('m003')" aria-label="Save item">♡</button>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Do you offer custom packages? <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Absolutely! For large projects or custom requirements, please email us directly at support@brainboxx.com for a personalized quote.
+                </div>
             </div>
-            <div class="product-name">TikTok Viral Campaign</div>
-            <div class="rating-summary">★ 4.9 (32)</div>
-            <div class="product-desc">TikTok influencer collabs and organic viral strategy</div>
-            <div class="delivery-time">Fulfilment: 5-10 business days</div>
-            <div class="product-price">₦18,000</div>
-            <button class="view-details-btn" type="button" onclick="event.stopPropagation(); openProductDetails('m003')">View product details</button>
-            <div class="product-actions">
-              <input type="number" class="qty-input" id="qty-m003" value="1" min="1" max="99" onclick="event.stopPropagation()" />
-              <button class="add-btn" onclick="event.stopPropagation(); addToCartFromDOM('m003', 'TikTok Viral Campaign', 18000, 'qty-m003')">Add to Cart</button>
-            </div>
-          </article>
-
-          <article class="product-card" data-product-id="m004" onclick="openProductDetails('m004')">
-            <img class="product-image" src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80" alt="Google Ads Setup" loading="lazy" />
-            <div class="product-card-topline">
-              <div class="product-category-label">📢 Marketing & Promotion</div>
-              <button class="wishlist-icon" type="button" onclick="event.stopPropagation(); toggleWishlist('m004')" aria-label="Save item">♡</button>
-            </div>
-            <div class="product-name">Google Ads Setup</div>
-            <div class="rating-summary">★ 4.8 (28)</div>
-            <div class="product-desc">Google search, display, and YouTube ads management</div>
-            <div class="delivery-time">Fulfilment: 5-10 business days</div>
-            <div class="product-price">₦20,000</div>
-            <button class="view-details-btn" type="button" onclick="event.stopPropagation(); openProductDetails('m004')">View product details</button>
-            <div class="product-actions">
-              <input type="number" class="qty-input" id="qty-m004" value="1" min="1" max="99" onclick="event.stopPropagation()" />
-              <button class="add-btn" onclick="event.stopPropagation(); addToCartFromDOM('m004', 'Google Ads Setup', 20000, 'qty-m004')">Add to Cart</button>
-            </div>
-          </article>
-
-          <article class="product-card" data-product-id="m005" onclick="openProductDetails('m005')">
-            <img class="product-image" src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80" alt="SMS Marketing Campaign" loading="lazy" />
-            <div class="product-card-topline">
-              <div class="product-category-label">📢 Marketing & Promotion</div>
-              <button class="wishlist-icon" type="button" onclick="event.stopPropagation(); toggleWishlist('m005')" aria-label="Save item">♡</button>
-            </div>
-            <div class="product-name">SMS Marketing Campaign</div>
-            <div class="rating-summary">★ 4.5 (14)</div>
-            <div class="product-desc">Bulk targeted SMS promotion to targeted customer lists</div>
-            <div class="delivery-time">Fulfilment: 5-10 business days</div>
-            <div class="product-price">₦8,000</div>
-            <button class="view-details-btn" type="button" onclick="event.stopPropagation(); openProductDetails('m005')">View product details</button>
-            <div class="product-actions">
-              <input type="number" class="qty-input" id="qty-m005" value="1" min="1" max="99" onclick="event.stopPropagation()" />
-              <button class="add-btn" onclick="event.stopPropagation(); addToCartFromDOM('m005', 'SMS Marketing Campaign', 8000, 'qty-m005')">Add to Cart</button>
-            </div>
-          </article>
-
-          <article class="product-card" data-product-id="m006" onclick="openProductDetails('m006')">
-            <img class="product-image" src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80" alt="Email Marketing Series" loading="lazy" />
-            <div class="product-card-topline">
-              <div class="product-category-label">📢 Marketing & Promotion</div>
-              <button class="wishlist-icon" type="button" onclick="event.stopPropagation(); toggleWishlist('m006')" aria-label="Save item">♡</button>
-            </div>
-            <div class="product-name">Email Marketing Series</div>
-            <div class="rating-summary">★ 4.6 (16)</div>
-            <div class="product-desc">Email campaign automation and newsletter setup</div>
-            <div class="delivery-time">Fulfilment: 5-10 business days</div>
-            <div class="product-price">₦10,000</div>
-            <button class="view-details-btn" type="button" onclick="event.stopPropagation(); openProductDetails('m006')">View product details</button>
-            <div class="product-actions">
-              <input type="number" class="qty-input" id="qty-m006" value="1" min="1" max="99" onclick="event.stopPropagation()" />
-              <button class="add-btn" onclick="event.stopPropagation(); addToCartFromDOM('m006', 'Email Marketing Series', 10000, 'qty-m006')">Add to Cart</button>
-            </div>
-          </article>
-
-          <article class="product-card" data-product-id="m007" onclick="openProductDetails('m007')">
-            <img class="product-image" src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80" alt="Content Creation (5 posts)" loading="lazy" />
-            <div class="product-card-topline">
-              <div class="product-category-label">📢 Marketing & Promotion</div>
-              <button class="wishlist-icon" type="button" onclick="event.stopPropagation(); toggleWishlist('m007')" aria-label="Save item">♡</button>
-            </div>
-            <div class="product-name">Content Creation (5 posts)</div>
-            <div class="rating-summary">★ 4.8 (21)</div>
-            <div class="product-desc">Professional social media copy, graphics, and designs</div>
-            <div class="delivery-time">Fulfilment: 5-10 business days</div>
-            <div class="product-price">₦12,000</div>
-            <button class="view-details-btn" type="button" onclick="event.stopPropagation(); openProductDetails('m007')">View product details</button>
-            <div class="product-actions">
-              <input type="number" class="qty-input" id="qty-m007" value="1" min="1" max="99" onclick="event.stopPropagation()" />
-              <button class="add-btn" onclick="event.stopPropagation(); addToCartFromDOM('m007', 'Content Creation (5 posts)', 12000, 'qty-m007')">Add to Cart</button>
-            </div>
-          </article>
-
-          <article class="product-card" data-product-id="m008" onclick="openProductDetails('m008')">
-            <img class="product-image" src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80" alt="Influencer Collaboration" loading="lazy" />
-            <div class="product-card-topline">
-              <div class="product-category-label">📢 Marketing & Promotion</div>
-              <button class="wishlist-icon" type="button" onclick="event.stopPropagation(); toggleWishlist('m008')" aria-label="Save item">♡</button>
-            </div>
-            <div class="product-name">Influencer Collaboration</div>
-            <div class="rating-summary">★ 4.9 (29)</div>
-            <div class="product-desc">Partner with verified top social media influencers</div>
-            <div class="delivery-time">Fulfilment: 5-10 business days</div>
-            <div class="product-price">₦35,000</div>
-            <button class="view-details-btn" type="button" onclick="event.stopPropagation(); openProductDetails('m008')">View product details</button>
-            <div class="product-actions">
-              <input type="number" class="qty-input" id="qty-m008" value="1" min="1" max="99" onclick="event.stopPropagation()" />
-              <button class="add-btn" onclick="event.stopPropagation(); addToCartFromDOM('m008', 'Influencer Collaboration', 35000, 'qty-m008')">Add to Cart</button>
-            </div>
-          </article>
-
-          <article class="product-card" data-product-id="m009" onclick="openProductDetails('m009')">
-            <img class="product-image" src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80" alt="Video Marketing" loading="lazy" />
-            <div class="product-card-topline">
-              <div class="product-category-label">📢 Marketing & Promotion</div>
-              <button class="wishlist-icon" type="button" onclick="event.stopPropagation(); toggleWishlist('m009')" aria-label="Save item">♡</button>
-            </div>
-            <div class="product-name">Video Marketing</div>
-            <div class="rating-summary">★ 4.8 (23)</div>
-            <div class="product-desc">Professional promo video production and distribution</div>
-            <div class="delivery-time">Fulfilment: 5-10 business days</div>
-            <div class="product-price">₦25,000</div>
-            <button class="view-details-btn" type="button" onclick="event.stopPropagation(); openProductDetails('m009')">View product details</button>
-            <div class="product-actions">
-              <input type="number" class="qty-input" id="qty-m009" value="1" min="1" max="99" onclick="event.stopPropagation()" />
-              <button class="add-btn" onclick="event.stopPropagation(); addToCartFromDOM('m009', 'Video Marketing', 25000, 'qty-m009')">Add to Cart</button>
-            </div>
-          </article>
-
-          <article class="product-card" data-product-id="m010" onclick="openProductDetails('m010')">
-            <img class="product-image" src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80" alt="Retargeting Ad Campaign" loading="lazy" />
-            <div class="product-card-topline">
-              <div class="product-category-label">📢 Marketing & Promotion</div>
-              <button class="wishlist-icon" type="button" onclick="event.stopPropagation(); toggleWishlist('m010')" aria-label="Save item">♡</button>
-            </div>
-            <div class="product-name">Retargeting Ad Campaign</div>
-            <div class="rating-summary">★ 4.7 (18)</div>
-            <div class="product-desc">Retarget website visitors for higher sales conversion</div>
-            <div class="delivery-time">Fulfilment: 5-10 business days</div>
-            <div class="product-price">₦16,000</div>
-            <button class="view-details-btn" type="button" onclick="event.stopPropagation(); openProductDetails('m010')">View product details</button>
-            <div class="product-actions">
-              <input type="number" class="qty-input" id="qty-m010" value="1" min="1" max="99" onclick="event.stopPropagation()" />
-              <button class="add-btn" onclick="event.stopPropagation(); addToCartFromDOM('m010', 'Retargeting Ad Campaign', 16000, 'qty-m010')">Add to Cart</button>
-            </div>
-          </article>
-
-          <!-- EDITABLE PRODUCT CARDS END HERE -->
         </div>
-      </section>
-    </main>
+    </section>
 
-    <div class="cart-overlay" id="cartOverlay" onclick="if(event.target === this) toggleCart()"></div>
-    <aside class="cart-sidebar" id="cartSidebar">
-      <div class="cart-header">
-        <h3 style="margin: 0;">Your Cart</h3>
-        <button class="cart-close-btn" onclick="toggleCart()">✕</button>
-      </div>
-      <div class="cart-items" id="cartItemsContainer">
-        <div style="text-align: center; color: var(--text-muted); padding: 20px;">Your cart is empty</div>
-      </div>
-      <div class="cart-footer">
-        <div class="cart-total">
-          <span>Total</span>
-          <span id="cartTotal">₦0</span>
-        </div>
-        <button class="checkout-btn" id="checkoutBtn" onclick="proceedToCheckout()">Proceed to Checkout</button>
-      </div>
-    </aside>
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 brainboxX. All rights reserved. | Marketing & Promotion Services</p>
+    </footer>
 
-    <div class="product-modal" id="productModal" onclick="if (event.target === this) closeProductDetails()">
-      <section class="product-modal-content" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
-        <button class="modal-close-btn" type="button" onclick="closeProductDetails()" aria-label="Close product details">&times;</button>
-        <div id="productDetailsContent"></div>
-      </section>
-    </div>
-
-    <script src="marketplace.js"></script>
     <script>
-      let showWishlistOnly = false;
-      const wishlistKey = 'brainboxx-wishlist';
-      const wishlist = new Set(JSON.parse(localStorage.getItem(wishlistKey) || '[]'));
+        // Advanced Form Validation
+        const orderForm = document.getElementById('orderForm');
 
-      document.addEventListener('DOMContentLoaded', () => {
-        updateCartUI();
-        updateWishlistUI();
-      });
-
-      function addToCartFromDOM(productId, defaultName, defaultPrice, qtyInputId) {
-        const card = document.querySelector(`[data-product-id="${productId}"]`);
-        let name = defaultName;
-        let price = defaultPrice;
-        if (card) {
-          const nameEl = card.querySelector('.product-name');
-          const priceEl = card.querySelector('.product-price');
-          if (nameEl && nameEl.textContent.trim()) name = nameEl.textContent.trim();
-          if (priceEl) {
-            const parsed = parseInt(priceEl.textContent.replace(/[^0-9]/g, ''));
-            if (!isNaN(parsed)) price = parsed;
-          }
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
         }
-        const qtyInput = document.getElementById(qtyInputId || `qty-${productId}`);
-        const qty = parseInt(qtyInput ? qtyInput.value : 1) || 1;
-        cartManager.addItem(productId, name, price, qty);
-        updateCartUI();
-        if (qtyInput) qtyInput.value = '1';
-        alert(`${name} added to cart!`);
-      }
 
-      function updateCartUI() {
-        const cart = cartManager.cart;
-        const total = cartManager.getTotal();
-        const itemCount = cartManager.getItemCount();
-        document.getElementById('cartCount').textContent = itemCount || '0';
-        document.getElementById('cartTotal').textContent = formatMoney(total);
-
-        const container = document.getElementById('cartItemsContainer');
-        if (cart.length === 0) {
-          container.innerHTML = '<div style="text-align: center; color: var(--text-muted); padding: 20px;">Your cart is empty</div>';
-          document.getElementById('checkoutBtn').disabled = true;
-        } else {
-          container.innerHTML = cart.map(item => `
-            <div class="cart-item">
-              <div class="cart-item-info">
-                <div class="cart-item-name">${item.name}</div>
-                <div class="cart-item-qty">Qty: ${item.qty}</div>
-              </div>
-              <div class="cart-item-price">${formatMoney(item.price * item.qty)}</div>
-              <button class="cart-remove-btn" onclick="removeFromCart('${item.id}')">Remove</button>
-            </div>
-          `).join('');
-          document.getElementById('checkoutBtn').disabled = false;
+        function validatePhone(phone) {
+            return phone.length >= 10 && /^\+?[\d\s()-]+$/.test(phone);
         }
-      }
 
-      function removeFromCart(productId) {
-        cartManager.removeItem(productId);
-        updateCartUI();
-      }
-
-      function toggleCart() {
-        document.getElementById('cartOverlay').classList.toggle('visible');
-        document.getElementById('cartSidebar').classList.toggle('visible');
-      }
-
-      function proceedToCheckout() {
-        if (cartManager.cart.length === 0) {
-          alert('Your cart is empty!');
-          return;
+        function getSelectedServices() {
+            return Array.from(document.querySelectorAll('.service-checkbox:checked')).map(el => el.value);
         }
-        window.location.href = 'payment.html';
-      }
 
-      function toggleWishlist(productId) {
-        wishlist.has(productId) ? wishlist.delete(productId) : wishlist.add(productId);
-        localStorage.setItem(wishlistKey, JSON.stringify([...wishlist]));
-        updateWishlistUI();
-      }
+        function getSelectedPlatform() {
+            return document.querySelector('.platform-btn:checked')?.value;
+        }
 
-      function toggleWishlistFilter() {
-        showWishlistOnly = !showWishlistOnly;
-        updateWishlistUI();
-        filterPageProducts();
-      }
+        orderForm.addEventListener('submit', function(e) {
+            e.preventDefault();
 
-      function updateWishlistUI() {
-        document.getElementById('wishlistCount').textContent = wishlist.size;
-        document.getElementById('wishlistToggle').classList.toggle('active', showWishlistOnly);
-        document.getElementById('savedFilterBtn').classList.toggle('active', showWishlistOnly);
-        document.querySelectorAll('.product-card').forEach(card => {
-          const id = card.dataset.productId;
-          const btn = card.querySelector('.wishlist-icon');
-          if (btn) {
-            btn.classList.toggle('saved', wishlist.has(id));
-            btn.textContent = wishlist.has(id) ? '♥' : '♡';
-          }
+            // Clear previous errors
+            document.querySelectorAll('.form-error').forEach(el => el.classList.remove('form-error'));
+            document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+
+            let isValid = true;
+            const errors = {};
+
+            // Validate Tier Selection
+            if (!document.querySelector('input[name="tier"]:checked')) {
+                errors.tier = 'Please select a tier';
+                isValid = false;
+            }
+
+            // Validate Client Info
+            const fullName = document.getElementById('fullName').value.trim();
+            if (!fullName || fullName.length < 2) {
+                errors.fullName = 'Valid full name required';
+                document.getElementById('fullName').classList.add('form-error');
+                isValid = false;
+            }
+
+            const whatsapp = document.getElementById('whatsapp').value.trim();
+            if (!whatsapp || !validatePhone(whatsapp)) {
+                errors.whatsapp = 'Valid WhatsApp number required';
+                document.getElementById('whatsapp').classList.add('form-error');
+                isValid = false;
+            }
+
+            const email = document.getElementById('email').value.trim();
+            if (!email || !validateEmail(email)) {
+                errors.email = 'Valid email required';
+                document.getElementById('email').classList.add('form-error');
+                isValid = false;
+            }
+
+            const socialHandle = document.getElementById('socialHandle').value.trim();
+            if (!socialHandle) {
+                errors.socialHandle = 'Social media handle required';
+                document.getElementById('socialHandle').classList.add('form-error');
+                isValid = false;
+            }
+
+            // Validate Platform
+            const platform = getSelectedPlatform();
+            if (!platform) {
+                document.getElementById('platform-error').style.display = 'block';
+                isValid = false;
+            }
+
+            // Validate Services
+            const services = getSelectedServices();
+            if (services.length === 0) {
+                document.getElementById('service-error').style.display = 'block';
+                isValid = false;
+            }
+
+            // Validate Quantity
+            const quantity = document.getElementById('quantity').value;
+            if (!quantity) {
+                errors.quantity = 'Please select a quantity';
+                document.getElementById('quantity').classList.add('form-error');
+                isValid = false;
+            }
+
+            // Validate Duration
+            const duration = document.getElementById('duration').value;
+            if (!duration) {
+                errors.duration = 'Please select a duration';
+                document.getElementById('duration').classList.add('form-error');
+                isValid = false;
+            }
+
+            // Validate Budget
+            const budget = document.getElementById('budget').value;
+            if (!budget || parseInt(budget) < 1000) {
+                errors.budget = 'Minimum ?1,000 required';
+                document.getElementById('budget').classList.add('form-error');
+                isValid = false;
+            }
+
+            // Validate Description
+            const description = document.getElementById('description').value.trim();
+            if (!description || description.length < 10) {
+                errors.description = 'Project description required (minimum 10 characters)';
+                document.getElementById('description').classList.add('form-error');
+                isValid = false;
+            }
+
+            if (!isValid) {
+                alert('Please fix the errors in the form before submitting.');
+                return;
+            }
+
+            // Form is valid - prepare data
+            const tier = document.querySelector('input[name="tier"]:checked').value;
+            const targetAudience = document.getElementById('targetAudience').value.trim();
+
+            const formData = {
+                // Client Info
+                fullName: fullName,
+                whatsapp: whatsapp,
+                email: email,
+                socialHandle: socialHandle,
+
+                // Tier Selection
+                tier: tier === 'tier-a' ? 'Tier A: Real & Responsive' : 'Tier B: Robotic/System',
+
+                // Platform & Services
+                platform: platform,
+                services: services.join(', '),
+
+                // Quantity & Duration (Separate)
+                quantity: quantity,
+                duration: duration,
+
+                // Additional Info
+                targetAudience: targetAudience || 'Not specified',
+                budget: '?' + budget.toLocaleString('en-NG'),
+                description: description,
+
+                // Metadata
+                orderId: 'ORD-' + Math.random().toString(36).substr(2, 9).toUpperCase(),
+                orderDate: new Date().toLocaleString('en-NG'),
+                timestamp: new Date().toISOString()
+            };
+
+            // Store in localStorage
+            const allOrders = JSON.parse(localStorage.getItem('socialMediaOrders')) || [];
+            allOrders.push(formData);
+            localStorage.setItem('socialMediaOrders', JSON.stringify(allOrders));
+            localStorage.setItem('latestOrder', JSON.stringify(formData));
+
+            // Show success message
+            const successMsg = document.getElementById('successMessage');
+            document.getElementById('orderId').innerHTML = `<strong>Order ID:</strong> ${formData.orderId}<br><strong>Confirmation sent to:</strong> ${email}`;
+            successMsg.classList.add('show');
+
+            // Scroll to success message
+            successMsg.scrollIntoView({ behavior: 'smooth' });
+
+            // Reset form
+            setTimeout(() => {
+                orderForm.reset();
+                successMsg.classList.remove('show');
+            }, 4000);
+
+            console.log('Order Submitted:', formData);
         });
-      }
 
-      function filterPageProducts() {
-        const query = (document.getElementById('marketplaceSearch').value || '').toLowerCase().trim();
-        const cards = Array.from(document.querySelectorAll('.product-card'));
-        let visibleCount = 0;
-
-        cards.forEach(card => {
-          const id = card.dataset.productId;
-          const name = (card.querySelector('.product-name')?.textContent || '').toLowerCase();
-          const desc = (card.querySelector('.product-desc')?.textContent || '').toLowerCase();
-          const matchesSearch = !query || name.includes(query) || desc.includes(query);
-          const matchesWishlist = !showWishlistOnly || wishlist.has(id);
-
-          if (matchesSearch && matchesWishlist) {
-            card.style.display = 'flex';
-            visibleCount++;
-          } else {
-            card.style.display = 'none';
-          }
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                this.parentElement.classList.toggle('active');
+            });
         });
 
-        const summary = document.getElementById('searchSummary');
-        summary.textContent = query || showWishlistOnly ? `Showing ${visibleCount} item(s)` : '';
-      }
-
-      function sortPageProducts(sortType) {
-        const grid = document.getElementById('productsGrid');
-        const cards = Array.from(grid.querySelectorAll('.product-card'));
-
-        cards.sort((a, b) => {
-          const nameA = a.querySelector('.product-name')?.textContent.trim() || '';
-          const nameB = b.querySelector('.product-name')?.textContent.trim() || '';
-          const priceA = parseInt((a.querySelector('.product-price')?.textContent || '0').replace(/[^0-9]/g, '')) || 0;
-          const priceB = parseInt((b.querySelector('.product-price')?.textContent || '0').replace(/[^0-9]/g, '')) || 0;
-
-          if (sortType === 'price-low') return priceA - priceB;
-          if (sortType === 'price-high') return priceB - priceA;
-          return nameA.localeCompare(nameB);
+        // Service Card Order Now buttons
+        document.querySelectorAll('.btn-secondary').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelector('.order-section').scrollIntoView({ behavior: 'smooth' });
+            });
         });
 
-        cards.forEach(card => grid.appendChild(card));
-      }
+        // Platform selection validation
+        document.querySelectorAll('.platform-btn').forEach(radio => {
+            radio.addEventListener('change', () => {
+                document.getElementById('platform-error').style.display = 'none';
+            });
+        });
 
-      function openProductDetails(productId) {
-        const card = document.querySelector(`[data-product-id="${productId}"]`);
-        const productFromCatalog = getProductById(productId);
-        const name = card?.querySelector('.product-name')?.textContent || productFromCatalog?.name || 'Product Details';
-        const desc = card?.querySelector('.product-desc')?.textContent || productFromCatalog?.desc || '';
-        const priceText = card?.querySelector('.product-price')?.textContent || (productFromCatalog ? formatMoney(productFromCatalog.price) : '₦0');
-        const priceVal = parseInt(priceText.replace(/[^0-9]/g, '')) || (productFromCatalog?.price || 0);
-        const imgSrc = card?.querySelector('.product-image')?.src || 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80';
-        const fulfilment = card?.querySelector('.delivery-time')?.textContent || 'Fulfilment: 5-10 business days';
+        // Service selection validation
+        document.querySelectorAll('.service-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                if (getSelectedServices().length > 0) {
+                    document.getElementById('service-error').style.display = 'none';
+                }
+            });
+        });
 
-        document.getElementById('productDetailsContent').innerHTML = `
-          <div class="product-detail-layout">
-            <img class="product-detail-image" src="${imgSrc}" alt="${name}" />
-            <div>
-              <p class="detail-category">📢 Marketing & Promotion</p>
-              <h2 class="detail-title" id="detailTitle">${name}</h2>
-              <p class="detail-description">${desc}</p>
-              <p class="detail-price">${priceText}</p>
-              <p class="detail-meta">${fulfilment}</p>
-              <div class="product-actions">
-                <input type="number" class="qty-input" id="qty-modal-${productId}" value="1" min="1" max="99" />
-                <button class="add-btn" type="button" onclick="addToCartFromDOM('${productId}', '${name.replace(/'/g, "\\'")}', ${priceVal}, 'qty-modal-${productId}'); closeProductDetails()">Add to Cart</button>
-              </div>
-            </div>
-          </div>
-        `;
-        document.getElementById('productModal').classList.add('visible');
-      }
-
-      function closeProductDetails() {
-        document.getElementById('productModal').classList.remove('visible');
-      }
+        // Clear input errors on focus
+        document.querySelectorAll('input, select, textarea').forEach(field => {
+            field.addEventListener('focus', function() {
+                this.classList.remove('form-error');
+            });
+        });
     </script>
 </body>
 </html>

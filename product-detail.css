@@ -1,20 +1,20 @@
-/* ==========================================================================
-   Product Detail Page — mobile-first, deep purple/amethyst theme
+﻿/* ==========================================================================
+   Product Detail Page â€” mobile-first, deep purple/amethyst theme
    ========================================================================== */
 
 :root {
-  --amethyst-900: #2e1a47;
-  --amethyst-700: #4b2b7a;
-  --amethyst-600: #6b3fa0;
-  --amethyst-500: #8654c2;
-  --amethyst-100: #f2ecfa;
-  --amethyst-50: #faf8fd;
-  --gold: #f5b942;
-  --danger: #e0355b;
-  --text-main: #241a30;
-  --text-muted: #6b6377;
-  --border-soft: #e6def2;
-  --shadow-card: 0 10px 30px rgba(75, 43, 122, 0.12);
+  --primary-900: #0f1419;
+  --primary-700: #1e3a52;
+  --primary-600: #2d5f8d;
+  --primary-500: #3d7ab5;
+  --primary-100: #e8f2f8;
+  --primary-50: #f0f4f8;
+  --gold: #d4832f;
+  --danger: #c62828;
+  --text-main: #0f1419;
+  --text-muted: #5a6b79;
+  --border-soft: #e0e8f0;
+  --shadow-card: 0 4px 12px rgba(15, 20, 25, 0.08);
   --radius-lg: 20px;
   --radius-md: 12px;
   --font-body: "DM Sans", "Segoe UI", -apple-system, BlinkMacSystemFont, "San Francisco", Roboto, sans-serif;
@@ -29,7 +29,7 @@ body {
   margin: 0;
   font-family: var(--font-body);
   color: var(--text-main);
-  background: var(--amethyst-50);
+  background: linear-gradient(180deg, #f8fafb 0%, #f0f4f8 50%, #f8fafb 100%);
   line-height: 1.6;
   padding-bottom: 88px; /* space for sticky mobile bar */
 }
@@ -52,15 +52,16 @@ a {
   flex-wrap: wrap;
   gap: 12px;
   padding: 16px 20px;
-  background: #fff;
-  border-bottom: 1px solid var(--border-soft);
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafb 100%);
+  border-bottom: 2px solid var(--border-soft);
+  box-shadow: 0 2px 8px rgba(15, 20, 25, 0.06);
 }
 
 .site-header .brand {
   font-family: var(--font-display);
   font-weight: 800;
   font-size: 1.25rem;
-  color: var(--amethyst-700);
+  color: var(--primary-700);
   text-decoration: none;
 }
 
@@ -78,7 +79,7 @@ a {
 }
 
 .site-nav a[aria-current="page"] {
-  color: var(--amethyst-600);
+  color: var(--primary-600);
 }
 
 /* ---------- Page shell ---------- */
@@ -95,7 +96,7 @@ a {
   font-size: 0.9rem;
   font-weight: 600;
   text-decoration: none;
-  color: var(--amethyst-600);
+  color: var(--primary-600);
 }
 
 .product-layout {
@@ -117,7 +118,7 @@ a {
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-card);
-  background: var(--amethyst-100);
+  background: linear-gradient(135deg, #e8f2f8 0%, #f0f4f8 100%);
 }
 
 .main-image {
@@ -132,13 +133,13 @@ a {
   top: 14px;
   left: 14px;
   z-index: 2;
-  background: var(--amethyst-700);
+  background: var(--primary-700);
   color: #fff;
   font-size: 0.78rem;
   font-weight: 700;
   padding: 6px 12px;
   border-radius: 999px;
-  box-shadow: 0 4px 12px rgba(75, 43, 122, 0.3);
+  box-shadow: 0 4px 12px rgba(15, 20, 25, 0.2);
 }
 
 /* ---------- Details ---------- */
@@ -155,7 +156,7 @@ a {
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--amethyst-500);
+  color: var(--primary-600);
 }
 
 .product-title {
@@ -163,7 +164,7 @@ a {
   font-family: var(--font-display);
   font-size: 1.6rem;
   font-weight: 800;
-  color: var(--amethyst-900);
+  color: var(--primary-900);
   line-height: 1.25;
 }
 
@@ -194,7 +195,7 @@ a {
 .price {
   font-size: 1.75rem;
   font-weight: 800;
-  color: var(--amethyst-700);
+  color: var(--primary-700);
 }
 
 .original-price {
@@ -204,8 +205,8 @@ a {
 }
 
 .discount-badge {
-  background: var(--amethyst-100);
-  color: var(--amethyst-700);
+  background: var(--primary-100);
+  color: var(--primary-700);
   font-size: 0.78rem;
   font-weight: 700;
   padding: 4px 10px;
@@ -235,7 +236,7 @@ a {
   padding: 12px 14px;
   border-radius: var(--radius-md);
   border: 1.5px solid var(--border-soft);
-  background: #fff url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="%236b3fa0"><path d="M5.5 7.5l4.5 4.5 4.5-4.5z"/></svg>') no-repeat right 14px center;
+  background: #fff url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="%232d5f8d"><path d="M5.5 7.5l4.5 4.5 4.5-4.5z"/></svg>') no-repeat right 14px center;
   background-size: 14px;
   font-family: inherit;
   font-size: 0.95rem;
@@ -246,7 +247,7 @@ a {
 
 .option-group select:focus-visible {
   outline: none;
-  border-color: var(--amethyst-500);
+  border-color: var(--primary-500);
 }
 
 .checkout-actions {
@@ -268,23 +269,23 @@ a {
 }
 
 .btn-primary {
-  background: var(--amethyst-700);
+  background: linear-gradient(135deg, var(--primary-700) 0%, var(--primary-900) 100%);
   color: #fff;
 }
 
 .btn-primary:hover {
-  background: var(--amethyst-600);
+  background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
   transform: translateY(-1px);
 }
 
 .btn-secondary {
   background: #fff;
-  color: var(--amethyst-700);
-  border-color: var(--amethyst-700);
+  color: var(--primary-700);
+  border-color: var(--primary-700);
 }
 
 .btn-secondary:hover {
-  background: var(--amethyst-100);
+  background: var(--primary-100);
   transform: translateY(-1px);
 }
 
@@ -292,7 +293,7 @@ a {
   margin-top: 10px;
   padding: 16px;
   border-radius: var(--radius-md);
-  background: var(--amethyst-100);
+  background: var(--primary-100);
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -314,8 +315,8 @@ a {
   gap: 12px;
   padding: 12px 16px;
   background: #fff;
-  border-top: 1px solid var(--border-soft);
-  box-shadow: 0 -6px 20px rgba(75, 43, 122, 0.12);
+  border-top: 2px solid var(--border-soft);
+  box-shadow: 0 -6px 20px rgba(15, 20, 25, 0.12);
 }
 
 .wishlist-btn {
@@ -391,3 +392,108 @@ a {
     max-width: 420px;
   }
 }
+
+        
+        /* Shop Now Button - Fancy & Flashy */
+        .shop-now-btn {
+            position: relative !important;
+            font-weight: 700 !important;
+            font-size: 0.95rem !important;
+            color: white !important;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%) !important;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3) !important;
+            border: none !important;
+            border-radius: 6px !important;
+            padding: 14px 16px !important;
+            cursor: pointer !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            flex: 0.5 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 6px !important;
+            overflow: hidden !important;
+            animation: pulse-glow 2s infinite !important;
+        }
+        
+        .shop-now-btn::before {
+            content: '🛍️';
+            font-size: 1rem;
+            animation: bounce 2s infinite;
+        }
+        
+        .shop-now-btn:hover {
+            background: linear-gradient(135deg, #ff5722 0%, #ff7a3d 100%) !important;
+            box-shadow: 0 6px 25px rgba(255, 107, 53, 0.5) !important;
+            transform: translateY(-3px) scale(1.08) !important;
+        }
+        
+        .shop-now-btn:active {
+            transform: translateY(-1px) scale(0.96) !important;
+        }
+        
+        
+            50% {
+                box-shadow: 0 8px 30px rgba(255, 107, 53, 0.6);
+                filter: brightness(1.15);
+            }
+        }
+        
+        
+            50% { transform: translateY(-3px); }
+        }
+        
+        @keyframes electric-pulse {
+            0%, 100% {
+                box-shadow: 0 4px 15px rgba(217, 70, 239, 0.4);
+                filter: brightness(1);
+            }
+            50% {
+                box-shadow: 0 8px 30px rgba(217, 70, 239, 0.8), 0 0 20px rgba(236, 72, 153, 0.6);
+                filter: brightness(1.2);
+            }
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .shop-now-btn {
+            position: relative !important;
+            font-weight: 700 !important;
+            font-size: 0.8rem !important;
+            color: white !important;
+            background: linear-gradient(135deg, #d946ef 0%, #ec4899 50%, #f43f5e 100%) !important;
+            box-shadow: 0 4px 15px rgba(217, 70, 239, 0.4) !important;
+            border: none !important;
+            border-radius: 6px !important;
+            padding: 8px 10px !important;
+            cursor: pointer !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            flex: 0.25 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 4px !important;
+            overflow: hidden !important;
+            animation: electric-pulse 1.5s infinite !important;
+            white-space: nowrap !important;
+        }
+        
+        .shop-now-btn::before {
+            content: '✨' !important;
+            font-size: 0.9rem !important;
+            display: inline-block !important;
+            animation: sparkle 1.5s infinite !important;
+        }
+        
+        .shop-now-btn:hover {
+            background: linear-gradient(135deg, #c026d3 0%, #db2777 50%, #e11d48 100%) !important;
+            box-shadow: 0 8px 30px rgba(217, 70, 239, 0.8), 0 0 20px rgba(236, 72, 153, 0.8) !important;
+            transform: translateY(-2px) scale(1.15) !important;
+        }
+        
+        .shop-now-btn:active {
+            transform: translateY(0) scale(0.92) !important;
+        }

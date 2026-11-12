@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LaunchForge Web & Digital Studio | brainboxX Marketplace</title>
     <meta name="description" content="Custom Websites, Industry Platforms, E-Commerce, Mobile Apps, APIs, and CMS Setup on brainboxX" />
+    <meta http-equiv="refresh" content="0; url=brainboxX-pro-hub.html#digital-studio" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -169,28 +170,83 @@
     </style>
 </head>
 <body>
-    <header class="header">
-      <div class="header-content">
-        <a href="brainboxtools.html" class="logo"><span>brainboxX</span></a>
-        <nav class="nav-center">
-          <a href="marketplace.html">All Categories</a>
-          <a href="communication.html">Communication</a>
-          <a href="courses.html">Courses</a>
-          <a href="crypto.html">Crypto</a>
-          <a href="gifts-delivery.html">Gifts & Delivery</a>
-          <a href="launchforge.html" class="active">LaunchForge</a>
-          <a href="marketing.html">Marketing</a>
-          <a href="professional.html">Professional</a>
-          <a href="telecom.html">Telecom</a>
+        <header class="site-header">
+      <div class="container nav">
+        <a href="brainboxtools.html" class="brand" aria-label="brainboxX home">
+          <span>brainboxX</span>
+        </a>
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="brainboxtools.html#home">Home</a>
+          <a href="brainboxtools.html#services">Services</a>
+          <a href="brainboxtools.html#marketplace">Marketplace</a>
+          <a href="brainboxtools.html#contact">Contact</a>
         </nav>
-        <div class="nav-right">
-          <button class="wishlist-btn" id="wishlistToggle" type="button" onclick="toggleWishlistFilter()" aria-pressed="false">♡ Saved <span id="wishlistCount">0</span></button>
-          <button class="cart-btn" onclick="toggleCart()">🛒 Cart <span class="cart-badge" id="cartCount">0</span></button>
+        <div class="nav-buttons">
+          <button class="nav-btn login-toggle" onclick="toggleModal('login-modal')" style="background-color: #f5c76b; color: #1a2733;">Login</button>
+          <button class="nav-btn signup-toggle" onclick="toggleModal('signup-modal')" style="background-color: transparent; color: #f5c76b; border: 2px solid #f5c76b;">Sign Up</button>
         </div>
       </div>
     </header>
 
-    <section class="hero">
+    <div id="login-modal" class="modal" style="display: none;">
+      <div class="modal-overlay" onclick="closeModal('login-modal')"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Welcome Back</h2>
+          <button class="modal-close" onclick="closeModal('login-modal')">&times;</button>
+        </div>
+        <form class="auth-form" id="login-form">
+          <div class="form-group">
+            <label for="login-email">Email Address</label>
+            <input type="email" id="login-email" name="email" placeholder="your@email.com" required />
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" name="password" placeholder="Your password" required />
+          </div>
+          <button type="submit" class="submit-btn">Login</button>
+          <p class="form-footer">
+            Don't have an account?
+            <button type="button" class="link-btn" onclick="switchModal('login-modal', 'signup-modal')">Sign up here</button>
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <div id="signup-modal" class="modal" style="display: none;">
+      <div class="modal-overlay" onclick="closeModal('signup-modal')"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Create Your Account</h2>
+          <button class="modal-close" onclick="closeModal('signup-modal')">&times;</button>
+        </div>
+        <form class="auth-form" id="signup-form">
+          <div class="form-group">
+            <label for="signup-name">Full Name</label>
+            <input type="text" id="signup-name" name="fullName" placeholder="Your full name" required />
+          </div>
+          <div class="form-group">
+            <label for="signup-email">Email Address</label>
+            <input type="email" id="signup-email" name="email" placeholder="your@email.com" required />
+          </div>
+          <div class="form-group">
+            <label for="signup-password">Password</label>
+            <input type="password" id="signup-password" name="password" placeholder="Create a strong password" required />
+          </div>
+          <div class="form-group">
+            <label for="signup-confirm">Confirm Password</label>
+            <input type="password" id="signup-confirm" name="confirmPassword" placeholder="Confirm your password" required />
+          </div>
+          <button type="submit" class="submit-btn">Create Account</button>
+          <p class="form-footer">
+            Already have an account?
+            <button type="button" class="link-btn" onclick="switchModal('signup-modal', 'login-modal')">Login here</button>
+          </p>
+        </form>
+      </div>
+    </div>
+
+<section class="hero">
       <div class="container">
         <h1>🚀 LaunchForge Web & Digital Studio</h1>
         <p>Custom websites, industry platforms, e-commerce stores, mobile apps, REST APIs, and CMS infrastructure</p>
@@ -780,5 +836,39 @@
         document.getElementById('productModal').classList.remove('visible');
       }
     </script>
-</body>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <span>brainboxX</span>
+        </div>
+
+        <div class="footer-links">
+          <div>
+            <h4>Company</h4>
+            <a href="brainboxtools.html#home">Home</a>
+            <a href="brainboxtools.html#services">Services</a>
+            <a href="brainboxtools.html#courses">Courses</a>
+          </div>
+          <div>
+            <h4>Support</h4>
+            <a href="brainboxtools.html#contact">Contact</a>
+            <a href="brainboxtools.html">Help Center</a>
+          </div>
+          <div>
+            <h4>Legal</h4>
+            <a href="brainboxtools.html">Terms of Service</a>
+            <a href="brainboxtools.html">Privacy Policy</a>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2024 brainboxX. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="app.js"></script>    </script>
+    <script src="payment-handler.js"></script>
+<script src="theme-toggle.js"></script>
+  </body>
 </html>

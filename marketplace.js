@@ -243,24 +243,6 @@ const CATALOG = {
     ]
   },
 
-  communication: {
-    category: 'Communication Software',
-    icon: '📱',
-    description: 'Video conferencing and communication tools',
-    products: [
-      { id: 'cc001', name: 'Video Conference Setup (10 users)', price: 3000, desc: 'Full-body HD video conferencing' },
-      { id: 'cc002', name: 'Team Collaboration License (Annual)', price: 12000, desc: 'Group communication platform' },
-      { id: 'cc003', name: 'Virtual Event Hosting', price: 15000, desc: 'Webinar and online event setup' },
-      { id: 'cc004', name: 'Live Streaming Setup', price: 8000, desc: 'Professional streaming configuration' },
-      { id: 'cc005', name: 'Screen Recording Software', price: 5000, desc: 'Professional screen capture tool' },
-      { id: 'cc006', name: 'Voice Over Service', price: 7000, desc: 'Professional voice-over recording' },
-      { id: 'cc007', name: 'Transcription Service (5 hours)', price: 6000, desc: 'Audio-to-text conversion' },
-      { id: 'cc008', name: 'Call Center Integration', price: 20000, desc: 'Business phone system setup' },
-      { id: 'cc009', name: 'Chat Bot Development', price: 18000, desc: 'AI customer service bot' },
-      { id: 'cc010', name: 'Multilingual Interpretation (1 hour)', price: 9000, desc: 'Real-time language interpretation' }
-    ]
-  },
-
   telecom: {
     category: 'Telecom & Connectivity',
     icon: '📴',

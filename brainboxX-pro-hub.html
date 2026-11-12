@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>brainboxX Pro Hub | Career & Web Services</title>
+    <meta name="description" content="One unified platform for professional career services and web/digital development solutions">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1f2e;
+            --primary-light: #2a3142;
+            --accent: #00d9ff;
+            --accent-secondary: #ff006e;
+            --gold: #ffd700;
+            --text-light: #e8eef5;
+            --text-muted: #a0aac7;
+            --bg-dark: #0f1419;
+            --bg-darker: #0a0e16;
+            --border: #1e2433;
+            --success: #00ff41;
+            --warning: #ffa500;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: "DM Sans", sans-serif;
+            color: var(--text-light);
+            background: linear-gradient(135deg, var(--bg-darker) 0%, #1a2540 25%, var(--bg-dark) 50%, #1a2540 75%, var(--bg-darker) 100%);
+            background-attachment: fixed;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        a { color: inherit; text-decoration: none; }
+
+        /* Header */
+        .header {
+            background: linear-gradient(180deg, var(--primary-light) 0%, var(--primary) 100%);
+            border-bottom: 2px solid var(--accent);
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 8px 32px rgba(0, 217, 255, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .logo {
+            font-family: "Playfair Display", serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav {
+            display: flex;
+            gap: 30px;
+            flex: 1;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            transition: all 0.3s;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 5px;
+        }
+
+        .nav a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1a3a52 0%, var(--primary) 50%, #0f1419 100%);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin: 0;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 20px auto 0;
+        }
+
+        .guarantee-badge {
+            background: linear-gradient(135deg, rgba(0, 255, 65, 0.2) 0%, rgba(0, 217, 255, 0.1) 100%);
+            border: 2px solid var(--success);
+            border-radius: 12px;
+            padding: 15px 25px;
+            margin-top: 30px;
+            display: inline-block;
+            font-weight: 700;
+            color: var(--success);
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.2), transparent);
+            transition: left 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0, 217, 255, 0.2);
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .service-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .service-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .service-details {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin: 15px 0;
+            padding: 10px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .service-detail-item {
+            display: flex;
+            gap: 8px;
+            margin: 8px 0;
+            align-items: flex-start;
+        }
+
+        .service-detail-item strong {
+            min-width: 80px;
+            color: var(--accent);
+        }
+
+        .service-price {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin: 20px 0 15px;
+        }
+
+        .delivery-time {
+            background: rgba(0, 255, 65, 0.15);
+            border-left: 3px solid var(--success);
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-weight: 700;
+            color: var(--success);
+            font-size: 0.9rem;
+            margin: 15px 0;
+        }
+
+        .order-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--accent) 0%, #00b8d4 100%);
+            color: var(--bg-darker);
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .order-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+        }
+
+        .order-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 200;
+            animation: fadeIn 0.3s;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        .modal {
+            background: var(--primary);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 600px;
+            width: 95%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
+        .modal-close:hover {
+            color: var(--accent);
+        }
+
+        .modal h2 {
+            font-size: 1.8rem;
+            margin: 0 0 10px;
+            color: var(--accent);
+        }
+
+        .modal-subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-light);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary-light);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-light);
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(0, 217, 255, 0.2);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--gold) 100%);
+            color: var(--bg-darker);
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .success-modal {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0, 255, 65, 0.1) 0%, rgba(0, 217, 255, 0.1) 100%);
+            border: 2px solid var(--success);
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        .success-modal h3 {
+            color: var(--success);
+            margin: 0 0 10px;
+            font-size: 1.5rem;
+        }
+
+        .success-modal p {
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        .order-id {
+            background: var(--primary-light);
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: monospace;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav {
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .services-grid {
+                padding: 30px 15px;
+            }
+
+            .service-card {
+                padding: 20px;
+            }
+
+            .modal {
+                padding: 25px;
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">brainboxX</div>
+            <nav class="nav">
+                <a href="#professional">Professional Services</a>
+                <a href="#digital-studio">Digital Studio</a>
+                <a href="marketplace.html">Marketplace</a>
+                <a href="crypto.html">Crypto</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>???? brainboxX Pro Hub</h1>
+        <p>Your Complete Solution for Career Growth & Professional Web Development</p>
+        <p style="font-size: 0.95rem; color: var(--text-muted); margin-top: 15px; max-width: 650px; margin-left: auto; margin-right: auto;">Build your career and digital presence with expert professionals. From CV optimization to custom web development, we deliver results.</p>
+        <div class="guarantee-badge">
+            ? Fast Delivery | ??? Secure | ? Satisfaction Guaranteed
+        </div>
+    </section>
+
+    <!-- Quick Stats Section -->
+    <section style="background: linear-gradient(135deg, rgba(0, 217, 255, 0.1) 0%, rgba(0, 217, 255, 0.05) 100%); padding: 40px 20px; border-bottom: 1px solid var(--border);">
+        <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; text-align: center;">
+            <div>
+                <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent); margin-bottom: 8px;">500+</div>
+                <div style="color: var(--text-muted); font-weight: 600;">Happy Clients</div>
+            </div>
+            <div>
+                <div style="font-size: 2.5rem; font-weight: 800; color: var(--gold); margin-bottom: 8px;">1000+</div>
+                <div style="color: var(--text-muted); font-weight: 600;">Projects Completed</div>
+            </div>
+            <div>
+                <div style="font-size: 2.5rem; font-weight: 800; color: var(--success); margin-bottom: 8px;">24/7</div>
+                <div style="color: var(--text-muted); font-weight: 600;">Professional Support</div>
+            </div>
+            <div>
+                <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent); margin-bottom: 8px;">98%</div>
+                <div style="color: var(--text-muted); font-weight: 600;">Satisfaction Rate</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section style="background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%); padding: 60px 20px; border-bottom: 1px solid var(--border);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h2 style="text-align: center; font-size: 2.2rem; color: var(--accent); margin: 0 0 40px; font-weight: 800;">Why Choose brainboxX Pro Hub?</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+                <div style="background: rgba(0, 217, 255, 0.1); border: 1px solid var(--border); border-radius: 12px; padding: 25px;">
+                    <div style="font-size: 2rem; margin-bottom: 12px;">??</div>
+                    <h3 style="color: var(--accent); font-weight: 700; margin: 0 0 10px;">Expert Professionals</h3>
+                    <p style="color: var(--text-muted); margin: 0; font-size: 0.95rem;">Experienced team with proven track record in career coaching and web development.</p>
+                </div>
+                <div style="background: rgba(0, 217, 255, 0.1); border: 1px solid var(--border); border-radius: 12px; padding: 25px;">
+                    <div style="font-size: 2rem; margin-bottom: 12px;">?</div>
+                    <h3 style="color: var(--gold); font-weight: 700; margin: 0 0 10px;">Lightning Fast Delivery</h3>
+                    <p style="color: var(--text-muted); margin: 0; font-size: 0.95rem;">Career services delivered in under 1 hour. Web projects completed on schedule, every time.</p>
+                </div>
+                <div style="background: rgba(0, 217, 255, 0.1); border: 1px solid var(--border); border-radius: 12px; padding: 25px;">
+                    <div style="font-size: 2rem; margin-bottom: 12px;">??</div>
+                    <h3 style="color: var(--accent); font-weight: 700; margin: 0 0 10px;">Personalized Solutions</h3>
+                    <p style="color: var(--text-muted); margin: 0; font-size: 0.95rem;">Every service tailored to your specific needs and goals. No cookie-cutter solutions.</p>
+                </div>
+                <div style="background: rgba(0, 217, 255, 0.1); border: 1px solid var(--border); border-radius: 12px; padding: 25px;">
+                    <div style="font-size: 2rem; margin-bottom: 12px;">???</div>
+                    <h3 style="color: var(--success); font-weight: 700; margin: 0 0 10px;">Secure & Confidential</h3>
+                    <p style="color: var(--text-muted); margin: 0; font-size: 0.95rem;">Your information is protected with industry-standard encryption and security protocols.</p>
+                </div>
+                <div style="background: rgba(0, 217, 255, 0.1); border: 1px solid var(--border); border-radius: 12px; padding: 25px;">
+                    <div style="font-size: 2rem; margin-bottom: 12px;">?</div>
+                    <h3 style="color: var(--accent); font-weight: 700; margin: 0 0 10px;">Satisfaction Guaranteed</h3>
+                    <p style="color: var(--text-muted); margin: 0; font-size: 0.95rem;">We stand behind our work with revisions and support until you're completely satisfied.</p>
+                </div>
+                <div style="background: rgba(0, 217, 255, 0.1); border: 1px solid var(--border); border-radius: 12px; padding: 25px;">
+                    <div style="font-size: 2rem; margin-bottom: 12px;">??</div>
+                    <h3 style="color: var(--gold); font-weight: 700; margin: 0 0 10px;">Dedicated Support</h3>
+                    <p style="color: var(--text-muted); margin: 0; font-size: 0.95rem;">24/7 customer support ready to answer your questions and resolve any concerns.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Digital Studio Section -->
+    <section style="background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%); padding: 60px 20px; border-bottom: 1px solid var(--border);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="text-align: center; margin-bottom: 50px;">
+                <h2 style="font-size: 2.5rem; margin: 0 0 15px; color: var(--accent); font-weight: 800;">?? Web & Digital Studio</h2>
+                <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 700px; margin: 0 auto;">Custom websites, mobile apps, e-commerce platforms, and complete digital infrastructure for modern businesses</p>
+            </div>
+            
+            <div class="services-grid" id="digital-studio" style="margin-top: 40px;">
+                <div class="service-card">
+                    <div class="service-icon">??</div>
+                    <div class="service-name">Business Website</div>
+                    <div class="service-desc">Professional, responsive website with SEO optimization</div>
+                    <div class="service-details">
+                        <div class="service-detail-item">
+                            <strong>Design:</strong> <span>Custom & Modern</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Pages:</strong> <span>5-10 pages</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Mobile:</strong> <span>Fully Responsive</span>
+                        </div>
+                    </div>
+                    <div class="service-price">?50,000</div>
+                    <div class="delivery-time">?? Timeline: 2-3 weeks</div>
+                    <button class="order-btn">Get Quote</button>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">??</div>
+                    <div class="service-name">E-Commerce Platform</div>
+                    <div class="service-desc">Online store with payment, inventory & shipping integration</div>
+                    <div class="service-details">
+                        <div class="service-detail-item">
+                            <strong>Products:</strong> <span>Unlimited</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Payments:</strong> <span>Paystack, Flutterwave</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Admin:</strong> <span>Full Dashboard</span>
+                        </div>
+                    </div>
+                    <div class="service-price">?75,000</div>
+                    <div class="delivery-time">?? Timeline: 3-4 weeks</div>
+                    <button class="order-btn">Get Quote</button>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">??</div>
+                    <div class="service-name">Mobile App Development</div>
+                    <div class="service-desc">iOS & Android apps with seamless user experience</div>
+                    <div class="service-details">
+                        <div class="service-detail-item">
+                            <strong>Platforms:</strong> <span>iOS & Android</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Features:</strong> <span>Custom Built</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Support:</strong> <span>6 months</span>
+                        </div>
+                    </div>
+                    <div class="service-price">?150,000</div>
+                    <div class="delivery-time">?? Timeline: 4-6 weeks</div>
+                    <button class="order-btn">Get Quote</button>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">??</div>
+                    <div class="service-name">REST API Development</div>
+                    <div class="service-desc">Scalable backend APIs for your application</div>
+                    <div class="service-details">
+                        <div class="service-detail-item">
+                            <strong>Framework:</strong> <span>Node.js / Python</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Database:</strong> <span>MongoDB / PostgreSQL</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Documentation:</strong> <span>Complete</span>
+                        </div>
+                    </div>
+                    <div class="service-price">?40,000</div>
+                    <div class="delivery-time">?? Timeline: 2-3 weeks</div>
+                    <button class="order-btn">Get Quote</button>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">??</div>
+                    <div class="service-name">UI/UX Design</div>
+                    <div class="service-desc">Beautiful, user-centered designs for web and mobile</div>
+                    <div class="service-details">
+                        <div class="service-detail-item">
+                            <strong>Wireframes:</strong> <span>Low-Fidelity</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Mockups:</strong> <span>High-Fidelity</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Revisions:</strong> <span>2 rounds</span>
+                        </div>
+                    </div>
+                    <div class="service-price">?25,000</div>
+                    <div class="delivery-time">?? Timeline: 1-2 weeks</div>
+                    <button class="order-btn">Get Quote</button>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">??</div>
+                    <div class="service-name">Website Maintenance</div>
+                    <div class="service-desc">Ongoing support, updates, and performance optimization</div>
+                    <div class="service-details">
+                        <div class="service-detail-item">
+                            <strong>Updates:</strong> <span>Monthly</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Support:</strong> <span>24/7 Availability</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Backups:</strong> <span>Weekly</span>
+                        </div>
+                    </div>
+                    <div class="service-price">?5,000/mo</div>
+                    <div class="delivery-time">?? Monthly Subscription</div>
+                    <button class="order-btn">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Services Section -->
+    <section style="background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%); padding: 60px 20px; border-bottom: 1px solid var(--border);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="text-align: center; margin-bottom: 50px;">
+                <h2 style="font-size: 2.5rem; margin: 0 0 15px; color: var(--accent); font-weight: 800;">?? Career & Professional Services</h2>
+                <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 700px; margin: 0 auto;">Transform your career with expert CV writing, interview coaching, LinkedIn optimization, and strategic career guidance</p>
+            </div>
+
+    <!-- Services Grid -->
+    <div class="services-grid" id="professional" style="margin-top: 40px;">
+        <div class="service-card" onclick="openOrderModal('cv-writing')">
+            <div class="service-icon">??</div>
+            <div class="service-name">ATS CV Writing</div>
+            <div class="service-desc">Professional CV optimized for Applicant Tracking Systems</div>
+            <div class="service-details">
+                <div class="service-detail-item">
+                    <strong>Format:</strong> <span>Word + PDF</span>
+                </div>
+                <div class="service-detail-item">
+                    <strong>Revisions:</strong> <span>2 free revisions</span>
+                </div>
+                <div class="service-detail-item">
+                    <strong>Keywords:</strong> <span>Industry optimized</span>
+                </div>
+            </div>
+            <div class="service-price">?2,500</div>
+            <div class="delivery-time">? Delivery: < 1 hour</div>
+            <button class="order-btn">Order Now</button>
+        </div>
+
+        <!-- Service 2: LinkedIn Optimization -->
+        <div class="service-card" onclick="openOrderModal('linkedin-optimization')">
+            <div class="service-icon">??</div>
+            <div class="service-name">LinkedIn Profile Optimization</div>
+            <div class="service-desc">Complete LinkedIn makeover for maximum visibility</div>
+            <div class="service-details">
+                <div class="service-detail-item">
+                    <strong>Profile Photo:</strong> <span>Professional edit</span>
+                </div>
+                <div class="service-detail-item">
+                    <strong>Headline:</strong> <span>Keyword optimized</span>
+                </div>
+                <div class="service-detail-item">
+                    <strong>About Section:</strong> <span>Engaging copy</span>
+                </div>
+            </div>
+            <div class="service-price">?2,000</div>
+            <div class="delivery-time">? Delivery: < 1 hour</div>
+            <button class="order-btn">Order Now</button>
+        </div>
+
+        <!-- Service 3: Interview Prep -->
+        <div class="service-card" onclick="openOrderModal('interview-prep')">
+            <div class="service-icon">??</div>
+            <div class="service-name">Mock Interview Coaching</div>
+            <div class="service-desc">1-on-1 interview training and feedback</div>
+            <div class="service-details">
+                <div class="service-detail-item">
+                    <strong>Session Length:</strong> <span>30 minutes</span>
+                </div>
+                <div class="service-detail-item">
+                    <strong>Focus Area:</strong> <span>Your choice</span>
+                </div>
+                <div class="service-detail-item">
+                    <strong>Feedback:</strong> <span>Written notes</span>
+                </div>
+            </div>
+            <div class="service-price">?3,000</div>
+            <div class="delivery-time">? Delivery: < 1 hour</div>
+            <button class="order-btn">Order Now</button>
+        </div>
+
+        <!-- Service 4: Cover Letter -->
+        <div class="service-card" onclick="openOrderModal('cover-letter')">
+            <div class="service-icon">??</div>
+            <div class="service-name">Professional Cover Letter</div>
+            <div class="service-desc">Tailored cover letter that stands out</div>
+            <div class="service-details">
+                <div class="service-detail-item">
+                    <strong>Customization:</strong> <span>Job-specific</span>
+                </div>
+                <div class="service-detail-item">
+                    <strong>Revisions:</strong> <span>1 free revision</span>
+                </div>
+                <div class="service-detail-item">
+                    <strong>Format:</strong> <span>Word + PDF</span>
+                </div>
+            </div>
+            <div class="service-price">?1,500</div>
+            <div class="delivery-time">? Delivery: < 1 hour</div>
+            <button class="order-btn">Order Now</button>
+        </div>
+
+        <!-- Service 5: Salary Negotiation -->
+        <div class="service-card" onclick="openOrderModal('salary-coaching')">
+            <div class="service-icon">??</div>
+            <div class="service-name">Salary Negotiation Coaching</div>
+            <div class="service-desc">Learn to negotiate your worth effectively</div>
+            <div class="service-details">
+                <div class="service-detail-item">
+                    <strong>Consultation:</strong> <span>30 minutes</span>
+                </div>
+                <div class="service-detail-item">
+                    <strong>Market Research:</strong> <span>Included</span>
+                </div>
+                <div class="service-detail-item">
+                    <strong>Strategy:</strong> <span>Personalized</span>
+                </div>
+            </div>
+            <div class="service-price">?2,500</div>
+            <div class="delivery-time">? Delivery: < 1 hour</div>
+            <button class="order-btn">Order Now</button>
+        </div>
+
+        <!-- Service 6: Career Consultation -->
+        <div class="service-card" onclick="openOrderModal('career-consultation')">
+            <div class="service-icon">??</div>
+            <div class="service-name">Career Consultation</div>
+            <div class="service-desc">Strategic career planning and guidance</div>
+            <div class="service-details">
+                <div class="service-detail-item">
+                    <strong>Assessment:</strong> <span>Career assessment</span>
+                </div>
+                <div class="service-detail-item">
+                    <strong>Planning:</strong> <span>12-month roadmap</span>
+                </div>
+                <div class="service-detail-item">
+                    <strong>Follow-up:</strong> <span>Email support</span>
+                </div>
+            </div>
+            <div class="service-price">?4,000</div>
+            <div class="delivery-time">? Delivery: < 1 hour</div>
+            <button class="order-btn">Order Now</button>
+        </div>
+    </div>
+    </section>
+
+    <!-- Communication Software Section -->
+    <section style="background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%); padding: 60px 20px; border-bottom: 1px solid var(--border);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="text-align: center; margin-bottom: 50px;">
+                <h2 style="font-size: 2.5rem; margin: 0 0 15px; color: var(--accent); font-weight: 800;">?? Communication & Software Tools</h2>
+                <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 700px; margin: 0 auto;">Professional communication tools, video conferencing, streaming, and business software solutions</p>
+            </div>
+
+    <div class="services-grid" id="communication" style="margin-top: 40px;">
+                <div class="service-card" onclick="openOrderModal('video-conference')">
+                    <div class="service-icon">??</div>
+                    <div class="service-name">Video Conference Setup (10 users)</div>
+                    <div class="service-desc">Full-body HD video conferencing</div>
+                    <div class="service-details">
+                        <div class="service-detail-item">
+                            <strong>Users:</strong> <span>Up to 10 participants</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Quality:</strong> <span>Full HD 1080p</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Duration:</strong> <span>Unlimited sessions</span>
+                        </div>
+                    </div>
+                    <div class="service-price">?3,000</div>
+                    <div class="delivery-time">? Delivery: < 1 hour</div>
+                    <button class="order-btn">Order Now</button>
+                </div>
+
+                <div class="service-card" onclick="openOrderModal('team-collaboration')">
+                    <div class="service-icon">??</div>
+                    <div class="service-name">Team Collaboration License (Annual)</div>
+                    <div class="service-desc">Group communication platform</div>
+                    <div class="service-details">
+                        <div class="service-detail-item">
+                            <strong>Duration:</strong> <span>12 months</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Team Size:</strong> <span>Unlimited users</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Support:</strong> <span>24/7 priority</span>
+                        </div>
+                    </div>
+                    <div class="service-price">?12,000</div>
+                    <div class="delivery-time">? Delivery: < 1 hour</div>
+                    <button class="order-btn">Order Now</button>
+                </div>
+
+                <div class="service-card" onclick="openOrderModal('virtual-event')">
+                    <div class="service-icon">??</div>
+                    <div class="service-name">Virtual Event Hosting</div>
+                    <div class="service-desc">Webinar and online event setup</div>
+                    <div class="service-details">
+                        <div class="service-detail-item">
+                            <strong>Attendees:</strong> <span>Unlimited</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Features:</strong> <span>Chat, polls, Q&A</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Recording:</strong> <span>Included</span>
+                        </div>
+                    </div>
+                    <div class="service-price">?15,000</div>
+                    <div class="delivery-time">? Delivery: < 1 hour</div>
+                    <button class="order-btn">Order Now</button>
+                </div>
+
+                <div class="service-card" onclick="openOrderModal('live-streaming')">
+                    <div class="service-icon">??</div>
+                    <div class="service-name">Live Streaming Setup</div>
+                    <div class="service-desc">Professional streaming configuration</div>
+                    <div class="service-details">
+                        <div class="service-detail-item">
+                            <strong>Resolution:</strong> <span>4K capable</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Multi-platform:</strong> <span>YouTube, Facebook, etc</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Support:</strong> <span>Technical guidance</span>
+                        </div>
+                    </div>
+                    <div class="service-price">?8,000</div>
+                    <div class="delivery-time">? Delivery: < 1 hour</div>
+                    <button class="order-btn">Order Now</button>
+                </div>
+
+                <div class="service-card" onclick="openOrderModal('screen-recording')">
+                    <div class="service-icon">??</div>
+                    <div class="service-name">Screen Recording Software</div>
+                    <div class="service-desc">Professional screen capture tool</div>
+                    <div class="service-details">
+                        <div class="service-detail-item">
+                            <strong>Quality:</strong> <span>Up to 4K</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Editing:</strong> <span>Basic tools included</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Export:</strong> <span>Multiple formats</span>
+                        </div>
+                    </div>
+                    <div class="service-price">?5,000</div>
+                    <div class="delivery-time">? Delivery: < 1 hour</div>
+                    <button class="order-btn">Order Now</button>
+                </div>
+
+                <div class="service-card" onclick="openOrderModal('voice-over')">
+                    <div class="service-icon">???</div>
+                    <div class="service-name">Voice Over Service</div>
+                    <div class="service-desc">Professional voice-over recording</div>
+                    <div class="service-details">
+                        <div class="service-detail-item">
+                            <strong>Languages:</strong> <span>Multiple available</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Quality:</strong> <span>Studio standard</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Revisions:</strong> <span>2 free rounds</span>
+                        </div>
+                    </div>
+                    <div class="service-price">?7,000</div>
+                    <div class="delivery-time">? Delivery: < 1 hour</div>
+                    <button class="order-btn">Order Now</button>
+                </div>
+
+                <div class="service-card" onclick="openOrderModal('transcription')">
+                    <div class="service-icon">??</div>
+                    <div class="service-name">Transcription Service (5 hours)</div>
+                    <div class="service-desc">Audio-to-text conversion</div>
+                    <div class="service-details">
+                        <div class="service-detail-item">
+                            <strong>Duration:</strong> <span>Up to 5 hours</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Accuracy:</strong> <span>99% guaranteed</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Delivery:</strong> <span>24-48 hours</span>
+                        </div>
+                    </div>
+                    <div class="service-price">?6,000</div>
+                    <div class="delivery-time">? Delivery: 24-48 hours</div>
+                    <button class="order-btn">Order Now</button>
+                </div>
+
+                <div class="service-card" onclick="openOrderModal('call-center')">
+                    <div class="service-icon">??</div>
+                    <div class="service-name">Call Center Integration</div>
+                    <div class="service-desc">Business phone system setup</div>
+                    <div class="service-details">
+                        <div class="service-detail-item">
+                            <strong>Extensions:</strong> <span>Unlimited</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Analytics:</strong> <span>Call tracking included</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Integration:</strong> <span>CRM compatible</span>
+                        </div>
+                    </div>
+                    <div class="service-price">?20,000</div>
+                    <div class="delivery-time">? Delivery: < 1 hour</div>
+                    <button class="order-btn">Order Now</button>
+                </div>
+
+                <div class="service-card" onclick="openOrderModal('chatbot')">
+                    <div class="service-icon">??</div>
+                    <div class="service-name">Chat Bot Development</div>
+                    <div class="service-desc">AI customer service bot</div>
+                    <div class="service-details">
+                        <div class="service-detail-item">
+                            <strong>AI Powered:</strong> <span>Advanced NLP</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Platforms:</strong> <span>Web, Facebook, WhatsApp</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Support:</strong> <span>6 months included</span>
+                        </div>
+                    </div>
+                    <div class="service-price">?18,000</div>
+                    <div class="delivery-time">? Delivery: 3-5 days</div>
+                    <button class="order-btn">Order Now</button>
+                </div>
+
+                <div class="service-card" onclick="openOrderModal('interpretation')">
+                    <div class="service-icon">??</div>
+                    <div class="service-name">Multilingual Interpretation (1 hour)</div>
+                    <div class="service-desc">Real-time language interpretation</div>
+                    <div class="service-details">
+                        <div class="service-detail-item">
+                            <strong>Languages:</strong> <span>50+ available</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Format:</strong> <span>Simultaneous/consecutive</span>
+                        </div>
+                        <div class="service-detail-item">
+                            <strong>Expertise:</strong> <span>Professional interpreters</span>
+                        </div>
+                    </div>
+                    <div class="service-price">?9,000</div>
+                    <div class="delivery-time">? Delivery: < 1 hour</div>
+                    <button class="order-btn">Order Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section style="background: linear-gradient(135deg, rgba(0, 217, 255, 0.05) 0%, rgba(255, 215, 0, 0.02) 100%); padding: 60px 20px; border-bottom: 1px solid var(--border);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h2 style="text-align: center; font-size: 2.2rem; color: var(--accent); margin: 0 0 40px; font-weight: 800;">What Our Clients Say</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+                <div style="background: var(--primary-light); border: 1px solid var(--border); border-radius: 12px; padding: 25px; display: flex; flex-direction: column;">
+                    <div style="color: var(--gold); font-size: 1rem; margin-bottom: 12px;">?????</div>
+                    <p style="color: var(--text-light); margin: 0 0 15px; font-size: 0.95rem; flex-grow: 1; line-height: 1.6;">"The CV writing service transformed my job search. Within weeks, I landed 3 interviews and secured my dream role. Highly professional!"</p>
+                    <div style="color: var(--accent); font-weight: 700;">- Chioma O., Lagos</div>
+                </div>
+                <div style="background: var(--primary-light); border: 1px solid var(--border); border-radius: 12px; padding: 25px; display: flex; flex-direction: column;">
+                    <div style="color: var(--gold); font-size: 1rem; margin-bottom: 12px;">?????</div>
+                    <p style="color: var(--text-light); margin: 0 0 15px; font-size: 0.95rem; flex-grow: 1; line-height: 1.6;">"Building my website with brainboxX was seamless. The team delivered exactly what I needed, on time and within budget. Excellent service!"</p>
+                    <div style="color: var(--accent); font-weight: 700;">- Tunde A., Ibadan</div>
+                </div>
+                <div style="background: var(--primary-light); border: 1px solid var(--border); border-radius: 12px; padding: 25px; display: flex; flex-direction: column;">
+                    <div style="color: var(--gold); font-size: 1rem; margin-bottom: 12px;">?????</div>
+                    <p style="color: var(--text-light); margin: 0 0 15px; font-size: 0.95rem; flex-grow: 1; line-height: 1.6;">"LinkedIn optimization boosted my profile views by 400%. The career consultation helped me pivot to tech successfully. Worth every naira!"</p>
+                    <div style="color: var(--accent); font-weight: 700;">- Adeola K., Abuja</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section style="background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%); padding: 60px 20px; border-bottom: 1px solid var(--border);">
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <h2 style="text-align: center; font-size: 2.2rem; color: var(--accent); margin: 0 0 40px; font-weight: 800;">Frequently Asked Questions</h2>
+            <div style="display: grid; gap: 16px;">
+                <details style="background: rgba(0, 217, 255, 0.1); border: 1px solid var(--border); border-radius: 12px; padding: 20px; cursor: pointer;">
+                    <summary style="font-weight: 700; color: var(--accent); font-size: 1.05rem;">How quickly will I receive my order?</summary>
+                    <p style="color: var(--text-muted); margin: 15px 0 0; font-size: 0.95rem;">Career services are delivered within 1 hour of order. Web development projects have customized timelines (typically 2-6 weeks) depending on complexity.</p>
+                </details>
+                <details style="background: rgba(0, 217, 255, 0.1); border: 1px solid var(--border); border-radius: 12px; padding: 20px; cursor: pointer;">
+                    <summary style="font-weight: 700; color: var(--accent); font-size: 1.05rem;">Do you offer revisions?</summary>
+                    <p style="color: var(--text-muted); margin: 15px 0 0; font-size: 0.95rem;">Yes! Most services include free revisions. CV writing includes 2 revisions, cover letters include 1 revision, and web development includes unlimited revisions until satisfaction.</p>
+                </details>
+                <details style="background: rgba(0, 217, 255, 0.1); border: 1px solid var(--border); border-radius: 12px; padding: 20px; cursor: pointer;">
+                    <summary style="font-weight: 700; color: var(--accent); font-size: 1.05rem;">What payment methods do you accept?</summary>
+                    <p style="color: var(--text-muted); margin: 15px 0 0; font-size: 0.95rem;">We accept bank transfers, card payments, and mobile money. Payment is secure and encrypted. You'll receive an order confirmation immediately after payment.</p>
+                </details>
+                <details style="background: rgba(0, 217, 255, 0.1); border: 1px solid var(--border); border-radius: 12px; padding: 20px; cursor: pointer;">
+                    <summary style="font-weight: 700; color: var(--accent); font-size: 1.05rem;">Is my information kept confidential?</summary>
+                    <p style="color: var(--text-muted); margin: 15px 0 0; font-size: 0.95rem;">Absolutely. We use bank-level encryption and never share your personal information. Your privacy is our top priority.</p>
+                </details>
+                <details style="background: rgba(0, 217, 255, 0.1); border: 1px solid var(--border); border-radius: 12px; padding: 20px; cursor: pointer;">
+                    <summary style="font-weight: 700; color: var(--accent); font-size: 1.05rem;">Can I get a discount for multiple services?</summary>
+                    <p style="color: var(--text-muted); margin: 15px 0 0; font-size: 0.95rem;">Yes! We offer package discounts for clients ordering multiple services. Contact our support team for custom pricing on bundles.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section style="background: linear-gradient(135deg, rgba(0, 217, 255, 0.15) 0%, rgba(255, 215, 0, 0.1) 100%); padding: 60px 20px; border-bottom: 1px solid var(--border); text-align: center;">
+        <div style="max-width: 800px; margin: 0 auto;">
+            <h2 style="font-size: 2rem; color: var(--accent); margin: 0 0 15px; font-weight: 800;">Ready to Transform Your Career or Business?</h2>
+            <p style="color: var(--text-muted); font-size: 1.05rem; margin: 0 0 30px;">Join 500+ successful clients who've improved their careers and grown their digital presence with brainboxX Pro Hub.</p>
+            <button class="order-btn" onclick="document.querySelector('.services-grid').scrollIntoView({behavior: 'smooth'})" style="padding: 16px 40px; font-size: 1.05rem;">Explore Our Services</button>
+        </div>
+    </section>
+
+    <!-- Order Modal -->
+    <div class="modal-overlay" id="orderModal">
+        <div class="modal" style="position: relative;">
+            <button class="modal-close" onclick="closeOrderModal()">×</button>
+            <div id="modalContent">
+                <!-- Content loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const services = {
+            'cv-writing': {
+                name: 'ATS CV Writing',
+                price: 2500,
+                description: 'Professional CV optimized for Applicant Tracking Systems',
+                details: ['Word + PDF format', '2 free revisions', 'Industry keywords', 'Professional formatting']
+            },
+            'linkedin-optimization': {
+                name: 'LinkedIn Profile Optimization',
+                price: 2000,
+                description: 'Complete LinkedIn makeover for maximum visibility',
+                details: ['Profile photo edit', 'Keyword-optimized headline', 'Engaging about section', 'Recommended section setup']
+            },
+            'interview-prep': {
+                name: 'Mock Interview Coaching',
+                price: 3000,
+                description: '1-on-1 interview training and feedback',
+                details: ['30-minute session', 'Focus on your goals', 'Written feedback notes', 'Interview tips guide']
+            },
+            'cover-letter': {
+                name: 'Professional Cover Letter',
+                price: 1500,
+                description: 'Tailored cover letter that stands out',
+                details: ['Job-specific content', '1 free revision', 'Word + PDF format', 'Professional tone']
+            },
+            'salary-coaching': {
+                name: 'Salary Negotiation Coaching',
+                price: 2500,
+                description: 'Learn to negotiate your worth effectively',
+                details: ['30-minute consultation', 'Market research included', 'Personalized strategy', 'Negotiation scripts']
+            },
+            'career-consultation': {
+                name: 'Career Consultation',
+                price: 4000,
+                description: 'Strategic career planning and guidance',
+                details: ['Career assessment', '12-month roadmap', 'Email follow-up support', 'Industry insights']
+            },
+            'video-conference': {
+                name: 'Video Conference Setup (10 users)',
+                price: 3000,
+                description: 'Full-body HD video conferencing',
+                details: ['Up to 10 participants', 'Full HD 1080p quality', 'Unlimited sessions', 'Screen sharing included']
+            },
+            'team-collaboration': {
+                name: 'Team Collaboration License (Annual)',
+                price: 12000,
+                description: 'Group communication platform',
+                details: ['12-month subscription', 'Unlimited team members', '24/7 priority support', 'Custom integrations']
+            },
+            'virtual-event': {
+                name: 'Virtual Event Hosting',
+                price: 15000,
+                description: 'Webinar and online event setup',
+                details: ['Unlimited attendees', 'Interactive features (chat, polls, Q&A)', 'Auto recording included', 'Post-event analytics']
+            },
+            'live-streaming': {
+                name: 'Live Streaming Setup',
+                price: 8000,
+                description: 'Professional streaming configuration',
+                details: ['4K capable setup', 'Multi-platform support (YouTube, Facebook, etc)', 'Technical guidance included', 'OBS configuration']
+            },
+            'screen-recording': {
+                name: 'Screen Recording Software',
+                price: 5000,
+                description: 'Professional screen capture tool',
+                details: ['Up to 4K recording quality', 'Basic editing tools included', 'Multiple export formats', 'Lifetime license']
+            },
+            'voice-over': {
+                name: 'Voice Over Service',
+                price: 7000,
+                description: 'Professional voice-over recording',
+                details: ['Multiple languages available', 'Studio quality audio', '2 free revision rounds', 'Quick turnaround']
+            },
+            'transcription': {
+                name: 'Transcription Service (5 hours)',
+                price: 6000,
+                description: 'Audio-to-text conversion',
+                details: ['Up to 5 hours of audio', '99% accuracy guaranteed', '24-48 hour delivery', 'Multiple language support']
+            },
+            'call-center': {
+                name: 'Call Center Integration',
+                price: 20000,
+                description: 'Business phone system setup',
+                details: ['Unlimited extensions', 'Call tracking and analytics', 'CRM compatible', 'IVR system included']
+            },
+            'chatbot': {
+                name: 'Chat Bot Development',
+                price: 18000,
+                description: 'AI customer service bot',
+                details: ['Advanced NLP powered', 'Web, Facebook, WhatsApp ready', '6 months support included', 'Customizable responses']
+            },
+            'interpretation': {
+                name: 'Multilingual Interpretation (1 hour)',
+                price: 9000,
+                description: 'Real-time language interpretation',
+                details: ['50+ languages available', 'Simultaneous and consecutive modes', 'Professional interpreters', 'Technical support included']
+            }
+        };
+
+        function openOrderModal(serviceId) {
+            const service = services[serviceId];
+            if (!service) return;
+
+            const content = `
+                <h2>${service.name}</h2>
+                <p class="modal-subtitle">${service.description}</p>
+                
+                <div style="background: var(--primary-light); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <h4 style="margin: 0 0 10px; color: var(--accent);">What's Included:</h4>
+                    <ul style="margin: 0; padding-left: 20px; color: var(--text-muted);">
+                        ${service.details.map(d => `<li style="margin: 5px 0;">${d}</li>`).join('')}
+                    </ul>
+                </div>
+
+                <form id="orderForm" onsubmit="submitOrder(event, '${serviceId}')">
+                    <div class="form-group">
+                        <label for="fullName">Full Name *</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                        <span class="error-message" id="fullNameError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                        <span class="error-message" id="emailError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">WhatsApp Number *</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+234..." required>
+                        <span class="error-message" id="phoneError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="details">Service Details / Requirements *</label>
+                        <textarea id="details" name="details" placeholder="Tell us more about your needs..." required></textarea>
+                        <span class="error-message" id="detailsError"></span>
+                    </div>
+
+                    <div style="background: var(--primary-light); padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 3px solid var(--accent);">
+                        <div style="color: var(--text-muted); font-size: 0.9rem;">Total Cost</div>
+                        <div style="font-size: 1.8rem; font-weight: 800; color: var(--accent); margin-top: 5px;">?${service.price.toLocaleString()}</div>
+                        <div style="color: var(--success); font-weight: 700; margin-top: 8px; font-size: 0.9rem;">? Delivery: Less than 1 hour</div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Place Order & Pay</button>
+                </form>
+            `;
+
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('orderModal').classList.add('active');
+        }
+
+        function closeOrderModal() {
+            document.getElementById('orderModal').classList.remove('active');
+        }
+
+        function submitOrder(event, serviceId) {
+            event.preventDefault();
+
+            const fullName = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const details = document.getElementById('details').value.trim();
+
+            // Validation
+            let isValid = true;
+
+            if (!fullName || fullName.length < 2) {
+                showError('fullNameError', 'Please enter a valid name');
+                isValid = false;
+            }
+
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showError('emailError', 'Please enter a valid email');
+                isValid = false;
+            }
+
+            if (!phone || phone.length < 10) {
+                showError('phoneError', 'Please enter a valid phone number');
+                isValid = false;
+            }
+
+            if (!details || details.length < 10) {
+                showError('detailsError', 'Please provide at least 10 characters');
+                isValid = false;
+            }
+
+            if (!isValid) return;
+
+            // Generate Order ID
+            const orderId = 'PRO-' + Date.now();
+            const service = services[serviceId];
+
+            // Create order object
+            const order = {
+                orderId,
+                serviceId,
+                serviceName: service.name,
+                servicePrice: service.price,
+                fullName,
+                email,
+                phone,
+                details,
+                timestamp: new Date().toISOString(),
+                status: 'pending'
+            };
+
+            // Save to localStorage
+            let orders = JSON.parse(localStorage.getItem('professionalOrders') || '[]');
+            orders.push(order);
+            localStorage.setItem('professionalOrders', JSON.stringify(orders));
+            localStorage.setItem('latestProfessionalOrder', JSON.stringify(order));
+
+            console.log('Order placed:', order);
+
+            // Show success message
+            const successContent = `
+                <div class="success-modal">
+                    <h3>? Order Placed Successfully!</h3>
+                    <p>Your order has been received and will be processed within 1 hour.</p>
+                    <div class="order-id">Order ID: ${orderId}</div>
+                    <p style="color: var(--text-muted);">We've sent a confirmation email to <strong>${email}</strong></p>
+                    <p style="color: var(--success); font-weight: 700; margin-top: 15px;">Our team will contact you via WhatsApp at ${phone} to finalize your order and deliver the service.</p>
+                    <button onclick="closeOrderModal()" style="margin-top: 20px; padding: 12px 30px; background: var(--accent); color: var(--bg-darker); border: none; border-radius: 8px; font-weight: 700; cursor: pointer;">Close</button>
+                </div>
+            `;
+
+            document.getElementById('modalContent').innerHTML = successContent;
+
+            // Auto-close after 4 seconds
+            setTimeout(() => {
+                closeOrderModal();
+                location.reload();
+            }, 4000);
+        }
+
+        function showError(elementId, message) {
+            const errorEl = document.getElementById(elementId);
+            if (errorEl) {
+                errorEl.textContent = message;
+                errorEl.style.display = 'block';
+            }
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('orderModal')?.addEventListener('click', (e) => {
+            if (e.target === document.getElementById('orderModal')) {
+                closeOrderModal();
+            }
+        });
+    </script>
+    <script src="payment-handler.js"></script>
+<script src="theme-toggle.js"></script>
+  </body>
+</html>
+

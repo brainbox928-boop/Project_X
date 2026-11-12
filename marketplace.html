@@ -11,16 +11,34 @@
     <link rel="stylesheet" href="style.css" />
     <style>
       :root {
-        --primary: #f5c76b;
-        --primary-dark: #d9a73f;
-        --bg: #f5fbff;
-        --surface: #ffffff;
-        --surface-alt: #eaf7ff;
-        --text: #1a2733;
-        --text-muted: #5f6f7a;
-        --border: #dfeaf4;
-        --error: #ff6b6b;
-        --success: #4ade80;
+        /* Light Mode - New Professional Palette */
+        --primary: #2563EB;
+        --primary-dark: #1D4ED8;
+        --bg: #F8FAFC;
+        --surface: #FFFFFF;
+        --surface-alt: #F0F4F8;
+        --text: #0F172A;
+        --text-muted: #475569;
+        --border: #E2E8F0;
+        --error: #EF4444;
+        --success: #10B981;
+        
+        /* Category Accents */
+        --accent-marketplace: #F97316;
+        --accent-learning: #4F46E5;
+        --accent-productivity: #0D9488;
+        --accent-lifestyle: #8B5CF6;
+      }
+
+      html.dark {
+        --primary: #3B82F6;
+        --primary-dark: #1E40AF;
+        --bg: #0B1120;
+        --surface: #111827;
+        --surface-alt: #1F2937;
+        --text: #F8FAFC;
+        --text-muted: #94A3B8;
+        --border: #1E293B;
       }
 
       * {
@@ -30,9 +48,10 @@
       body {
         margin: 0;
         font-family: 'Inter', sans-serif;
-        background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%);
+        background: var(--bg);
         color: var(--text);
         line-height: 1.6;
+        transition: background-color 0.3s ease, color 0.3s ease;
       }
 
       a {
@@ -47,6 +66,11 @@
         background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(10px);
         border-bottom: 1px solid var(--border);
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+      }
+
+      html.dark .header {
+        background: rgba(17, 24, 39, 0.95);
       }
 
       .header-content {
@@ -83,7 +107,7 @@
 
       .nav-center a:hover,
       .nav-center a.active {
-        color: var(--primary-dark);
+        color: var(--primary);
       }
 
       .nav-right {
@@ -100,12 +124,13 @@
         border-radius: 999px;
         font-weight: 700;
         cursor: pointer;
+        transition: all 0.2s;
       }
 
       .wishlist-btn.active,
       .wishlist-btn:hover {
-        border-color: var(--primary-dark);
-        color: var(--primary-dark);
+        border-color: var(--primary);
+        color: var(--primary);
       }
 
       .cart-btn {
@@ -113,19 +138,20 @@
         display: flex;
         align-items: center;
         gap: 8px;
-        background: linear-gradient(135deg, var(--primary), #ffd886);
-        color: var(--text);
+        background: var(--primary);
+        color: white;
         border: none;
         padding: 10px 20px;
         border-radius: 999px;
         font-weight: 700;
         cursor: pointer;
         transition: transform 0.2s, box-shadow 0.2s;
+        box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
       }
 
       .cart-btn:hover {
         transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(245, 199, 107, 0.3);
+        box-shadow: 0 12px 28px rgba(37, 99, 235, 0.4);
       }
 
       .cart-badge {
@@ -151,10 +177,11 @@
       }
 
       .hero {
-        background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
-        color: var(--text);
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        color: white;
         padding: 60px 24px;
         text-align: center;
+        transition: background 0.3s ease;
       }
 
       .hero h1 {
@@ -162,6 +189,7 @@
         margin: 0 0 16px;
         font-weight: 800;
         letter-spacing: -0.02em;
+        color: white;
       }
 
       .hero p {
@@ -171,6 +199,7 @@
         margin-left: auto;
         margin-right: auto;
         opacity: 0.95;
+        color: rgba(255, 255, 255, 0.9);
       }
 
       .filters {
@@ -180,6 +209,8 @@
         padding: 40px 24px;
         justify-content: center;
         border-bottom: 1px solid var(--border);
+        background: var(--bg);
+        transition: background-color 0.3s ease, border-color 0.3s ease;
       }
 
       .filter-tools {
@@ -198,6 +229,13 @@
         background: var(--surface);
         color: var(--text);
         font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .sort-select:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
       }
 
       .marketplace-search {
@@ -215,11 +253,17 @@
         background: var(--surface);
         color: var(--text);
         font-size: 1rem;
+        transition: all 0.3s ease;
       }
 
       .marketplace-search input:focus {
-        outline: 3px solid rgba(245, 199, 107, 0.35);
-        border-color: var(--primary-dark);
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      }
+
+      .marketplace-search input::placeholder {
+        color: var(--text-muted);
       }
 
       .marketplace-search-icon {
@@ -254,12 +298,14 @@
       .filter-btn.active {
         border-color: var(--primary);
         background: var(--primary);
-        color: var(--text);
+        color: white;
       }
 
       .category-section {
         padding: 60px 24px;
         border-bottom: 1px solid var(--border);
+        background: var(--bg);
+        transition: background-color 0.3s ease;
       }
 
       .category-header {
@@ -277,6 +323,7 @@
         margin: 0;
         font-size: 1.8rem;
         font-weight: 800;
+        color: var(--text);
       }
 
       .category-info p {
@@ -306,6 +353,7 @@
         margin: 0 0 20px;
         font-size: 1.2rem;
         font-weight: 800;
+        color: var(--text);
       }
 
       .product-card {
@@ -317,6 +365,12 @@
         flex-direction: column;
         gap: 12px;
         transition: all 0.3s;
+      }
+
+      .product-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15);
+        border-color: var(--primary);
       }
 
       .product-card-topline {
@@ -336,16 +390,22 @@
         color: var(--text-muted);
         font-size: 1.15rem;
         cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .wishlist-icon:hover {
+        border-color: var(--primary);
+        color: var(--primary);
       }
 
       .wishlist-icon.saved {
-        border-color: var(--primary-dark);
-        color: var(--primary-dark);
-        background: #fff8e5;
+        border-color: var(--primary);
+        color: var(--primary);
+        background: rgba(37, 99, 235, 0.1);
       }
 
       .rating-summary {
-        color: #a86f00;
+        color: var(--primary);
         font-size: 0.84rem;
         font-weight: 700;
       }
@@ -369,12 +429,6 @@
         font-weight: 600;
       }
 
-      .product-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 20px 40px rgba(26, 39, 51, 0.12);
-        border-color: var(--primary);
-      }
-
       .product-name {
         font-size: 1.1rem;
         font-weight: 700;
@@ -390,7 +444,7 @@
       .product-price {
         font-size: 1.4rem;
         font-weight: 800;
-        color: var(--primary-dark);
+        color: var(--primary);
       }
 
       .product-actions {
@@ -406,33 +460,70 @@
         border-radius: 8px;
         text-align: center;
         font-weight: 600;
+        background: var(--surface-alt);
+        color: var(--text);
+        transition: all 0.2s;
+      }
+
+      .qty-input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
       }
 
       .add-btn {
         flex: 1;
         padding: 10px 16px;
-        background: linear-gradient(135deg, var(--primary), #ffd886);
-        color: var(--text);
+        background: var(--primary);
+        color: white;
         border: none;
         border-radius: 8px;
         font-weight: 700;
         cursor: pointer;
         transition: all 0.2s;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
       }
 
       .add-btn:hover {
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(245, 199, 107, 0.3);
+        box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35);
       }
 
-      .view-details-btn {
+      .buy-now-btn {
+        flex: 1;
+        padding: 10px 16px;
+        background: linear-gradient(135deg, var(--primary), #0ea5e9);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .buy-now-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+      }
+
+      .buy-now-btn:active {
+        transform: translateY(0);
+      }
         padding: 0;
         border: 0;
         background: none;
-        color: var(--primary-dark);
+        color: var(--primary);
         font-weight: 700;
         text-align: left;
         cursor: pointer;
+        transition: color 0.2s;
+      }
+
+      .view-details-btn:hover {
+        color: var(--primary-dark);
       }
 
       .product-modal {
@@ -765,6 +856,71 @@
         cursor: not-allowed;
       }
 
+      /* Empty State & Loading */
+      .empty-state {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 80px 40px;
+        text-align: center;
+        min-height: 400px;
+      }
+
+      .empty-state-icon {
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+        opacity: 0.8;
+      }
+
+      .empty-state h2 {
+        font-size: 1.8rem;
+        color: var(--text);
+        margin: 0 0 12px;
+        font-weight: 800;
+      }
+
+      .empty-state p {
+        color: var(--text-muted);
+        font-size: 1rem;
+        margin: 0 0 32px;
+        max-width: 500px;
+        line-height: 1.6;
+      }
+
+      .empty-state a,
+      .empty-state button {
+        display: inline-block;
+        padding: 12px 28px;
+        margin: 0 8px;
+        background: linear-gradient(135deg, var(--primary), #ffd886);
+        color: var(--text);
+        border: none;
+        border-radius: 8px;
+        font-weight: 700;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .empty-state a:hover,
+      .empty-state button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(245, 199, 107, 0.3);
+      }
+
+      /* Loading State */
+      .skeleton-loader {
+        background: linear-gradient(90deg, var(--surface-alt) 25%, var(--surface) 50%, var(--surface-alt) 75%);
+        background-size: 200% 100%;
+        animation: loading 1.5s infinite;
+      }
+
+      @keyframes loading {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+
       /* Responsive */
       @media (max-width: 1024px) {
         .nav-center {
@@ -781,13 +937,58 @@
         }
       }
 
+      @media (max-width: 768px) {
+        .nav-center {
+          gap: 16px;
+          font-size: 0.9rem;
+        }
+
+        .hero h1 {
+          font-size: 2rem;
+        }
+
+        .category-header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .category-icon {
+          font-size: 2rem;
+        }
+
+        .filter-btn {
+          white-space: nowrap;
+        }
+      }
+
       @media (max-width: 640px) {
         .header-content {
           padding: 12px 16px;
+          gap: 12px;
+          flex-wrap: wrap;
         }
 
         .logo {
           font-size: 1.2rem;
+          flex: 1;
+        }
+
+        .nav-center {
+          display: flex !important;
+          gap: 8px;
+          flex-basis: 100%;
+          order: 3;
+          font-size: 0.8rem;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          padding: 0 16px;
+        }
+
+        .nav-center a {
+          white-space: nowrap;
+          font-size: 0.9rem;
+          padding: 4px 12px;
+          border-bottom: 2px solid transparent;
         }
 
         .nav-right {
@@ -795,28 +996,141 @@
         }
 
         .wishlist-btn {
-          padding: 9px 10px;
-          font-size: 0;
+          padding: 8px 12px;
+          font-size: 0.85rem;
         }
 
-        .wishlist-btn::first-letter {
-          font-size: 1rem;
+        .cart-btn {
+          padding: 8px 12px;
+          font-size: 0.85rem;
+        }
+
+        .hero {
+          padding: 40px 16px;
         }
 
         .hero h1 {
-          font-size: 1.8rem;
+          font-size: 1.6rem;
+          letter-spacing: normal;
+        }
+
+        .hero p {
+          font-size: 0.95rem;
         }
 
         .filters {
-          padding: 20px 16px;
+          padding: 16px;
+          gap: 8px;
+          flex-direction: column;
+        }
+
+        .filter-tools {
+          width: 100%;
+          flex-direction: column;
+        }
+
+        .filter-tools label {
+          width: 100%;
+        }
+
+        .sort-select {
+          width: 100%;
+        }
+
+        .marketplace-search {
+          width: 100%;
+          margin: 0 0 12px 0;
+        }
+
+        .marketplace-search input {
+          min-height: 44px;
+        }
+
+        .search-summary {
+          width: 100%;
+          padding: 0 16px 12px;
+          font-size: 0.85rem;
+        }
+
+        .filter-btn {
+          padding: 8px 16px;
+          font-size: 0.9rem;
+          white-space: nowrap;
+          flex-shrink: 0;
+        }
+
+        .category-section {
+          padding: 32px 16px;
+        }
+
+        .category-header {
+          flex-direction: column;
+          align-items: flex-start;
+          margin-bottom: 24px;
+          gap: 12px;
+        }
+
+        .category-icon {
+          font-size: 1.8rem;
+        }
+
+        .category-info h2 {
+          font-size: 1.4rem;
+          margin: 0;
+        }
+
+        .category-info p {
+          font-size: 0.85rem;
+        }
+
+        .subcategory-title {
+          font-size: 1rem;
+          margin-bottom: 16px;
+        }
+
+        .products-grid {
+          grid-template-columns: 1fr;
+          gap: 16px;
+        }
+
+        .product-card {
+          padding: 16px;
+          gap: 10px;
+        }
+
+        .product-image {
+          height: 140px;
+        }
+
+        .product-name {
+          font-size: 1rem;
+        }
+
+        .product-price {
+          font-size: 1.2rem;
+        }
+
+        .product-actions {
+          flex-direction: column;
           gap: 8px;
         }
 
-        .marketplace-search,
-        .search-summary {
-          width: calc(100% - 32px);
-          padding-left: 0;
-          padding-right: 0;
+        .qty-input,
+        .add-btn {
+          width: 100%;
+        }
+
+        .qty-input {
+          min-height: 40px;
+        }
+
+        .add-btn {
+          min-height: 44px;
+        }
+
+        .buy-now-btn {
+          width: 100%;
+          min-height: 44px;
         }
 
         .cart-sidebar {
@@ -824,10 +1138,11 @@
           bottom: 0;
           height: auto;
           max-height: 80vh;
+          border-radius: 16px 16px 0 0;
         }
 
-        .products-grid {
-          grid-template-columns: 1fr;
+        .cart-header {
+          padding: 16px;
         }
 
         .product-modal {
@@ -836,7 +1151,10 @@
 
         .product-modal-content {
           max-height: calc(100vh - 24px);
-          padding: 52px 18px 20px;
+          padding: 48px 16px 20px;
+          border-radius: 16px;
+          width: 100%;
+          max-width: 100%;
         }
 
         .product-detail-layout,
@@ -847,6 +1165,85 @@
         .review-form {
           grid-template-columns: 1fr;
         }
+
+        .product-detail-image {
+          height: 280px;
+        }
+
+        .detail-meta {
+          font-size: 0.85rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .header-content {
+          padding: 8px 12px;
+        }
+
+        .logo {
+          font-size: 1rem;
+        }
+
+        .nav-center {
+          gap: 6px;
+          padding: 0 12px !important;
+        }
+
+        .nav-center a {
+          font-size: 0.75rem;
+          padding: 3px 8px;
+        }
+
+        .cart-btn,
+        .wishlist-btn {
+          padding: 6px 10px;
+          font-size: 0.75rem;
+        }
+
+        .hero {
+          padding: 32px 16px;
+        }
+
+        .hero h1 {
+          font-size: 1.3rem;
+          margin-bottom: 12px;
+        }
+
+        .filters {
+          padding: 12px;
+          gap: 6px;
+        }
+
+        .filter-btn {
+          padding: 6px 12px;
+          font-size: 0.8rem;
+        }
+
+        .products-grid {
+          gap: 12px;
+        }
+
+        .product-card {
+          padding: 12px;
+          gap: 8px;
+        }
+
+        .product-image {
+          height: 120px;
+        }
+
+        .product-name {
+          font-size: 0.95rem;
+        }
+
+        .product-price {
+          font-size: 1.1rem;
+        }
+
+        .product-detail-image {
+          height: 240px;
+        }
+      }
 
         .product-detail-image {
           aspect-ratio: 16 / 9;
@@ -863,13 +1260,11 @@
         </a>
         <nav class="nav-center">
           <a href="marketplace.html" class="nav-link active">All</a>
-          <a href="communication.html" class="nav-link">Communication</a>
           <a href="courses.html" class="nav-link">Courses</a>
           <a href="crypto.html" class="nav-link">Crypto</a>
           <a href="gifts-delivery.html" class="nav-link">Gifts &amp; Delivery</a>
-          <a href="launchforge.html" class="nav-link">LaunchForge</a>
+          <a href="brainboxX-pro-hub.html" class="nav-link">Professional Services</a>
           <a href="marketing.html" class="nav-link">Marketing</a>
-          <a href="professional.html" class="nav-link">Professional</a>
           <a href="telecom.html" class="nav-link">Telecom</a>
         </nav>
         <div class="nav-right">
@@ -901,14 +1296,10 @@
           <button class="filter-btn" id="savedFilterBtn" type="button" onclick="toggleWishlistFilter()">♡ Saved items</button>
           <label>Sort <select class="sort-select" id="sortSelect" onchange="changeSort(this.value)"><option value="name">A-Z</option><option value="price-low">Price: low to high</option><option value="price-high">Price: high to low</option><option value="rating">Top rated</option></select></label>
         </div>
-        <button class="filter-btn active" onclick="filterByCategory(null)">All Categories</button>
-        <a href="communication.html" class="filter-btn">📱 Communication</a>
         <a href="courses.html" class="filter-btn">🎓 Courses</a>
         <a href="crypto.html" class="filter-btn">₿ Crypto</a>
         <a href="gifts-delivery.html" class="filter-btn">🎁 Gifts &amp; Delivery</a>
-        <a href="launchforge.html" class="filter-btn">🚀 LaunchForge</a>
-        <a href="marketing.html" class="filter-btn">📢 Marketing</a>
-        <a href="professional.html" class="filter-btn">👔 Professional</a>
+        <a href="brainboxX-pro-hub.html" class="filter-btn">💼 Professional Services</a>
         <a href="telecom.html" class="filter-btn">📴 Telecom</a>
       </div>
 
@@ -955,9 +1346,9 @@
       const reviewsKey = 'brainboxx-reviews';
       const wishlist = new Set(JSON.parse(localStorage.getItem(wishlistKey) || '[]'));
       const CATEGORY_VISUALS = {
-        communication: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=80',
         courses: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=80',
         crypto: 'https://images.unsplash.com/photo-1621761191319-c6fb62004040?auto=format&fit=crop&w=900&q=80',
+        giftCards: 'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=900&q=80',
         launchForge: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80',
         giftsDelivery: 'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=900&q=80',
         marketing: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80',
@@ -1019,6 +1410,23 @@
         }
 
         searchSummary.textContent = '';
+        // Show welcome message when no filter is selected
+        if (!currentFilter) {
+          container.innerHTML = `
+            <div class="empty-state" style="padding: 80px 20px; text-align: center;">
+              <div class="empty-state-icon" style="font-size: 3rem; margin-bottom: 20px;">🎯</div>
+              <h2 style="color: var(--text); font-size: 2rem; margin-bottom: 15px;">Welcome to brainboxX Marketplace</h2>
+              <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">Choose a category above to explore our premium services and solutions</p>
+              <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                <a href="courses.html" style="padding: 12px 24px; background: var(--primary); color: var(--text); border-radius: 8px; font-weight: 600; text-decoration: none; transition: background 0.2s;">🎓 Browse Courses</a>
+                <a href="gifts-delivery.html" style="padding: 12px 24px; background: var(--primary); color: var(--text); border-radius: 8px; font-weight: 600; text-decoration: none; transition: background 0.2s;">🎁 Gifts & Delivery</a>
+                <a href="brainboxX-pro-hub.html" style="padding: 12px 24px; background: var(--primary); color: var(--text); border-radius: 8px; font-weight: 600; text-decoration: none; transition: background 0.2s;">💼 Professional Services</a>
+                <a href="telecom.html" style="padding: 12px 24px; background: var(--primary); color: var(--text); border-radius: 8px; font-weight: 600; text-decoration: none; transition: background 0.2s;">📴 Telecom</a>
+              </div>
+            </div>
+          `;
+          return;
+        }
         container.innerHTML = categories.map(([categoryKey, category]) => renderCategorySection(categoryKey, category)).join('');
       }
 
@@ -1126,6 +1534,7 @@
             <div class="product-actions">
               <input type="number" class="qty-input" id="qty-${product.id}" value="1" min="1" max="99" />
               <button class="add-btn" onclick="event.stopPropagation(); addToCart('${product.id}', '${product.name}', ${product.price})">Add to Cart</button>
+              <button class="buy-now-btn" onclick="event.stopPropagation(); buyNow('${product.id}', '${product.name}', ${product.price})" title="Buy this item immediately">Buy Now</button>
             </div>
           </article>
         `;
@@ -1157,7 +1566,7 @@
               <p class="detail-price">${formatMoney(product.price)}</p>
               <div class="detail-rating">${getRatingMarkup(product.id)} <button class="wishlist-btn ${wishlist.has(product.id) ? 'active' : ''}" type="button" onclick="toggleWishlist('${product.id}'); openProductDetails('${product.id}')">${wishlist.has(product.id) ? '♥ Saved' : '♡ Save item'}</button></div>
               <p class="detail-meta">Fulfilment: ${getDeliveryTime(categoryKey, product.id)}</p>
-              <div class="product-actions"><input type="number" class="qty-input" id="qty-detail-${product.id}" value="1" min="1" max="99" /><button class="add-btn" type="button" onclick="addToCart('${product.id}', '${product.name}', ${product.price}, 'qty-detail-${product.id}'); closeProductDetails()">Add to Cart</button></div>
+              <div class="product-actions"><input type="number" class="qty-input" id="qty-detail-${product.id}" value="1" min="1" max="99" /><button class="add-btn" type="button" onclick="addToCart('${product.id}', '${product.name}', ${product.price}, 'qty-detail-${product.id}'); closeProductDetails()">Add to Cart</button><button class="buy-now-btn" type="button" onclick="buyNow('${product.id}', '${product.name}', ${product.price})">Buy Now</button></div>
             </div>
           </div>
           ${relatedProducts.length ? `
@@ -1269,6 +1678,29 @@
         alert(`${name} added to cart!`);
       }
 
+      function buyNow(productId, name, price) {
+        // Clear existing cart for single-item purchase
+        cartManager.clearCart();
+        
+        // Add item to cart
+        cartManager.addItem(productId, name, price, 1);
+        
+        // Store order metadata for checkout page
+        const orderData = {
+          productId: productId,
+          productName: name,
+          productPrice: price,
+          quantity: 1,
+          cartTotal: price,
+          directCheckout: true,
+          timestamp: Date.now()
+        };
+        localStorage.setItem('brainboxX-pending-order', JSON.stringify(orderData));
+        
+        // Redirect to checkout
+        window.location.href = 'checkout.html?direct=true&product=' + encodeURIComponent(productId);
+      }
+
       function updateCartUI() {
         const cart = cartManager.cart;
         const total = cartManager.getTotal();
@@ -1316,5 +1748,8 @@
         window.location.href = 'payment.html';
       }
     </script>
+    <script src="payment-handler.js"></script>
+<script src="theme-toggle.js"></script>
   </body>
 </html>
+

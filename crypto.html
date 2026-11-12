@@ -1,621 +1,1001 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Crypto & Digital Assets | brainboxX Marketplace</title>
-    <meta name="description" content="Legitimate Cryptocurrency, Security, Blockchain Education, and DeFi Consultation on brainboxX" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto & Gift Cards Trading | brainboxX</title>
+    <meta name="description" content="Buy and sell cryptocurrencies, physical gift cards, and e-gift codes with instant 45-minute response time">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-      :root {
-        --primary: #f5c76b;
-        --primary-dark: #d9a73f;
-        --bg: #f5fbff;
-        --surface: #ffffff;
-        --surface-alt: #eaf7ff;
-        --text: #1a2733;
-        --text-muted: #5f6f7a;
-        --border: #dfeaf4;
-        --error: #ff6b6b;
-        --success: #4ade80;
-      }
+        :root {
+            --primary: #f5c76b;
+            --primary-dark: #d9a73f;
+            --bg: #f5fbff;
+            --surface: #ffffff;
+            --surface-alt: #eaf7ff;
+            --text: #1a2733;
+            --text-muted: #5f6f7a;
+            --border: #dfeaf4;
+            --success: #4ade80;
+            --error: #ff6b6b;
+            --warning: #ffa500;
+            --accent: #00d9ff;
+            --crypto-gold: #ffd700;
+        }
 
-      * { box-sizing: border-box; }
+        * { box-sizing: border-box; }
 
-      body {
-        margin: 0;
-        font-family: 'Inter', sans-serif;
-        background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%);
-        color: var(--text);
-        line-height: 1.6;
-      }
+        body {
+            margin: 0;
+            font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color: var(--text);
+            background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
 
-      a { color: inherit; text-decoration: none; }
+        a { color: inherit; text-decoration: none; }
 
-      .header {
-        position: sticky; top: 0; z-index: 40;
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid var(--border);
-      }
+        /* Header */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
 
-      .header-content {
-        display: flex; align-items: center; justify-content: space-between;
-        gap: 20px; padding: 16px 24px; max-width: 1400px; margin: 0 auto;
-      }
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 16px 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
 
-      .logo { font-size: 1.5rem; font-weight: 800; color: var(--text); }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text);
+        }
 
-      .nav-center { display: flex; gap: 20px; flex: 1; justify-content: center; flex-wrap: wrap; }
-      .nav-center a { font-weight: 600; color: var(--text-muted); transition: color 0.2s; font-size: 0.9rem; }
-      .nav-center a:hover, .nav-center a.active { color: var(--primary-dark); }
+        .nav {
+            display: flex;
+            gap: 32px;
+            flex: 1;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
 
-      .nav-right { display: flex; align-items: center; gap: 16px; }
+        .nav a {
+            font-weight: 600;
+            color: var(--text-muted);
+            transition: color 0.2s;
+        }
 
-      .wishlist-btn {
-        border: 1px solid var(--border); background: var(--surface); color: var(--text);
-        padding: 9px 14px; border-radius: 999px; font-weight: 700; cursor: pointer;
-      }
-      .wishlist-btn.active, .wishlist-btn:hover { border-color: var(--primary-dark); color: var(--primary-dark); }
+        .nav a:hover,
+        .nav a.active {
+            color: var(--primary-dark);
+        }
 
-      .cart-btn {
-        position: relative; display: flex; align-items: center; gap: 8px;
-        background: linear-gradient(135deg, var(--primary), #ffd886); color: var(--text);
-        border: none; padding: 10px 20px; border-radius: 999px; font-weight: 700; cursor: pointer;
-      }
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            color: var(--text);
+            padding: 60px 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
 
-      .cart-badge {
-        position: absolute; top: -8px; right: -8px; background: var(--error); color: white;
-        width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center;
-        justify-content: center; font-size: 0.75rem; font-weight: 700;
-      }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 217, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255, 0, 110, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
 
-      .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
 
-      .hero {
-        background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
-        color: var(--text); padding: 60px 24px; text-align: center;
-      }
+        .hero h1 {
+            font-size: 2.5rem;
+            margin: 0 0 16px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
 
-      .hero h1 { font-size: 2.5rem; margin: 0 0 16px; font-weight: 800; letter-spacing: -0.02em; }
-      .hero p { font-size: 1.1rem; margin: 0 auto; max-width: 600px; opacity: 0.95; }
+        .hero p {
+            font-size: 1.1rem;
+            margin: 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.95;
+        }
 
-      .filters { display: flex; flex-wrap: wrap; gap: 12px; padding: 30px 24px; justify-content: center; border-bottom: 1px solid var(--border); }
-      .marketplace-search { position: relative; width: min(680px, 100%); margin: 0 auto 20px; }
-      .marketplace-search input { width: 100%; min-height: 52px; padding: 12px 48px 12px 18px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text); font-size: 1rem; }
-      .marketplace-search-icon { position: absolute; top: 50%; right: 18px; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(74, 222, 128, 0.1);
+            border: 1px solid var(--success);
+            color: var(--text);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
 
-      .filter-tools { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; margin-bottom: 10px; }
-      .sort-select { min-height: 44px; padding: 8px 34px 8px 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text); font-weight: 600; }
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
 
-      .filter-btn { padding: 10px 20px; border: 2px solid var(--border); background: var(--surface); color: var(--text); border-radius: 999px; font-weight: 600; cursor: pointer; font-size: 0.9rem; }
-      .filter-btn:hover, .filter-btn.active { border-color: var(--primary); background: var(--primary); color: var(--text); }
+        .section-title {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 50px;
+            color: var(--text);
+        }
 
-      .category-section { padding: 40px 24px; border-bottom: 1px solid var(--border); }
-      .category-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
-      .category-icon { font-size: 2.5rem; }
-      .category-info h2 { margin: 0; font-size: 1.8rem; font-weight: 800; }
-      .category-info p { margin: 4px 0 0; color: var(--text-muted); font-size: 0.95rem; }
+        /* Trading Grid */
+        .trading-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
 
-      .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+        .trading-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
 
-      .product-card {
-        background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px;
-        display: flex; flex-direction: column; gap: 12px; transition: all 0.3s; cursor: pointer;
-      }
-      .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(26, 39, 51, 0.12); border-color: var(--primary); }
+        .trading-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent 0%, rgba(245, 199, 107, 0.1) 50%, transparent 100%);
+            transition: left 0.5s;
+        }
 
-      .product-image { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; background: var(--surface-alt); }
-      .product-card-topline { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-      .product-category-label, .delivery-time { color: var(--text-muted); font-size: 0.82rem; font-weight: 600; }
+        .trading-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 8px 32px rgba(245, 199, 107, 0.15), inset 0 1px 0 rgba(245, 199, 107, 0.1);
+            transform: translateY(-4px);
+        }
 
-      .wishlist-icon { width: 36px; height: 36px; flex: 0 0 36px; border: 1px solid var(--border); border-radius: 50%; background: var(--surface); color: var(--text-muted); font-size: 1.15rem; cursor: pointer; }
-      .wishlist-icon.saved { border-color: var(--primary-dark); color: var(--primary-dark); background: #fff8e5; }
+        .trading-card:hover::before {
+            left: 100%;
+        }
 
-      .rating-summary { color: #a86f00; font-size: 0.84rem; font-weight: 700; }
-      .product-name { font-size: 1.1rem; font-weight: 700; color: var(--text); }
-      .product-desc { font-size: 0.9rem; color: var(--text-muted); flex-grow: 1; }
-      .product-price { font-size: 1.4rem; font-weight: 800; color: var(--primary-dark); }
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
 
-      .product-actions { display: flex; gap: 8px; margin-top: 8px; }
-      .qty-input { width: 70px; padding: 8px; border: 1px solid var(--border); border-radius: 8px; text-align: center; font-weight: 600; }
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
 
-      .add-btn { flex: 1; padding: 10px 16px; background: linear-gradient(135deg, var(--primary), #ffd886); color: var(--text); border: none; border-radius: 8px; font-weight: 700; cursor: pointer; }
-      .add-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(245, 199, 107, 0.3); }
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
 
-      .view-details-btn { padding: 0; border: 0; background: none; color: var(--primary-dark); font-weight: 700; text-align: left; cursor: pointer; }
+        .card-badge {
+            display: inline-block;
+            background: rgba(245, 199, 107, 0.1);
+            border: 1px solid var(--primary);
+            color: var(--primary-dark);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
 
-      .cart-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); opacity: 0; visibility: hidden; transition: all 0.3s; z-index: 99; }
-      .cart-overlay.visible { opacity: 1; visibility: visible; }
-      .cart-sidebar { position: fixed; right: 0; top: 0; height: 100vh; width: 420px; background: var(--surface); box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1); z-index: 100; transform: translateX(100%); transition: transform 0.3s; display: flex; flex-direction: column; }
-      .cart-sidebar.visible { transform: translateX(0); }
-      .cart-header { display: flex; align-items: center; justify-content: space-between; padding: 20px; border-bottom: 1px solid var(--border); }
-      .cart-close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted); }
-      .cart-items { flex: 1; overflow-y: auto; padding: 20px; }
-      .cart-item { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
-      .cart-item-name { font-weight: 600; font-size: 0.95rem; }
-      .cart-item-qty { font-size: 0.85rem; color: var(--text-muted); }
-      .cart-item-price { font-weight: 700; white-space: nowrap; }
-      .cart-remove-btn { background: var(--error); color: white; border: none; border-radius: 4px; padding: 4px 8px; font-size: 0.75rem; font-weight: 600; cursor: pointer; }
-      .cart-footer { padding: 20px; border-top: 1px solid var(--border); background: var(--surface-alt); }
-      .cart-total { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; font-size: 1.2rem; font-weight: 800; }
-      .checkout-btn { width: 100%; padding: 12px; background: linear-gradient(135deg, var(--primary), #ffd886); color: var(--text); border: none; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; }
+        /* Form Section */
+        .form-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 50px;
+            margin-bottom: 60px;
+            box-shadow: 0 8px 32px rgba(245, 199, 107, 0.1);
+        }
 
-      .product-modal { position: fixed; inset: 0; display: grid; place-items: center; padding: 24px; background: rgba(26, 39, 51, 0.64); opacity: 0; pointer-events: none; transition: opacity 0.2s; z-index: 110; }
-      .product-modal.visible { opacity: 1; pointer-events: auto; }
-      .product-modal-content { position: relative; width: min(960px, 100%); max-height: min(760px, calc(100vh - 48px)); overflow-y: auto; padding: 28px; border-radius: 12px; background: var(--surface); box-shadow: 0 24px 70px rgba(0, 0, 0, 0.25); }
-      .modal-close-btn { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; border: 0; border-radius: 50%; background: var(--surface-alt); color: var(--text); font-size: 1.35rem; cursor: pointer; }
-      .product-detail-layout { display: grid; grid-template-columns: minmax(240px, 0.9fr) minmax(0, 1fr); gap: 28px; align-items: start; }
-      .product-detail-image { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px; background: var(--surface-alt); }
-      .detail-category { margin: 0 0 8px; color: var(--primary-dark); font-size: 0.9rem; font-weight: 800; }
-      .detail-title { margin: 0; font-size: 1.9rem; line-height: 1.2; }
-      .detail-description { color: var(--text-muted); }
-      .detail-price { margin: 16px 0; color: var(--primary-dark); font-size: 1.6rem; font-weight: 800; }
-      .detail-meta { margin: 0 0 18px; color: var(--text-muted); font-size: 0.95rem; }
+        .form-tabs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+            flex-wrap: wrap;
+        }
 
-      @media (max-width: 640px) {
-        .header-content { padding: 12px 16px; }
-        .logo { font-size: 1.2rem; }
-        .hero h1 { font-size: 1.8rem; }
-        .cart-sidebar { width: 100%; bottom: 0; height: auto; max-height: 80vh; }
-        .products-grid { grid-template-columns: 1fr; }
-        .product-detail-layout { grid-template-columns: 1fr; }
-      }
+        .tab-btn {
+            padding: 12px 24px;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .tab-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--crypto-gold) 100%);
+            border-color: transparent;
+            color: var(--primary);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .form-group label .required {
+            color: var(--accent);
+            margin-left: 4px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s;
+            background: linear-gradient(135deg, rgba(45, 95, 141, 0.2) 0%, rgba(26, 31, 46, 0.2) 100%);
+            color: var(--text-light);
+        }
+
+        .form-group input::placeholder,
+        .form-group select::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.2);
+            background: linear-gradient(135deg, rgba(45, 95, 141, 0.4) 0%, rgba(26, 31, 46, 0.4) 100%);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group select option {
+            background: var(--primary);
+            color: var(--text-light);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent) 0%, #00ffcc 100%);
+            color: var(--primary);
+            width: 100%;
+            font-weight: 700;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 32px rgba(0, 217, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--accent-secondary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Response Time Badge */
+        .response-time {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(0, 255, 65, 0.1) 0%, transparent 100%);
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            border-radius: 8px;
+            margin-bottom: 30px;
+            color: var(--success);
+        }
+
+        .response-time strong {
+            font-size: 1.2rem;
+        }
+
+        /* FAQ */
+        .faq-item {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+            border-color: var(--accent);
+            box-shadow: 0 4px 16px rgba(0, 217, 255, 0.15);
+        }
+
+        .faq-question {
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: all 0.3s;
+            color: var(--text-light);
+        }
+
+        .faq-question:hover {
+            background: linear-gradient(135deg, #2a3142 0%, #1a1f2e 100%);
+            color: var(--accent);
+        }
+
+        .faq-answer {
+            padding: 20px;
+            background: rgba(0, 217, 255, 0.05);
+            color: var(--text-muted);
+            display: none;
+            border-top: 1px solid var(--border);
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(180deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+            color: var(--text-light);
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 80px;
+            border-top: 2px solid var(--border);
+        }
+
+        .footer p {
+            margin: 0;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .trading-grid { grid-template-columns: 1fr; }
+            .form-section { padding: 30px; }
+            .form-grid { grid-template-columns: 1fr; }
+            .form-tabs { flex-direction: column; }
+        }
     </style>
 </head>
 <body>
+    <!-- Header -->
     <header class="header">
-      <div class="header-content">
-        <a href="brainboxtools.html" class="logo"><span>brainboxX</span></a>
-        <nav class="nav-center">
-          <a href="marketplace.html">All Categories</a>
-          <a href="communication.html">Communication</a>
-          <a href="courses.html">Courses</a>
-          <a href="crypto.html" class="active">Crypto</a>
-          <a href="gifts-delivery.html">Gifts & Delivery</a>
-          <a href="launchforge.html">LaunchForge</a>
-          <a href="marketing.html">Marketing</a>
-          <a href="professional.html">Professional</a>
-          <a href="telecom.html">Telecom</a>
-        </nav>
-        <div class="nav-right">
-          <button class="wishlist-btn" id="wishlistToggle" type="button" onclick="toggleWishlistFilter()" aria-pressed="false">♡ Saved <span id="wishlistCount">0</span></button>
-          <button class="cart-btn" onclick="toggleCart()">🛒 Cart <span class="cart-badge" id="cartCount">0</span></button>
+        <div class="header-content">
+            <div class="logo">brainboxX</div>
+            <nav class="nav">
+                <a href="brainboxtools.html">Home</a>
+                <a href="gifts-delivery.html">Marketplace</a>
+                <a href="marketing.html">Marketing</a>
+                <a href="crypto.html" class="active">Crypto</a>
+            </nav>
         </div>
-      </div>
     </header>
 
+    <!-- Hero Section -->
     <section class="hero">
-      <div class="container">
-        <h1>₿ Crypto & Digital Assets</h1>
-        <p>Legitimate cryptocurrency consultation, wallet security, blockchain education, and portfolio support</p>
-      </div>
+        <div class="hero-content">
+            <div class="hero-badge">? Fast & Secure Trading</div>
+            <h1>Buy & Sell Crypto, Gift Cards & E-Codes</h1>
+            <p>Instant cryptocurrency trading, physical gift cards, and digital e-gift codes. Guaranteed response within 45 minutes!</p>
+        </div>
     </section>
 
-    <main id="marketplace">
-      <div class="filters">
-        <div class="marketplace-search">
-          <input id="marketplaceSearch" type="search" placeholder="Search crypto services..." aria-label="Search crypto services" oninput="filterPageProducts()" />
-          <span class="marketplace-search-icon" aria-hidden="true">⌕</span>
+    <!-- Quick Options -->
+    <section class="container">
+        <h2 class="section-title">What We Trade</h2>
+        <div class="trading-grid">
+            <div class="trading-card" onclick="switchTab('crypto-buy')">
+                <div class="card-icon">?</div>
+                <div class="card-title">Cryptocurrency</div>
+                <div class="card-badge">Bitcoin, Ethereum, USDT & More</div>
+                <div class="card-desc">Buy and sell major cryptocurrencies instantly. All transactions verified and secure.</div>
+                <button class="btn btn-secondary">Trade Now</button>
+            </div>
+
+            <div class="trading-card" onclick="switchTab('giftcard-buy')">
+                <div class="card-icon">??</div>
+                <div class="card-title">Physical Gift Cards</div>
+                <div class="card-badge">iTunes, Google Play, Amazon & More</div>
+                <div class="card-desc">Buy and sell official physical gift cards. Fast delivery and competitive rates.</div>
+                <button class="btn btn-secondary">Trade Now</button>
+            </div>
+
+            <div class="trading-card" onclick="switchTab('ecode-buy')">
+                <div class="card-icon">??</div>
+                <div class="card-title">E-Gift Codes</div>
+                <div class="card-badge">Digital Codes Delivered Instantly</div>
+                <div class="card-desc">Instant e-gift codes for all major platforms. Redeem immediately after purchase.</div>
+                <button class="btn btn-secondary">Trade Now</button>
+            </div>
         </div>
-        <div class="filter-tools">
-          <button class="filter-btn" id="savedFilterBtn" type="button" onclick="toggleWishlistFilter()">♡ Saved items</button>
-          <label>Sort <select class="sort-select" id="sortSelect" onchange="sortPageProducts(this.value)"><option value="name">A-Z</option><option value="price-low">Price: low to high</option><option value="price-high">Price: high to low</option></select></label>
+    </section>
+
+    <!-- Trading Forms Section -->
+    <section class="container">
+        <div class="form-section">
+            <h2 class="section-title">Place Your Trade</h2>
+            
+            <div class="response-time">
+                <p><strong>?? 45-Minute Response Guarantee!</strong></p>
+                <p>We respond to all buy and sell requests within 45 minutes maximum. Fast, reliable, and professional service.</p>
+            </div>
+
+            <!-- Tab Buttons -->
+            <div class="form-tabs">
+                <button class="tab-btn active" onclick="switchTab('crypto-buy', this)">?? Buy Crypto</button>
+                <button class="tab-btn" onclick="switchTab('crypto-sell', this)">?? Sell Crypto</button>
+                <button class="tab-btn" onclick="switchTab('giftcard-buy', this)">?? Buy Gift Cards</button>
+                <button class="tab-btn" onclick="switchTab('giftcard-sell', this)">?? Sell Gift Cards</button>
+                <button class="tab-btn" onclick="switchTab('ecode-buy', this)">?? Buy E-Codes</button>
+                <button class="tab-btn" onclick="switchTab('ecode-sell', this)">?? Sell E-Codes</button>
+            </div>
+
+            <!-- BUY CRYPTO FORM -->
+            <form id="crypto-buy-form" class="trade-form" style="display: block;">
+                <h3 style="color: var(--text-light); margin-top: 0;">Buy Cryptocurrency</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="crypto-coin">Cryptocurrency <span class="required">*</span></label>
+                        <select id="crypto-coin" required>
+                            <option value="">-- Select Cryptocurrency --</option>
+                            <option value="Bitcoin (BTC)">Bitcoin (BTC)</option>
+                            <option value="Ethereum (ETH)">Ethereum (ETH)</option>
+                            <option value="USDT (Tether)">USDT (Tether)</option>
+                            <option value="USDC (USD Coin)">USDC (USD Coin)</option>
+                            <option value="XRP (Ripple)">XRP (Ripple)</option>
+                            <option value="Litecoin (LTC)">Litecoin (LTC)</option>
+                            <option value="Dogecoin (DOGE)">Dogecoin (DOGE)</option>
+                            <option value="Solana (SOL)">Solana (SOL)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="crypto-amount">Amount (Naira ?) <span class="required">*</span></label>
+                        <input type="number" id="crypto-amount" placeholder="e.g., 50000" min="1000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="crypto-wallet">Wallet Address <span class="required">*</span></label>
+                        <input type="text" id="crypto-wallet" placeholder="Your crypto wallet address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="crypto-name">Full Name <span class="required">*</span></label>
+                        <input type="text" id="crypto-name" placeholder="Your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="crypto-email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="crypto-email" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="crypto-phone">Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="crypto-phone" placeholder="+234..." required>
+                    </div>
+                    <div class="form-group full">
+                        <label for="crypto-notes">Additional Notes (Optional)</label>
+                        <textarea id="crypto-notes" placeholder="Any special instructions..."></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Buy Request</button>
+            </form>
+
+            <!-- SELL CRYPTO FORM -->
+            <form id="crypto-sell-form" class="trade-form" style="display: none;">
+                <h3 style="color: var(--text-light); margin-top: 0;">Sell Cryptocurrency</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="sell-crypto-coin">Cryptocurrency <span class="required">*</span></label>
+                        <select id="sell-crypto-coin" required>
+                            <option value="">-- Select Cryptocurrency --</option>
+                            <option value="Bitcoin (BTC)">Bitcoin (BTC)</option>
+                            <option value="Ethereum (ETH)">Ethereum (ETH)</option>
+                            <option value="USDT (Tether)">USDT (Tether)</option>
+                            <option value="USDC (USD Coin)">USDC (USD Coin)</option>
+                            <option value="XRP (Ripple)">XRP (Ripple)</option>
+                            <option value="Litecoin (LTC)">Litecoin (LTC)</option>
+                            <option value="Dogecoin (DOGE)">Dogecoin (DOGE)</option>
+                            <option value="Solana (SOL)">Solana (SOL)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sell-crypto-amount">Amount to Sell <span class="required">*</span></label>
+                        <input type="number" id="sell-crypto-amount" placeholder="e.g., 0.5 BTC" step="0.01" min="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sell-crypto-bank">Bank Account Name <span class="required">*</span></label>
+                        <input type="text" id="sell-crypto-bank" placeholder="Account holder name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sell-crypto-banknum">Bank Account Number <span class="required">*</span></label>
+                        <input type="text" id="sell-crypto-banknum" placeholder="Your account number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sell-crypto-bankname">Bank Name <span class="required">*</span></label>
+                        <input type="text" id="sell-crypto-bankname" placeholder="e.g., First Bank, GTB" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sell-crypto-name">Full Name <span class="required">*</span></label>
+                        <input type="text" id="sell-crypto-name" placeholder="Your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sell-crypto-email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="sell-crypto-email" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sell-crypto-phone">Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="sell-crypto-phone" placeholder="+234..." required>
+                    </div>
+                    <div class="form-group full">
+                        <label for="sell-crypto-notes">Additional Notes (Optional)</label>
+                        <textarea id="sell-crypto-notes" placeholder="Any special instructions..."></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Sell Request</button>
+            </form>
+
+            <!-- BUY GIFT CARDS FORM -->
+            <form id="giftcard-buy-form" class="trade-form" style="display: none;">
+                <h3 style="color: var(--text-light); margin-top: 0;">Buy Physical Gift Cards</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="gc-type">Gift Card Type <span class="required">*</span></label>
+                        <select id="gc-type" required>
+                            <option value="">-- Select Card Type --</option>
+                            <option value="iTunes Card">iTunes Card</option>
+                            <option value="Google Play Card">Google Play Card</option>
+                            <option value="Amazon Card">Amazon Card</option>
+                            <option value="Netflix Card">Netflix Card</option>
+                            <option value="PlayStation Card">PlayStation Card</option>
+                            <option value="Xbox Card">Xbox Card</option>
+                            <option value="Razer Card">Razer Card</option>
+                            <option value="Steam Card">Steam Card</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="gc-value">Card Value (?) <span class="required">*</span></label>
+                        <input type="number" id="gc-value" placeholder="e.g., 5000, 10000" min="1000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gc-quantity">Quantity <span class="required">*</span></label>
+                        <input type="number" id="gc-quantity" placeholder="Number of cards" min="1" value="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gc-delivery">Delivery Method <span class="required">*</span></label>
+                        <select id="gc-delivery" required>
+                            <option value="">-- Select Method --</option>
+                            <option value="Pickup">Pickup (Lagos)</option>
+                            <option value="Courier">Courier Delivery</option>
+                            <option value="Instant Digital">Instant (Digital Photo)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="gc-name">Full Name <span class="required">*</span></label>
+                        <input type="text" id="gc-name" placeholder="Your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gc-email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="gc-email" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gc-phone">Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="gc-phone" placeholder="+234..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gc-address">Delivery Address (if applicable) <span class="required">*</span></label>
+                        <input type="text" id="gc-address" placeholder="Your delivery address" required>
+                    </div>
+                    <div class="form-group full">
+                        <label for="gc-notes">Additional Notes (Optional)</label>
+                        <textarea id="gc-notes" placeholder="Any special instructions..."></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Buy Request</button>
+            </form>
+
+            <!-- SELL GIFT CARDS FORM -->
+            <form id="giftcard-sell-form" class="trade-form" style="display: none;">
+                <h3 style="color: var(--text-light); margin-top: 0;">Sell Physical Gift Cards</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="sell-gc-type">Gift Card Type <span class="required">*</span></label>
+                        <select id="sell-gc-type" required>
+                            <option value="">-- Select Card Type --</option>
+                            <option value="iTunes Card">iTunes Card</option>
+                            <option value="Google Play Card">Google Play Card</option>
+                            <option value="Amazon Card">Amazon Card</option>
+                            <option value="Netflix Card">Netflix Card</option>
+                            <option value="PlayStation Card">PlayStation Card</option>
+                            <option value="Xbox Card">Xbox Card</option>
+                            <option value="Razer Card">Razer Card</option>
+                            <option value="Steam Card">Steam Card</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sell-gc-value">Card Value <span class="required">*</span></label>
+                        <input type="number" id="sell-gc-value" placeholder="e.g., 5000, 10000" min="1000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sell-gc-quantity">Quantity <span class="required">*</span></label>
+                        <input type="number" id="sell-gc-quantity" placeholder="Number of cards" min="1" value="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sell-gc-code">Gift Card PIN/Code (First 10 digits) <span class="required">*</span></label>
+                        <input type="text" id="sell-gc-code" placeholder="Don't reveal full code yet" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sell-gc-name">Full Name <span class="required">*</span></label>
+                        <input type="text" id="sell-gc-name" placeholder="Your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sell-gc-email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="sell-gc-email" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sell-gc-phone">Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="sell-gc-phone" placeholder="+234..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sell-gc-bankname">Bank Account Name <span class="required">*</span></label>
+                        <input type="text" id="sell-gc-bankname" placeholder="Your bank account name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sell-gc-banknum">Bank Account Number <span class="required">*</span></label>
+                        <input type="text" id="sell-gc-banknum" placeholder="Your account number" required>
+                    </div>
+                    <div class="form-group full">
+                        <label for="sell-gc-notes">Additional Notes (Optional)</label>
+                        <textarea id="sell-gc-notes" placeholder="Any special instructions..."></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Sell Request</button>
+            </form>
+
+            <!-- BUY E-CODES FORM -->
+            <form id="ecode-buy-form" class="trade-form" style="display: none;">
+                <h3 style="color: var(--text-light); margin-top: 0;">Buy E-Gift Codes</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="ecode-type">E-Code Type <span class="required">*</span></label>
+                        <select id="ecode-type" required>
+                            <option value="">-- Select Code Type --</option>
+                            <option value="iTunes Digital">iTunes Digital Code</option>
+                            <option value="Google Play Digital">Google Play Digital Code</option>
+                            <option value="Amazon Digital">Amazon Digital Code</option>
+                            <option value="Netflix Digital">Netflix Digital Code</option>
+                            <option value="Spotify Digital">Spotify Digital Code</option>
+                            <option value="PlayStation Network">PlayStation Network Code</option>
+                            <option value="Xbox Live">Xbox Live Code</option>
+                            <option value="Steam Wallet">Steam Wallet Code</option>
+                            <option value="Other">Other Digital Code</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ecode-value">Code Value (?) <span class="required">*</span></label>
+                        <input type="number" id="ecode-value" placeholder="e.g., 1000, 5000, 10000" min="500" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ecode-quantity">Quantity <span class="required">*</span></label>
+                        <input type="number" id="ecode-quantity" placeholder="Number of codes" min="1" value="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ecode-name">Full Name <span class="required">*</span></label>
+                        <input type="text" id="ecode-name" placeholder="Your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ecode-email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="ecode-email" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ecode-phone">Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="ecode-phone" placeholder="+234..." required>
+                    </div>
+                    <div class="form-group full">
+                        <label for="ecode-notes">Delivery Instructions (Optional)</label>
+                        <textarea id="ecode-notes" placeholder="e.g., Send codes via email, WhatsApp, etc."></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Buy Request (Codes Sent Instantly)</button>
+            </form>
+
+            <!-- SELL E-CODES FORM -->
+            <form id="ecode-sell-form" class="trade-form" style="display: none;">
+                <h3 style="color: var(--text-light); margin-top: 0;">Sell E-Gift Codes</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="sell-ecode-type">E-Code Type <span class="required">*</span></label>
+                        <select id="sell-ecode-type" required>
+                            <option value="">-- Select Code Type --</option>
+                            <option value="iTunes Digital">iTunes Digital Code</option>
+                            <option value="Google Play Digital">Google Play Digital Code</option>
+                            <option value="Amazon Digital">Amazon Digital Code</option>
+                            <option value="Netflix Digital">Netflix Digital Code</option>
+                            <option value="Spotify Digital">Spotify Digital Code</option>
+                            <option value="PlayStation Network">PlayStation Network Code</option>
+                            <option value="Xbox Live">Xbox Live Code</option>
+                            <option value="Steam Wallet">Steam Wallet Code</option>
+                            <option value="Other">Other Digital Code</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sell-ecode-value">Code Value <span class="required">*</span></label>
+                        <input type="number" id="sell-ecode-value" placeholder="e.g., 1000, 5000, 10000" min="500" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sell-ecode-quantity">Quantity <span class="required">*</span></label>
+                        <input type="number" id="sell-ecode-quantity" placeholder="Number of codes" min="1" value="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sell-ecode-sample">Sample Code (First 10 chars) <span class="required">*</span></label>
+                        <input type="text" id="sell-ecode-sample" placeholder="Don't reveal complete codes" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sell-ecode-name">Full Name <span class="required">*</span></label>
+                        <input type="text" id="sell-ecode-name" placeholder="Your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sell-ecode-email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="sell-ecode-email" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sell-ecode-phone">Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="sell-ecode-phone" placeholder="+234..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sell-ecode-bankname">Bank Account Name <span class="required">*</span></label>
+                        <input type="text" id="sell-ecode-bankname" placeholder="Your bank account name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sell-ecode-banknum">Bank Account Number <span class="required">*</span></label>
+                        <input type="text" id="sell-ecode-banknum" placeholder="Your account number" required>
+                    </div>
+                    <div class="form-group full">
+                        <label for="sell-ecode-notes">Additional Notes (Optional)</label>
+                        <textarea id="sell-ecode-notes" placeholder="Any special instructions..."></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Sell Request</button>
+            </form>
         </div>
-        <a href="marketplace.html" class="filter-btn">← All Categories</a>
-        <a href="communication.html" class="filter-btn">📱 Communication</a>
-        <a href="courses.html" class="filter-btn">🎓 Courses</a>
-        <a href="crypto.html" class="filter-btn active">₿ Crypto</a>
-        <a href="gifts-delivery.html" class="filter-btn">🎁 Gifts & Delivery</a>
-        <a href="launchforge.html" class="filter-btn">🚀 LaunchForge</a>
-        <a href="marketing.html" class="filter-btn">📢 Marketing</a>
-        <a href="professional.html" class="filter-btn">👔 Professional</a>
-        <a href="telecom.html" class="filter-btn">📴 Telecom</a>
-      </div>
+    </section>
 
-      <p class="search-summary" id="searchSummary" aria-live="polite" style="text-align: center; color: var(--text-muted); margin-top: 10px;"></p>
+    <!-- FAQ Section -->
+    <section class="container">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div style="max-width: 900px; margin: 0 auto 60px;">
+            <div class="faq-item">
+                <div class="faq-question">
+                    How fast do you respond? <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    We respond to all trading requests within 45 minutes maximum! This includes verifying your order, confirming rates, and arranging payment or delivery.
+                </div>
+            </div>
 
-      <section class="category-section">
-        <div class="category-header">
-          <div class="category-icon">₿</div>
-          <div class="category-info">
-            <h2>Crypto & Digital Assets</h2>
-            <p>Legitimate cryptocurrency and investment services</p>
-          </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Is it safe to trade with you? <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Yes! We use secure payment methods, verify all transactions, and have been operating legitimately for years. All trades are protected with escrow service when needed.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    What payment methods do you accept? <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    We accept bank transfers, card payments, mobile money, and direct payment. Payment method is discussed based on your trading type and preference.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Do you buy/sell incomplete or used gift cards? <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    We only accept complete, unused, and verified gift cards and e-codes. All products must be authentic and have original value intact.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    What's the minimum and maximum amount I can trade? <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Minimum: ?1,000. Maximum: Unlimited! We handle small and large trades. Contact us for bulk or special orders.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Can I track my order status? <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Yes! After submission, you'll receive an Order ID via email. Use this to track your order status in real-time through your email updates.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    What if there's an issue with my order? <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Our customer support team is available 24/7. Contact us immediately with your Order ID and we'll resolve any issues within 24 hours.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Do you offer bulk discounts? <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Yes! For large volume trades (?100,000+), we offer special bulk rates. Submit your request and our team will provide a custom quote.
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="products-grid" id="productsGrid">
-          <!-- EDITABLE PRODUCT CARDS START HERE -->
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 brainboxX. All rights reserved. | Crypto & Digital Assets Trading</p>
+    </footer>
 
-          <article class="product-card" data-product-id="cr001" onclick="openProductDetails('cr001')">
-            <img class="product-image" src="https://images.unsplash.com/photo-1621761191319-c6fb62004040?auto=format&fit=crop&w=900&q=80" alt="Crypto Wallet Setup & Security" loading="lazy" />
-            <div class="product-card-topline">
-              <div class="product-category-label">₿ Crypto & Digital Assets</div>
-              <button class="wishlist-icon" type="button" onclick="event.stopPropagation(); toggleWishlist('cr001')" aria-label="Save item">♡</button>
-            </div>
-            <div class="product-name">Crypto Wallet Setup & Security</div>
-            <div class="rating-summary">★ 4.8 (30)</div>
-            <div class="product-desc">Secure hardware wallet consultation and setup</div>
-            <div class="delivery-time">Fulfilment: 5-10 business days</div>
-            <div class="product-price">₦5,000</div>
-            <button class="view-details-btn" type="button" onclick="event.stopPropagation(); openProductDetails('cr001')">View product details</button>
-            <div class="product-actions">
-              <input type="number" class="qty-input" id="qty-cr001" value="1" min="1" max="99" onclick="event.stopPropagation()" />
-              <button class="add-btn" onclick="event.stopPropagation(); addToCartFromDOM('cr001', 'Crypto Wallet Setup & Security', 5000, 'qty-cr001')">Add to Cart</button>
-            </div>
-          </article>
-
-          <article class="product-card" data-product-id="cr002" onclick="openProductDetails('cr002')">
-            <img class="product-image" src="https://images.unsplash.com/photo-1621761191319-c6fb62004040?auto=format&fit=crop&w=900&q=80" alt="Bitcoin Exchange Facilitation" loading="lazy" />
-            <div class="product-card-topline">
-              <div class="product-category-label">₿ Crypto & Digital Assets</div>
-              <button class="wishlist-icon" type="button" onclick="event.stopPropagation(); toggleWishlist('cr002')" aria-label="Save item">♡</button>
-            </div>
-            <div class="product-name">Bitcoin Exchange Facilitation</div>
-            <div class="rating-summary">★ 4.9 (31)</div>
-            <div class="product-desc">Peer-to-peer Bitcoin trading support and escrow</div>
-            <div class="delivery-time">Fulfilment: 5-10 business days</div>
-            <div class="product-price">₦8,000</div>
-            <button class="view-details-btn" type="button" onclick="event.stopPropagation(); openProductDetails('cr002')">View product details</button>
-            <div class="product-actions">
-              <input type="number" class="qty-input" id="qty-cr002" value="1" min="1" max="99" onclick="event.stopPropagation()" />
-              <button class="add-btn" onclick="event.stopPropagation(); addToCartFromDOM('cr002', 'Bitcoin Exchange Facilitation', 8000, 'qty-cr002')">Add to Cart</button>
-            </div>
-          </article>
-
-          <article class="product-card" data-product-id="cr003" onclick="openProductDetails('cr003')">
-            <img class="product-image" src="https://images.unsplash.com/photo-1621761191319-c6fb62004040?auto=format&fit=crop&w=900&q=80" alt="Ethereum Trading Guidance" loading="lazy" />
-            <div class="product-card-topline">
-              <div class="product-category-label">₿ Crypto & Digital Assets</div>
-              <button class="wishlist-icon" type="button" onclick="event.stopPropagation(); toggleWishlist('cr003')" aria-label="Save item">♡</button>
-            </div>
-            <div class="product-name">Ethereum Trading Guidance</div>
-            <div class="rating-summary">★ 4.2 (8)</div>
-            <div class="product-desc">Professional trading setup and strategy assistance</div>
-            <div class="delivery-time">Fulfilment: 5-10 business days</div>
-            <div class="product-price">₦8,000</div>
-            <button class="view-details-btn" type="button" onclick="event.stopPropagation(); openProductDetails('cr003')">View product details</button>
-            <div class="product-actions">
-              <input type="number" class="qty-input" id="qty-cr003" value="1" min="1" max="99" onclick="event.stopPropagation()" />
-              <button class="add-btn" onclick="event.stopPropagation(); addToCartFromDOM('cr003', 'Ethereum Trading Guidance', 8000, 'qty-cr003')">Add to Cart</button>
-            </div>
-          </article>
-
-          <article class="product-card" data-product-id="cr004" onclick="openProductDetails('cr004')">
-            <img class="product-image" src="https://images.unsplash.com/photo-1621761191319-c6fb62004040?auto=format&fit=crop&w=900&q=80" alt="Stablecoin Conversion" loading="lazy" />
-            <div class="product-card-topline">
-              <div class="product-category-label">₿ Crypto & Digital Assets</div>
-              <button class="wishlist-icon" type="button" onclick="event.stopPropagation(); toggleWishlist('cr004')" aria-label="Save item">♡</button>
-            </div>
-            <div class="product-name">Stablecoin Conversion</div>
-            <div class="rating-summary">★ 4.3 (9)</div>
-            <div class="product-desc">USDT/USDC/BUSD exchange assistance</div>
-            <div class="delivery-time">Fulfilment: 5-10 business days</div>
-            <div class="product-price">₦4,000</div>
-            <button class="view-details-btn" type="button" onclick="event.stopPropagation(); openProductDetails('cr004')">View product details</button>
-            <div class="product-actions">
-              <input type="number" class="qty-input" id="qty-cr004" value="1" min="1" max="99" onclick="event.stopPropagation()" />
-              <button class="add-btn" onclick="event.stopPropagation(); addToCartFromDOM('cr004', 'Stablecoin Conversion', 4000, 'qty-cr004')">Add to Cart</button>
-            </div>
-          </article>
-
-          <article class="product-card" data-product-id="cr005" onclick="openProductDetails('cr005')">
-            <img class="product-image" src="https://images.unsplash.com/photo-1621761191319-c6fb62004040?auto=format&fit=crop&w=900&q=80" alt="DeFi Investment Consultation" loading="lazy" />
-            <div class="product-card-topline">
-              <div class="product-category-label">₿ Crypto & Digital Assets</div>
-              <button class="wishlist-icon" type="button" onclick="event.stopPropagation(); toggleWishlist('cr005')" aria-label="Save item">♡</button>
-            </div>
-            <div class="product-name">DeFi Investment Consultation</div>
-            <div class="rating-summary">★ 4.4 (10)</div>
-            <div class="product-desc">Decentralized finance strategy and yield planning</div>
-            <div class="delivery-time">Fulfilment: 5-10 business days</div>
-            <div class="product-price">₦12,000</div>
-            <button class="view-details-btn" type="button" onclick="event.stopPropagation(); openProductDetails('cr005')">View product details</button>
-            <div class="product-actions">
-              <input type="number" class="qty-input" id="qty-cr005" value="1" min="1" max="99" onclick="event.stopPropagation()" />
-              <button class="add-btn" onclick="event.stopPropagation(); addToCartFromDOM('cr005', 'DeFi Investment Consultation', 12000, 'qty-cr005')">Add to Cart</button>
-            </div>
-          </article>
-
-          <article class="product-card" data-product-id="cr006" onclick="openProductDetails('cr006')">
-            <img class="product-image" src="https://images.unsplash.com/photo-1621761191319-c6fb62004040?auto=format&fit=crop&w=900&q=80" alt="NFT Marketplace Onboarding" loading="lazy" />
-            <div class="product-card-topline">
-              <div class="product-category-label">₿ Crypto & Digital Assets</div>
-              <button class="wishlist-icon" type="button" onclick="event.stopPropagation(); toggleWishlist('cr006')" aria-label="Save item">♡</button>
-            </div>
-            <div class="product-name">NFT Marketplace Onboarding</div>
-            <div class="rating-summary">★ 4.5 (11)</div>
-            <div class="product-desc">NFT platform setup and minting guidance</div>
-            <div class="delivery-time">Fulfilment: 5-10 business days</div>
-            <div class="product-price">₦6,000</div>
-            <button class="view-details-btn" type="button" onclick="event.stopPropagation(); openProductDetails('cr006')">View product details</button>
-            <div class="product-actions">
-              <input type="number" class="qty-input" id="qty-cr006" value="1" min="1" max="99" onclick="event.stopPropagation()" />
-              <button class="add-btn" onclick="event.stopPropagation(); addToCartFromDOM('cr006', 'NFT Marketplace Onboarding', 6000, 'qty-cr006')">Add to Cart</button>
-            </div>
-          </article>
-
-          <article class="product-card" data-product-id="cr007" onclick="openProductDetails('cr007')">
-            <img class="product-image" src="https://images.unsplash.com/photo-1621761191319-c6fb62004040?auto=format&fit=crop&w=900&q=80" alt="Crypto Tax Planning" loading="lazy" />
-            <div class="product-card-topline">
-              <div class="product-category-label">₿ Crypto & Digital Assets</div>
-              <button class="wishlist-icon" type="button" onclick="event.stopPropagation(); toggleWishlist('cr007')" aria-label="Save item">♡</button>
-            </div>
-            <div class="product-name">Crypto Tax Planning</div>
-            <div class="rating-summary">★ 4.6 (12)</div>
-            <div class="product-desc">Investment portfolio tax guidance and reporting</div>
-            <div class="delivery-time">Fulfilment: 5-10 business days</div>
-            <div class="product-price">₦15,000</div>
-            <button class="view-details-btn" type="button" onclick="event.stopPropagation(); openProductDetails('cr007')">View product details</button>
-            <div class="product-actions">
-              <input type="number" class="qty-input" id="qty-cr007" value="1" min="1" max="99" onclick="event.stopPropagation()" />
-              <button class="add-btn" onclick="event.stopPropagation(); addToCartFromDOM('cr007', 'Crypto Tax Planning', 15000, 'qty-cr007')">Add to Cart</button>
-            </div>
-          </article>
-
-          <article class="product-card" data-product-id="cr008" onclick="openProductDetails('cr008')">
-            <img class="product-image" src="https://images.unsplash.com/photo-1621761191319-c6fb62004040?auto=format&fit=crop&w=900&q=80" alt="Blockchain Education Course" loading="lazy" />
-            <div class="product-card-topline">
-              <div class="product-category-label">₿ Crypto & Digital Assets</div>
-              <button class="wishlist-icon" type="button" onclick="event.stopPropagation(); toggleWishlist('cr008')" aria-label="Save item">♡</button>
-            </div>
-            <div class="product-name">Blockchain Education Course</div>
-            <div class="rating-summary">★ 4.7 (13)</div>
-            <div class="product-desc">Understanding blockchain technology and fundamentals</div>
-            <div class="delivery-time">Fulfilment: 5-10 business days</div>
-            <div class="product-price">₦9,000</div>
-            <button class="view-details-btn" type="button" onclick="event.stopPropagation(); openProductDetails('cr008')">View product details</button>
-            <div class="product-actions">
-              <input type="number" class="qty-input" id="qty-cr008" value="1" min="1" max="99" onclick="event.stopPropagation()" />
-              <button class="add-btn" onclick="event.stopPropagation(); addToCartFromDOM('cr008', 'Blockchain Education Course', 9000, 'qty-cr008')">Add to Cart</button>
-            </div>
-          </article>
-
-          <article class="product-card" data-product-id="cr009" onclick="openProductDetails('cr009')">
-            <img class="product-image" src="https://images.unsplash.com/photo-1621761191319-c6fb62004040?auto=format&fit=crop&w=900&q=80" alt="Smart Contract Audit" loading="lazy" />
-            <div class="product-card-topline">
-              <div class="product-category-label">₿ Crypto & Digital Assets</div>
-              <button class="wishlist-icon" type="button" onclick="event.stopPropagation(); toggleWishlist('cr009')" aria-label="Save item">♡</button>
-            </div>
-            <div class="product-name">Smart Contract Audit</div>
-            <div class="rating-summary">★ 4.8 (14)</div>
-            <div class="product-desc">Security code review for web3 and token projects</div>
-            <div class="delivery-time">Fulfilment: 5-10 business days</div>
-            <div class="product-price">₦25,000</div>
-            <button class="view-details-btn" type="button" onclick="event.stopPropagation(); openProductDetails('cr009')">View product details</button>
-            <div class="product-actions">
-              <input type="number" class="qty-input" id="qty-cr009" value="1" min="1" max="99" onclick="event.stopPropagation()" />
-              <button class="add-btn" onclick="event.stopPropagation(); addToCartFromDOM('cr009', 'Smart Contract Audit', 25000, 'qty-cr009')">Add to Cart</button>
-            </div>
-          </article>
-
-          <article class="product-card" data-product-id="cr010" onclick="openProductDetails('cr010')">
-            <img class="product-image" src="https://images.unsplash.com/photo-1621761191319-c6fb62004040?auto=format&fit=crop&w=900&q=80" alt="Crypto Portfolio Management" loading="lazy" />
-            <div class="product-card-topline">
-              <div class="product-category-label">₿ Crypto & Digital Assets</div>
-              <button class="wishlist-icon" type="button" onclick="event.stopPropagation(); toggleWishlist('cr010')" aria-label="Save item">♡</button>
-            </div>
-            <div class="product-name">Crypto Portfolio Management</div>
-            <div class="rating-summary">★ 4.8 (30)</div>
-            <div class="product-desc">Monthly asset tracking and advisory service</div>
-            <div class="delivery-time">Fulfilment: 5-10 business days</div>
-            <div class="product-price">₦20,000</div>
-            <button class="view-details-btn" type="button" onclick="event.stopPropagation(); openProductDetails('cr010')">View product details</button>
-            <div class="product-actions">
-              <input type="number" class="qty-input" id="qty-cr010" value="1" min="1" max="99" onclick="event.stopPropagation()" />
-              <button class="add-btn" onclick="event.stopPropagation(); addToCartFromDOM('cr010', 'Crypto Portfolio Management', 20000, 'qty-cr010')">Add to Cart</button>
-            </div>
-          </article>
-
-          <!-- EDITABLE PRODUCT CARDS END HERE -->
-        </div>
-      </section>
-    </main>
-
-    <div class="cart-overlay" id="cartOverlay" onclick="if(event.target === this) toggleCart()"></div>
-    <aside class="cart-sidebar" id="cartSidebar">
-      <div class="cart-header">
-        <h3 style="margin: 0;">Your Cart</h3>
-        <button class="cart-close-btn" onclick="toggleCart()">✕</button>
-      </div>
-      <div class="cart-items" id="cartItemsContainer">
-        <div style="text-align: center; color: var(--text-muted); padding: 20px;">Your cart is empty</div>
-      </div>
-      <div class="cart-footer">
-        <div class="cart-total">
-          <span>Total</span>
-          <span id="cartTotal">₦0</span>
-        </div>
-        <button class="checkout-btn" id="checkoutBtn" onclick="proceedToCheckout()">Proceed to Checkout</button>
-      </div>
-    </aside>
-
-    <div class="product-modal" id="productModal" onclick="if (event.target === this) closeProductDetails()">
-      <section class="product-modal-content" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
-        <button class="modal-close-btn" type="button" onclick="closeProductDetails()" aria-label="Close product details">&times;</button>
-        <div id="productDetailsContent"></div>
-      </section>
-    </div>
-
-    <script src="marketplace.js"></script>
     <script>
-      let showWishlistOnly = false;
-      const wishlistKey = 'brainboxx-wishlist';
-      const wishlist = new Set(JSON.parse(localStorage.getItem(wishlistKey) || '[]'));
+        // Tab switching
+        function switchTab(tabName, button) {
+            // Hide all forms
+            document.querySelectorAll('.trade-form').forEach(form => {
+                form.style.display = 'none';
+            });
 
-      document.addEventListener('DOMContentLoaded', () => {
-        updateCartUI();
-        updateWishlistUI();
-      });
+            // Remove active class from all buttons
+            if (button) {
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                button.classList.add('active');
+            }
 
-      function addToCartFromDOM(productId, defaultName, defaultPrice, qtyInputId) {
-        const card = document.querySelector(`[data-product-id="${productId}"]`);
-        let name = defaultName;
-        let price = defaultPrice;
-        if (card) {
-          const nameEl = card.querySelector('.product-name');
-          const priceEl = card.querySelector('.product-price');
-          if (nameEl && nameEl.textContent.trim()) name = nameEl.textContent.trim();
-          if (priceEl) {
-            const parsed = parseInt(priceEl.textContent.replace(/[^0-9]/g, ''));
-            if (!isNaN(parsed)) price = parsed;
-          }
+            // Show selected form
+            const formId = tabName + '-form';
+            const form = document.getElementById(formId);
+            if (form) {
+                form.style.display = 'block';
+                form.scrollIntoView({ behavior: 'smooth' });
+            }
         }
-        const qtyInput = document.getElementById(qtyInputId || `qty-${productId}`);
-        const qty = parseInt(qtyInput ? qtyInput.value : 1) || 1;
-        cartManager.addItem(productId, name, price, qty);
-        updateCartUI();
-        if (qtyInput) qtyInput.value = '1';
-        alert(`${name} added to cart!`);
-      }
 
-      function updateCartUI() {
-        const cart = cartManager.cart;
-        const total = cartManager.getTotal();
-        const itemCount = cartManager.getItemCount();
-        document.getElementById('cartCount').textContent = itemCount || '0';
-        document.getElementById('cartTotal').textContent = formatMoney(total);
+        // Form submissions
+        document.querySelectorAll('.trade-form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
 
-        const container = document.getElementById('cartItemsContainer');
-        if (cart.length === 0) {
-          container.innerHTML = '<div style="text-align: center; color: var(--text-muted); padding: 20px;">Your cart is empty</div>';
-          document.getElementById('checkoutBtn').disabled = true;
-        } else {
-          container.innerHTML = cart.map(item => `
-            <div class="cart-item">
-              <div class="cart-item-info">
-                <div class="cart-item-name">${item.name}</div>
-                <div class="cart-item-qty">Qty: ${item.qty}</div>
-              </div>
-              <div class="cart-item-price">${formatMoney(item.price * item.qty)}</div>
-              <button class="cart-remove-btn" onclick="removeFromCart('${item.id}')">Remove</button>
-            </div>
-          `).join('');
-          document.getElementById('checkoutBtn').disabled = false;
-        }
-      }
+                const formData = new FormData(this);
+                const data = Object.fromEntries(formData);
+                const orderId = 'ORD-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+                const timestamp = new Date().toLocaleString('en-NG');
 
-      function removeFromCart(productId) {
-        cartManager.removeItem(productId);
-        updateCartUI();
-      }
+                const order = {
+                    orderId,
+                    timestamp,
+                    type: this.id.replace('-form', ''),
+                    ...data
+                };
 
-      function toggleCart() {
-        document.getElementById('cartOverlay').classList.toggle('visible');
-        document.getElementById('cartSidebar').classList.toggle('visible');
-      }
+                // Store in localStorage
+                const allOrders = JSON.parse(localStorage.getItem('cryptoOrders')) || [];
+                allOrders.push(order);
+                localStorage.setItem('cryptoOrders', JSON.stringify(allOrders));
+                localStorage.setItem('latestCryptoOrder', JSON.stringify(order));
 
-      function proceedToCheckout() {
-        if (cartManager.cart.length === 0) {
-          alert('Your cart is empty!');
-          return;
-        }
-        window.location.href = 'payment.html';
-      }
+                alert(`? Order Submitted Successfully!\n\nOrder ID: ${orderId}\n\nWe will respond within 45 minutes.\nCheck your email for updates.`);
 
-      function toggleWishlist(productId) {
-        wishlist.has(productId) ? wishlist.delete(productId) : wishlist.add(productId);
-        localStorage.setItem(wishlistKey, JSON.stringify([...wishlist]));
-        updateWishlistUI();
-      }
-
-      function toggleWishlistFilter() {
-        showWishlistOnly = !showWishlistOnly;
-        updateWishlistUI();
-        filterPageProducts();
-      }
-
-      function updateWishlistUI() {
-        document.getElementById('wishlistCount').textContent = wishlist.size;
-        document.getElementById('wishlistToggle').classList.toggle('active', showWishlistOnly);
-        document.getElementById('savedFilterBtn').classList.toggle('active', showWishlistOnly);
-        document.querySelectorAll('.product-card').forEach(card => {
-          const id = card.dataset.productId;
-          const btn = card.querySelector('.wishlist-icon');
-          if (btn) {
-            btn.classList.toggle('saved', wishlist.has(id));
-            btn.textContent = wishlist.has(id) ? '♥' : '♡';
-          }
-        });
-      }
-
-      function filterPageProducts() {
-        const query = (document.getElementById('marketplaceSearch').value || '').toLowerCase().trim();
-        const cards = Array.from(document.querySelectorAll('.product-card'));
-        let visibleCount = 0;
-
-        cards.forEach(card => {
-          const id = card.dataset.productId;
-          const name = (card.querySelector('.product-name')?.textContent || '').toLowerCase();
-          const desc = (card.querySelector('.product-desc')?.textContent || '').toLowerCase();
-          const matchesSearch = !query || name.includes(query) || desc.includes(query);
-          const matchesWishlist = !showWishlistOnly || wishlist.has(id);
-
-          if (matchesSearch && matchesWishlist) {
-            card.style.display = 'flex';
-            visibleCount++;
-          } else {
-            card.style.display = 'none';
-          }
+                this.reset();
+                console.log('Order:', order);
+            });
         });
 
-        const summary = document.getElementById('searchSummary');
-        summary.textContent = query || showWishlistOnly ? `Showing ${visibleCount} item(s)` : '';
-      }
-
-      function sortPageProducts(sortType) {
-        const grid = document.getElementById('productsGrid');
-        const cards = Array.from(grid.querySelectorAll('.product-card'));
-
-        cards.sort((a, b) => {
-          const nameA = a.querySelector('.product-name')?.textContent.trim() || '';
-          const nameB = b.querySelector('.product-name')?.textContent.trim() || '';
-          const priceA = parseInt((a.querySelector('.product-price')?.textContent || '0').replace(/[^0-9]/g, '')) || 0;
-          const priceB = parseInt((b.querySelector('.product-price')?.textContent || '0').replace(/[^0-9]/g, '')) || 0;
-
-          if (sortType === 'price-low') return priceA - priceB;
-          if (sortType === 'price-high') return priceB - priceA;
-          return nameA.localeCompare(nameB);
+        // FAQ toggle
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                this.parentElement.classList.toggle('active');
+            });
         });
-
-        cards.forEach(card => grid.appendChild(card));
-      }
-
-      function openProductDetails(productId) {
-        const card = document.querySelector(`[data-product-id="${productId}"]`);
-        const productFromCatalog = getProductById(productId);
-        const name = card?.querySelector('.product-name')?.textContent || productFromCatalog?.name || 'Product Details';
-        const desc = card?.querySelector('.product-desc')?.textContent || productFromCatalog?.desc || '';
-        const priceText = card?.querySelector('.product-price')?.textContent || (productFromCatalog ? formatMoney(productFromCatalog.price) : '₦0');
-        const priceVal = parseInt(priceText.replace(/[^0-9]/g, '')) || (productFromCatalog?.price || 0);
-        const imgSrc = card?.querySelector('.product-image')?.src || 'https://images.unsplash.com/photo-1621761191319-c6fb62004040?auto=format&fit=crop&w=900&q=80';
-        const fulfilment = card?.querySelector('.delivery-time')?.textContent || 'Fulfilment: 5-10 business days';
-
-        document.getElementById('productDetailsContent').innerHTML = `
-          <div class="product-detail-layout">
-            <img class="product-detail-image" src="${imgSrc}" alt="${name}" />
-            <div>
-              <p class="detail-category">₿ Crypto & Digital Assets</p>
-              <h2 class="detail-title" id="detailTitle">${name}</h2>
-              <p class="detail-description">${desc}</p>
-              <p class="detail-price">${priceText}</p>
-              <p class="detail-meta">${fulfilment}</p>
-              <div class="product-actions">
-                <input type="number" class="qty-input" id="qty-modal-${productId}" value="1" min="1" max="99" />
-                <button class="add-btn" type="button" onclick="addToCartFromDOM('${productId}', '${name.replace(/'/g, "\\'")}', ${priceVal}, 'qty-modal-${productId}'); closeProductDetails()">Add to Cart</button>
-              </div>
-            </div>
-          </div>
-        `;
-        document.getElementById('productModal').classList.add('visible');
-      }
-
-      function closeProductDetails() {
-        document.getElementById('productModal').classList.remove('visible');
-      }
     </script>
-</body>
+    <script src="payment-handler.js"></script>
+<script src="theme-toggle.js"></script>
+  </body>
 </html>

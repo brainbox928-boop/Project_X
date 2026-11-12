@@ -75,7 +75,7 @@ Your brainboxX marketplace has been **completely modernized** with a professiona
 Project_X/
 ├── marketplace.html          (Main storefront)
 ├── marketplace.js            (Catalog & Cart System)
-├── payment.html             (Checkout & Orders)
+├── payment.html             (Order summary; checkout unavailable)
 ├── brainboxtools.html       (Homepage)
 ├── style.css                (Global styles)
 ├── script.js                (Utilities)
@@ -98,12 +98,12 @@ Project_X/
    ↓
 4. Add items to cart
    ↓
-5. Proceed to Checkout (payment.html)
-   ↓
-6. Fill details & select payment method
-   ↓
-7. Order confirmation with reference number
+5. Review the cart and service fee (payment.html)
 ```
+
+Online checkout is unavailable until the storefront is connected to real order
+and payment processing. The cart and product reviews are stored in the browser;
+previous locally saved order records are not proof of a confirmed order.
 
 ---
 
@@ -207,9 +207,8 @@ const MARKETPLACE_CONFIG = {
 ✅ Customer information form  
 ✅ Order summary with calculations  
 ✅ Service fee automatic addition  
-✅ Multiple payment methods  
-✅ Order confirmation with reference  
-✅ Order history tracking  
+⚠️ Payment and order submission are not connected and are disabled.
+⚠️ Previous order history is stored locally, not confirmed by the server.
 
 ### Mobile Responsive
 ✅ Mobile-first design  
@@ -319,7 +318,7 @@ newCategory: {
 - [x] Cart badge updates in real-time
 - [x] Payment page displays correct totals
 - [x] Service fee calculated automatically
-- [x] Order confirmation shows all details
+- [ ] Real payment and server-side order confirmation integrated
 - [x] All navigation links work
 - [x] Responsive design works on mobile
 - [x] No console errors

@@ -1,1 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | brainboxX Marketplace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+      <div class="container nav">
+        <a href="brainboxtools.html" class="brand" aria-label="brainboxX home">
+          <span>brainboxX</span>
+        </a>
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="brainboxtools.html#home">Home</a>
+          <a href="brainboxtools.html#services">Services</a>
+          <a href="brainboxtools.html#marketplace">Marketplace</a>
+          <a href="brainboxtools.html#contact">Contact</a>
+        </nav>
+        <div class="nav-buttons">
+          <button class="nav-btn login-toggle" onclick="toggleModal('login-modal')" style="background-color: #f5c76b; color: #1a2733;">Login</button>
+          <button class="nav-btn signup-toggle" onclick="toggleModal('signup-modal')" style="background-color: transparent; color: #f5c76b; border: 2px solid #f5c76b;">Sign Up</button>
+        </div>
+      </div>
+    </header>
+
+    <div id="login-modal" class="modal" style="display: none;">
+      <div class="modal-overlay" onclick="closeModal('login-modal')"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Welcome Back</h2>
+          <button class="modal-close" onclick="closeModal('login-modal')">&times;</button>
+        </div>
+        <form class="auth-form" id="login-form">
+          <div class="form-group">
+            <label for="login-email">Email Address</label>
+            <input type="email" id="login-email" name="email" placeholder="your@email.com" required />
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" name="password" placeholder="Your password" required />
+          </div>
+          <button type="submit" class="submit-btn">Login</button>
+          <p class="form-footer">
+            Don't have an account?
+            <button type="button" class="link-btn" onclick="switchModal('login-modal', 'signup-modal')">Sign up here</button>
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <div id="signup-modal" class="modal" style="display: none;">
+      <div class="modal-overlay" onclick="closeModal('signup-modal')"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Create Your Account</h2>
+          <button class="modal-close" onclick="closeModal('signup-modal')">&times;</button>
+        </div>
+        <form class="auth-form" id="signup-form">
+          <div class="form-group">
+            <label for="signup-name">Full Name</label>
+            <input type="text" id="signup-name" name="fullName" placeholder="Your full name" required />
+          </div>
+          <div class="form-group">
+            <label for="signup-email">Email Address</label>
+            <input type="email" id="signup-email" name="email" placeholder="your@email.com" required />
+          </div>
+          <div class="form-group">
+            <label for="signup-password">Password</label>
+            <input type="password" id="signup-password" name="password" placeholder="Create a strong password" required />
+          </div>
+          <div class="form-group">
+            <label for="signup-confirm">Confirm Password</label>
+            <input type="password" id="signup-confirm" name="confirmPassword" placeholder="Confirm your password" required />
+          </div>
+          <button type="submit" class="submit-btn">Create Account</button>
+          <p class="form-footer">
+            Already have an account?
+            <button type="button" class="link-btn" onclick="switchModal('signup-modal', 'login-modal')">Login here</button>
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <main style="padding: 60px 20px; text-align: center;">
+      <h1>Checkout Page</h1>
+      <p style="color: #5f6f7a; font-size: 1.1rem;">Review your items and proceed to payment.</p>
+      <p style="margin-top: 40px; color: #999;">This page will display your cart summary and payment options.</p>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <span>brainboxX</span>
+        </div>
+
+        <div class="footer-links">
+          <div>
+            <h4>Company</h4>
+            <a href="brainboxtools.html#home">Home</a>
+            <a href="brainboxtools.html#services">Services</a>
+            <a href="brainboxtools.html#courses">Courses</a>
+          </div>
+          <div>
+            <h4>Support</h4>
+            <a href="brainboxtools.html#contact">Contact</a>
+            <a href="brainboxtools.html">Help Center</a>
+          </div>
+          <div>
+            <h4>Legal</h4>
+            <a href="brainboxtools.html">Terms of Service</a>
+            <a href="brainboxtools.html">Privacy Policy</a>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2024 brainboxX. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+        /**
+         * brainboxX Marketplace - Authentication & Checkout API Integration
+         * Professional Frontend-Backend Communication Layer
+         */
+
+        // ==========================================
+        // CONFIGURATION
+        // ==========================================
+        const API_BASE_URL = 'http://localhost:5000/api';
+        const STORAGE_PREFIX = 'brainboxx_';
+        const AUTH_TOKEN_KEY = `${STORAGE_PREFIX}authToken`;
+        const USER_KEY = `${STORAGE_PREFIX}user`;
+        const CART_KEY = `${STORAGE_PREFIX}cart`;
+
+        // ==========================================
+        // UTILITY FUNCTIONS
+        // ==========================================
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#2196F3'};
+                color: white;
+                padding: 15px 20px;
+                border-radius: 4px;
+                z-index: 9999;
+                animation: slideIn 0.3s ease;
+            `;
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 4000);
+        }
+
+        function getAuthToken() {
+            return localStorage.getItem(AUTH_TOKEN_KEY);
+        }
+
+        function saveAuthToken(token) {
+            localStorage.setItem(AUTH_TOKEN_KEY, token);
+        }
+
+        function clearAuthToken() {
+            localStorage.removeItem(AUTH_TOKEN_KEY);
+        }
+
+        function getUser() {
+            const user = localStorage.getItem(USER_KEY);
+            return user ? JSON.parse(user) : null;
+        }
+
+        function saveUser(user) {
+            localStorage.setItem(USER_KEY, JSON.stringify(user));
+        }
+
+        function isAuthenticated() {
+            return !!getAuthToken();
+        }
+
+        // ==========================================
+        // API CALLS
+        // ==========================================
+        async function apiCall(endpoint, options = {}) {
+            const url = `${API_BASE_URL}${endpoint}`;
+            const headers = {
+                'Content-Type': 'application/json',
+                ...options.headers
+            };
+
+            const token = getAuthToken();
+            if (token) {
+                headers['Authorization'] = `Bearer ${token}`;
+            }
+
+            try {
+                const response = await fetch(url, {
+                    ...options,
+                    headers
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.message || `API Error: ${response.status}`);
+                }
+
+                return data;
+            } catch (error) {
+                console.error('API Call Error:', error);
+                throw error;
+            }
+        }
+
+        async function registerUser(email, password, fullName) {
+            return apiCall('/auth/register', {
+                method: 'POST',
+                body: JSON.stringify({ email, password, fullName })
+            });
+        }
+
+        async function loginUser(email, password) {
+            return apiCall('/auth/login', {
+                method: 'POST',
+                body: JSON.stringify({ email, password })
+            });
+        }
+
+        async function logoutUser() {
+            clearAuthToken();
+            localStorage.removeItem(USER_KEY);
+            updateAuthUI();
+            showNotification('Logged out successfully', 'success');
+        }
+
+        async function createOrder(cartItems, deliveryAddress) {
+            return apiCall('/orders', {
+                method: 'POST',
+                body: JSON.stringify({ items: cartItems, deliveryAddress })
+            });
+        }
+
+        // ==========================================
+        // FORM HANDLERS
+        // ==========================================
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+
+            if (loginForm) {
+                loginForm.addEventListener('submit', handleLogin);
+            }
+
+            if (signupForm) {
+                signupForm.addEventListener('submit', handleSignup);
+            }
+
+            // Initialize UI based on auth state
+            updateAuthUI();
+        });
+
+        async function handleLogin(e) {
+            e.preventDefault();
+
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value;
+
+            if (!email || !password) {
+                showNotification('Please fill in all fields', 'error');
+                return;
+            }
+
+            try {
+                showNotification('Logging in...', 'info');
+                const response = await loginUser(email, password);
+
+                if (response.token && response.user) {
+                    saveAuthToken(response.token);
+                    saveUser(response.user);
+                    
+                    showNotification(`Welcome back, ${response.user.fullName || email}!`, 'success');
+                    document.getElementById('login-form').reset();
+                    closeModal('login-modal');
+                    updateAuthUI();
+                } else {
+                    showNotification('Login failed. Please try again.', 'error');
+                }
+            } catch (error) {
+                showNotification(`Login error: ${error.message}`, 'error');
+            }
+        }
+
+        async function handleSignup(e) {
+            e.preventDefault();
+
+            const fullName = document.getElementById('signup-name').value.trim();
+            const email = document.getElementById('signup-email').value.trim();
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('signup-confirm').value;
+
+            if (!fullName || !email || !password || !confirmPassword) {
+                showNotification('Please fill in all fields', 'error');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                showNotification('Passwords do not match', 'error');
+                return;
+            }
+
+            if (password.length < 6) {
+                showNotification('Password must be at least 6 characters', 'error');
+                return;
+            }
+
+            try {
+                showNotification('Creating account...', 'info');
+                const response = await registerUser(email, password, fullName);
+
+                if (response.token && response.user) {
+                    saveAuthToken(response.token);
+                    saveUser(response.user);
+                    
+                    showNotification(`Welcome to brainboxX, ${fullName}!`, 'success');
+                    document.getElementById('signup-form').reset();
+                    closeModal('signup-modal');
+                    updateAuthUI();
+                } else {
+                    showNotification('Account creation failed. Please try again.', 'error');
+                }
+            } catch (error) {
+                showNotification(`Signup error: ${error.message}`, 'error');
+            }
+        }
+
+        // ==========================================
+        // UI MANAGEMENT
+        // ==========================================
+        function updateAuthUI() {
+            const user = getUser();
+            const loginBtn = document.querySelector('.login-toggle');
+            const signupBtn = document.querySelector('.signup-toggle');
+
+            if (loginBtn) {
+                if (user) {
+                    loginBtn.textContent = `${user.fullName || user.email} ?`;
+                    loginBtn.style.background = '#4CAF50';
+                    loginBtn.onclick = () => showUserMenu();
+                } else {
+                    loginBtn.textContent = 'Login';
+                    loginBtn.style.background = '#f5c76b';
+                    loginBtn.onclick = () => toggleModal('login-modal');
+                }
+            }
+
+            if (signupBtn) {
+                signupBtn.style.display = user ? 'none' : 'block';
+            }
+        }
+
+        function showUserMenu() {
+            const user = getUser();
+            if (confirm(`Logged in as: ${user.fullName || user.email}\n\nClick OK to logout`)) {
+                logoutUser();
+            }
+        }
+
+        function toggleModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = modal.style.display === 'none' ? 'flex' : 'none';
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        function switchModal(closeModalId, openModalId) {
+            closeModal(closeModalId);
+            toggleModal(openModalId);
+        }
+
+        // ==========================================
+        // PAGE LOAD
+        // ==========================================
+        console.log('? brainboxX Marketplace Authentication & Checkout System Loaded');
+        console.log('API Endpoint:', API_BASE_URL);
+        console.log('Status:', isAuthenticated() ? 'Authenticated' : 'Not Authenticated');
+    </script>
+    <script src="checkout-handler.js"></script>
+    <script src="payment-handler.js"></script>
+<script src="theme-toggle.js"></script>
+</body>
+</html>
 

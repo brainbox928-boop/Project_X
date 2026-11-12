@@ -6,7 +6,7 @@
     <title>Payment & Order History | brainboxX</title>
     <meta
       name="description"
-      content="Secure payment page for bank transfer, card payment, mobile wallet, and crypto wallet options with order history and confirmation details."
+      content="Review your marketplace cart and locally saved order history."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,26 +17,95 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header class="site-header">
+        <header class="site-header">
       <div class="container nav">
-        <div class="brand" aria-label="brainboxX checkout">
+        <a href="brainboxtools.html" class="brand" aria-label="brainboxX home">
           <span>brainboxX</span>
+        </a>
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="brainboxtools.html#home">Home</a>
+          <a href="brainboxtools.html#services">Services</a>
+          <a href="brainboxtools.html#marketplace">Marketplace</a>
+          <a href="brainboxtools.html#contact">Contact</a>
+        </nav>
+        <div class="nav-buttons">
+          <button class="nav-btn login-toggle" onclick="toggleModal('login-modal')" style="background-color: #f5c76b; color: #1a2733;">Login</button>
+          <button class="nav-btn signup-toggle" onclick="toggleModal('signup-modal')" style="background-color: transparent; color: #f5c76b; border: 2px solid #f5c76b;">Sign Up</button>
         </div>
-
-        <p class="cart-item-meta">Secure checkout</p>
       </div>
     </header>
 
-    <main class="payment-page">
+    <div id="login-modal" class="modal" style="display: none;">
+      <div class="modal-overlay" onclick="closeModal('login-modal')"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Welcome Back</h2>
+          <button class="modal-close" onclick="closeModal('login-modal')">&times;</button>
+        </div>
+        <form class="auth-form" id="login-form">
+          <div class="form-group">
+            <label for="login-email">Email Address</label>
+            <input type="email" id="login-email" name="email" placeholder="your@email.com" required />
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" name="password" placeholder="Your password" required />
+          </div>
+          <button type="submit" class="submit-btn">Login</button>
+          <p class="form-footer">
+            Don't have an account?
+            <button type="button" class="link-btn" onclick="switchModal('login-modal', 'signup-modal')">Sign up here</button>
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <div id="signup-modal" class="modal" style="display: none;">
+      <div class="modal-overlay" onclick="closeModal('signup-modal')"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Create Your Account</h2>
+          <button class="modal-close" onclick="closeModal('signup-modal')">&times;</button>
+        </div>
+        <form class="auth-form" id="signup-form">
+          <div class="form-group">
+            <label for="signup-name">Full Name</label>
+            <input type="text" id="signup-name" name="fullName" placeholder="Your full name" required />
+          </div>
+          <div class="form-group">
+            <label for="signup-email">Email Address</label>
+            <input type="email" id="signup-email" name="email" placeholder="your@email.com" required />
+          </div>
+          <div class="form-group">
+            <label for="signup-password">Password</label>
+            <input type="password" id="signup-password" name="password" placeholder="Create a strong password" required />
+          </div>
+          <div class="form-group">
+            <label for="signup-confirm">Confirm Password</label>
+            <input type="password" id="signup-confirm" name="confirmPassword" placeholder="Confirm your password" required />
+          </div>
+          <button type="submit" class="submit-btn">Create Account</button>
+          <p class="form-footer">
+            Already have an account?
+            <button type="button" class="link-btn" onclick="switchModal('signup-modal', 'login-modal')">Login here</button>
+          </p>
+        </form>
+      </div>
+    </div>
+
+<main class="payment-page">
       <div class="container">
         <div class="section-head center">
           <p class="tagline">Payment Page</p>
-          <h2>Secure checkout and order confirmation.</h2>
+          <h2>Review your order.</h2>
+          <p>Online checkout is not yet available. Your cart will remain saved in this browser.</p>
+          <a href="marketplace.html">Return to marketplace</a>
         </div>
 
         <!-- Order History Section -->
         <div class="order-card mb-16">
-          <h3>Order History</h3>
+          <h3>Locally Saved Order History</h3>
+          <p>These records are stored in this browser and are not proof of payment or a confirmed order.</p>
           <div id="orderHistoryList" class="order-history-list"></div>
         </div>
 
@@ -70,12 +139,12 @@
                 <textarea id="notes" placeholder="Any instructions for your order"></textarea>
               </div>
 
-              <button type="submit" class="primary-btn btn-block">Confirm Checkout</button>
+              <button type="submit" class="primary-btn btn-block" disabled>Checkout unavailable</button>
             </form>
           </section>
 
           <aside class="summary-card">
-            <h3>Order Confirmation</h3>
+            <h3>Order Summary</h3>
             <div id="cartSummaryList" class="cart-list">
               <div class="empty-note">No items in cart yet.</div>
             </div>
@@ -95,53 +164,6 @@
           </aside>
         </div>
 
-        <!-- Payment Methods Section -->
-        <div class="payment-card mt-28">
-          <h3>Payment Method</h3>
-          <div class="payment-methods">
-            <label class="payment-option active">
-              <span class="payment-option-left">
-                <input type="radio" name="payment" checked />
-                <span>Bank Transfer</span>
-              </span>
-              <span>🏦</span>
-            </label>
-
-            <label class="payment-option">
-              <span class="payment-option-left">
-                <input type="radio" name="payment" />
-                <span>Card Payment</span>
-              </span>
-              <span>💳</span>
-            </label>
-
-            <label class="payment-option">
-              <span class="payment-option-left">
-                <input type="radio" name="payment" />
-                <span>Crypto Wallet</span>
-              </span>
-              <span>₿</span>
-            </label>
-
-            <label class="payment-option">
-              <span class="payment-option-left">
-                <input type="radio" name="payment" />
-                <span>Mobile Wallet</span>
-              </span>
-              <span>📱</span>
-            </label>
-          </div>
-
-          <div class="qr-box">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=brainboxX%20payment%20details%20bank%20transfer" alt="QR code payment" />
-          </div>
-
-          <div class="mt-18">
-            <p><strong>Bank details:</strong> GTBank • 0123456789 • brainboxX Services</p>
-            <p><strong>Card payment:</strong> Use your debit or credit card securely after checkout.</p>
-            <p><strong>Crypto wallet:</strong> Send payment to the wallet address indicated on confirmation.</p>
-          </div>
-        </div>
       </div>
     </main>
 
@@ -206,7 +228,7 @@
         const orderHistoryList = document.getElementById('orderHistoryList');
 
         if (!orderHistory.length) {
-          orderHistoryList.innerHTML = '<div class="empty-note">No completed orders yet.</div>';
+          orderHistoryList.innerHTML = '<div class="empty-note">No locally saved orders.</div>';
           return;
         }
 
@@ -226,46 +248,11 @@
       document.getElementById('checkoutForm').addEventListener('submit', (event) => {
         event.preventDefault();
 
-        if (!cartManager.cart.length) {
-          alert('Please add items to your cart before confirming checkout.');
-          return;
-        }
-
-        const name = document.getElementById('fullName').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const phone = document.getElementById('phone').value.trim();
-        const address = document.getElementById('address').value.trim();
-        const notes = document.getElementById('notes').value.trim();
-        const paymentMethod = document.querySelector('input[name="payment"]:checked')?.value || 'bank';
-
-        if (!name || !email || !phone) {
-          alert('Please fill in all required fields.');
-          return;
-        }
-
-        const order = cartManager.createOrder({
-          name,
-          email,
-          phone,
-          address,
-          notes,
-          paymentMethod
-        });
-
-        renderOrders();
-        renderSummary();
-        document.getElementById('checkoutForm').reset();
-        
-        alert(`Order #${order.id} placed successfully!\n\nOrder Reference: ${order.reference}`);
-      });
-
-      document.querySelectorAll('.payment-option').forEach((option) => {
-        option.addEventListener('click', () => {
-          document.querySelectorAll('.payment-option').forEach((item) => item.classList.remove('active'));
-          option.classList.add('active');
-          option.querySelector('input').checked = true;
-        });
+        alert('Online checkout is not yet available. Your cart has not been changed.');
       });
     </script>
+    <script src="payment-handler.js"></script>
+<script src="theme-toggle.js"></script>
   </body>
 </html>
+
