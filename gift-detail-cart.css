@@ -1,0 +1,19 @@
+.gift-cart-toggle, .gift-cart-checkout {
+  border: 0; border-radius: 10px; padding: 10px 15px; background: #2563eb;
+  color: #fff; font: 700 .9rem Arial, sans-serif; cursor: pointer;
+}
+.gift-cart-toggle { white-space: nowrap; }
+.gift-cart-toggle span { display: inline-block; min-width: 22px; margin-left: 4px; padding: 2px 5px; border-radius: 999px; background: rgba(255,255,255,.2); text-align: center; }
+.gift-cart { width: min(520px, calc(100% - 32px)); max-height: 85vh; padding: 24px; border: 1px solid #e2e8f0; border-radius: 16px; background: #fff; color: #0f172a; box-shadow: 0 25px 50px rgba(0,0,0,.2); }
+.gift-cart::backdrop { background: rgba(15,23,42,.6); }
+.gift-cart-header { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.gift-cart-header h2 { margin: 0; }
+.gift-cart-close { border: 0; background: transparent; color: inherit; font-size: 2rem; cursor: pointer; }
+.gift-cart-item { display: flex; justify-content: space-between; align-items: center; gap: 15px; padding: 16px 0; border-bottom: 1px solid #e2e8f0; }
+.gift-cart-item p { margin: 4px 0; color: #475569; font-size: .9rem; }
+.gift-cart-remove { border: 0; background: transparent; color: #2563eb; font: inherit; cursor: pointer; }
+.gift-cart-total { margin-bottom: 4px; }
+.gift-cart-note { color: #475569; font-size: .85rem; }
+.gift-cart-checkout { width: 100%; }
+.gift-cart-checkout:disabled { opacity: .5; cursor: not-allowed; }
+.gift-cart :focus-visible, .gift-cart-toggle:focus-visible { outline: 3px solid #2563eb; outline-offset: 3px; }
