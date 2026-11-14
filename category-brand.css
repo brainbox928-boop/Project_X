@@ -1,0 +1,272 @@
+:root {
+  --brand-page: #f8fafc;
+  --brand-surface: #fff;
+  --brand-soft: #eff6ff;
+  --brand-text: #0f172a;
+  --brand-muted: #475569;
+  --brand-border: #e2e8f0;
+  --brand-accent: #2563eb;
+  --brand-accent-text: #1d4ed8;
+  --text-light: var(--brand-text);
+  --text-muted: var(--brand-muted);
+  --accent: var(--brand-accent-text);
+  --border: var(--brand-border);
+}
+
+html.dark {
+  color-scheme: dark;
+  --brand-page: #0b1120;
+  --brand-surface: #111827;
+  --brand-soft: #1e293b;
+  --brand-text: #f8fafc;
+  --brand-muted: #cbd5e1;
+  --brand-border: #334155;
+  --brand-accent: #3b82f6;
+  --brand-accent-text: #93c5fd;
+}
+
+body {
+  font-family: "Inter", "Segoe UI", sans-serif;
+  color: var(--brand-text);
+  background: var(--brand-page);
+}
+
+.header {
+  background: var(--brand-surface);
+  border-bottom: 1px solid var(--brand-border);
+  box-shadow: none;
+}
+
+.header-content {
+  max-width: 1120px;
+}
+
+.header .logo {
+  font-family: "Inter", "Segoe UI", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -.04em;
+  color: var(--brand-text);
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+
+.header .nav a {
+  color: var(--brand-muted);
+}
+
+.header .nav a:hover,
+.header .nav a.active {
+  color: var(--brand-accent-text);
+  border-bottom-color: var(--brand-accent);
+}
+
+.hero {
+  color: var(--brand-text);
+  background: radial-gradient(circle at 85% 15%, rgba(37, 99, 235, .15), transparent 35%),
+    linear-gradient(135deg, var(--brand-page), var(--brand-surface));
+}
+
+.hero::before {
+  display: none;
+}
+
+.hero h1 {
+  font-family: "Inter", "Segoe UI", sans-serif;
+  color: var(--brand-text);
+  background: none;
+  -webkit-text-fill-color: currentColor;
+  letter-spacing: -.04em;
+}
+
+.hero p {
+  color: var(--brand-muted);
+}
+
+.service-card,
+.trading-card,
+.form-section,
+.order-section,
+.process-section,
+.faq-item,
+.faq-question,
+.modal-content,
+.success-modal {
+  background: var(--brand-surface);
+  border-color: var(--brand-border);
+  color: var(--brand-text);
+}
+
+.service-card:hover,
+.trading-card:hover,
+.faq-item:hover {
+  border-color: var(--brand-accent);
+  box-shadow: 0 12px 30px rgba(37, 99, 235, .12);
+}
+
+.service-card::before,
+.trading-card::before {
+  background: linear-gradient(90deg, transparent, rgba(37, 99, 235, .08), transparent);
+  pointer-events: none;
+}
+
+.section-title,
+.modal-header h2,
+.success-modal h3,
+.service-name,
+.card-title,
+.form-section-title,
+.tier-name,
+.step-title {
+  font-family: "Inter", "Segoe UI", sans-serif;
+  color: var(--brand-text);
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+
+.service-price,
+.card-badge {
+  color: var(--brand-accent-text);
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+
+.card-badge {
+  background: var(--brand-soft);
+  border-color: var(--brand-border);
+}
+
+.service-details,
+.service-desc,
+.card-desc,
+.tier-description,
+.tier-attributes li,
+.step-desc,
+.faq-answer {
+  color: var(--brand-muted);
+}
+
+.guarantee-badge,
+.hero-badge,
+.delivery-time,
+.response-time {
+  color: var(--brand-text);
+}
+
+.faq-question:hover {
+  background: var(--brand-soft);
+  color: var(--brand-accent-text);
+}
+
+.tier-card,
+.platform-btn + label,
+.service-checkbox + label,
+.faq-answer {
+  background: var(--brand-soft);
+  border-color: var(--brand-border);
+  color: var(--brand-text);
+}
+
+.tier-card input[type="radio"]:checked + .tier-content {
+  color: var(--brand-text);
+}
+
+.tier-card input[type="radio"]:checked + .tier-content .tier-name {
+  color: var(--brand-accent-text);
+}
+
+.platform-btn:checked + label,
+.service-checkbox:checked + label {
+  color: var(--brand-accent-text);
+  background: var(--brand-soft);
+  border-color: var(--brand-accent);
+}
+
+.form-group label {
+  color: var(--brand-text);
+}
+
+.form-group input:not([type="checkbox"]):not([type="radio"]),
+.form-group select,
+.form-group textarea,
+.form-group select option {
+  color: var(--brand-text);
+  background: var(--brand-surface);
+  border-color: var(--brand-border);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--brand-muted);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--brand-accent);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, .2);
+}
+
+.order-btn,
+.submit-btn,
+.btn-primary,
+.btn-secondary,
+.tab-btn.active,
+.step-number {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #fff;
+}
+
+.order-btn:hover,
+.submit-btn:hover,
+.btn-primary:hover,
+.btn-secondary:hover {
+  background: #1d4ed8;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, .24);
+}
+
+.tab-btn {
+  color: var(--brand-muted);
+  border-color: var(--brand-border);
+}
+
+.tab-btn.active {
+  color: #fff;
+}
+
+.footer {
+  background: var(--brand-surface);
+  border-color: var(--brand-border);
+  color: var(--brand-muted);
+}
+
+:focus-visible {
+  outline: 3px solid var(--brand-accent);
+  outline-offset: 3px;
+}
+
+@media (max-width: 700px) {
+  .header-content {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .header .nav {
+    justify-content: flex-start;
+    gap: 12px 18px;
+  }
+
+  .services-grid,
+  .trading-grid,
+  .tier-selection,
+  .form-grid,
+  .dual-control {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .order-section,
+  .form-section {
+    padding: 24px;
+  }
+}

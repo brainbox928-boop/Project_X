@@ -1,6 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+:root {
+  --ink: #0f172a;
+  --muted: #475569;
+  --line: #e2e8f0;
+  --paper: #f8fafc;
+  --mist: #eff6ff;
+  --gold: #2563eb;
+  --gold-light: #dbeafe;
+  --primary-900: #1e3a8a;
+  --primary-700: #1d4ed8;
+  --primary-600: #2563eb;
+  --font-body: "Inter", "Segoe UI", sans-serif;
+  --font-display: "Inter", "Segoe UI", sans-serif;
+}
+
+body {
+  font-family: "Inter", "Segoe UI", sans-serif;
+  color: #0f172a;
+  background: #f8fafc;
+}
+
+.site-header {
+  background: rgba(255, 255, 255, .96);
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.site-header .brand {
+  font-family: "Inter", "Segoe UI", sans-serif;
+  color: #0f172a;
+  font-size: 1.3rem;
+  letter-spacing: -.04em;
+}
+
+.site-nav a:hover,
+.site-nav a[aria-current="page"],
+.back-link,
+.product-category,
+.category-tag,
+.price {
+  color: #1d4ed8;
+}
+
+.product-info h1,
+.product-title {
+  font-family: "Inter", "Segoe UI", sans-serif;
+  letter-spacing: -.04em;
+}
+
+.checkout-actions .btn-primary,
+.mobile-action-bar .btn-primary {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #fff;
+}
+
+.checkout-actions .btn-secondary {
+  border-color: #2563eb;
+  color: #1d4ed8;
+}
+
 .gift-cart-toggle, .gift-cart-checkout {
   border: 0; border-radius: 10px; padding: 10px 15px; background: #2563eb;
-  color: #fff; font: 700 .9rem Arial, sans-serif; cursor: pointer;
+  color: #fff; font: 700 .9rem "Inter", "Segoe UI", sans-serif; cursor: pointer;
 }
 .gift-cart-toggle { white-space: nowrap; }
 .gift-cart-toggle span { display: inline-block; min-width: 22px; margin-left: 4px; padding: 2px 5px; border-radius: 999px; background: rgba(255,255,255,.2); text-align: center; }
