@@ -1,11 +1,24 @@
-# 🚀 PAYSTACK INTEGRATION - COMPLETE DEPLOYMENT GUIDE
+# Paystack deployment guide
+
+> **Netlify warning:** The PHP deployment steps below do not apply to Netlify.
+> Netlify checkout uses `netlify/functions/payment-verify.mjs`. It verifies test
+> transactions only; it does not create trusted orders or reconcile payments.
+> Live payments remain blocked until server-side pricing, order storage and
+> reconciliation are implemented and tested.
+
+For Netlify, set the rotated test secret as `PAYSTACK_SECRET_KEY` in the
+Netlify dashboard with Functions scope, then redeploy. Keep it out of source
+files and GitHub. Verify that the Netlify project's base directory contains
+`netlify/functions` and that the function appears in the Functions dashboard.
+Do not publish `.env`, private configuration, backups, logs, or internal
+documents as public site files.
 
 ## Pro Hub deployment notes
 
-- Upload `brainboxX-pro-hub.html`, `style.css`, `theme-toggle.js`, `checkout.html`, `payment-success.html`, `payment-verify.php`, and `paystack-config.js` together, preserving their relative paths.
+- Deploy `brainboxX-pro-hub.html`, `style.css`, `theme-toggle.js`, `checkout.html`, `payment-success.html`, and `paystack-config.js` alongside the Netlify Function, preserving relative paths.
 - Test the Pro Hub at desktop and mobile viewport sizes, including 320 px width. Check the theme toggle, service dialog, keyboard navigation, quote links, footer, and a test-mode checkout.
-- Set `PAYSTACK_SECRET_KEY` in the PHP server environment to the rotated secret key matching the configured public key's test or live mode. PHP cURL is required; opening HTML via `file://` cannot run verification.
-- The result page calls the verifier and shows a verified payment only after Paystack confirms its reference, email, amount and currency. No order confirmation email is sent.
+- Set `PAYSTACK_SECRET_KEY` in Netlify's Functions environment scope to the rotated test secret key. Opening HTML via `file://` cannot run verification.
+- The result page calls the Netlify function and shows a verified test transaction only after Paystack confirms its reference, email, amount and currency. No order confirmation email is sent.
 - The amount is supplied by the browser, not an authoritative server-side order. Implement server-side pricing, order persistence and payment reconciliation before live fulfillment.
 - Service orders add no shipping and add 7.5% VAT. Confirm the correct tax treatment before deployment. Service details are sent as Paystack metadata.
 - A test secret key was previously exposed in project files. Rotate it in Paystack and configure the replacement securely on the server; never put a secret key in public files.

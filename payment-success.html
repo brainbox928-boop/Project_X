@@ -241,7 +241,7 @@
             document.getElementById('amount').textContent = '—';
             retry.hidden = true;
             try {
-                const response = await fetch('payment-verify.php', {
+                const response = await fetch('/.netlify/functions/payment-verify', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payment)
@@ -254,7 +254,7 @@
                 }
                 title.textContent = 'Payment verified';
                 status.textContent = 'Paystack confirmed this payment.';
-                message.textContent = 'Keep your reference and contact support to follow up on your order. An order confirmation email is not currently sent.';
+                message.textContent = 'This verifies the test transaction, not the order price. Keep your reference and contact support to follow up. No order confirmation email is currently sent.';
                 document.getElementById('amount').textContent = '₦' + (result.amount / 100).toLocaleString();
                 document.getElementById('payment-status').textContent = 'Payment verified';
             } catch (error) {

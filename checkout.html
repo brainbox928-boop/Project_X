@@ -583,6 +583,10 @@
                 alert('Paystack is not configured. Please check the public key.');
                 return;
             }
+            if (!PaystackConfig.credentials.publicKey.startsWith('pk_test_')) {
+                alert('Live payments are not enabled: secure server-side order pricing and reconciliation are required first.');
+                return;
+            }
 
             const billingInfo = {
                 firstName: document.getElementById('first-name').value,

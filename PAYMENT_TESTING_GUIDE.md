@@ -1,10 +1,7 @@
 # Payment Integration Testing & Deployment Guide
 ## Option B - Complete Payment System
 
-**Status:** ✅ READY FOR DEPLOYMENT  
-**Pages Updated:** 406+ HTML files  
-**Time to Completion:** ~14 minutes  
-**Test Coverage:** Full e-commerce flow
+**Status:** Test mode only. Server-side orders and reconciliation are not yet implemented.
 
 ---
 
@@ -20,10 +17,14 @@
 1. Open `brainboxX-pro-hub.html`, choose a career or communication service, and fill in the service form.
 2. Continue to `checkout.html`. Confirm the service subtotal, zero shipping, 7.5% VAT and total appear.
 3. Complete the billing form and open Paystack using the configured test public key. Service details are included in Paystack transaction metadata; do not enter sensitive documents or passwords.
-4. On a PHP-enabled server with cURL and `PAYSTACK_SECRET_KEY` configured, complete a test payment. The result page requests server verification and shows the verified payment reference and amount; failed verification offers retry and support.
+4. Deploy the Netlify Function and set `PAYSTACK_SECRET_KEY` in Netlify's Functions environment scope to a rotated test secret key. Redeploy after setting it. Complete a test payment; the result page checks the transaction and offers retry on failure. Opening the page with `file://` cannot run the function.
 5. Verification checks the transaction against checkout-supplied values, not an authoritative server-side order. No order database or confirmation email is connected. Do not rely on this flow for live fulfillment until server-side pricing, order storage and payment reconciliation are implemented.
 
 Digital Studio quote and maintenance links open the existing WhatsApp support contact. They do not create an order or subscription.
+
+The function validates a transaction against browser-supplied values, not a trusted order. It and the linked checkouts intentionally reject live keys. A database-backed order, server-side prices, signed webhook reconciliation, and end-to-end testing on Netlify are required before enabling live payments.
+
+Run the local verification tests with `node --test backend/tests/payment-verify.test.mjs`. These use simulated Paystack responses, not real transactions.
 
 ### Step 1: Test Direct "Buy Now" (Marketplace.html)
 1. Open `marketplace.html` in browser

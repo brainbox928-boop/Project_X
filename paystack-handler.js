@@ -21,6 +21,13 @@ const PaystackHandler = {
       }
       return;
     }
+    if (!PaystackConfig.credentials.publicKey.startsWith('pk_test_')) {
+      console.error('Live payments require secure server-side order pricing and reconciliation.');
+      if (onFailure) {
+        onFailure({ message: 'Live payments are not enabled.' });
+      }
+      return;
+    }
 
     // Validate order data
     if (!this.validateOrderData(orderData)) {
@@ -107,7 +114,7 @@ const PaystackHandler = {
     // Send to your backend for verification
     // Your backend should then verify with Paystack using the secret key
     
-    fetch('payment-verify.php', {
+    fetch('/.netlify/functions/payment-verify', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
