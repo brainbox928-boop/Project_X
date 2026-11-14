@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Successful | brainboxX</title>
+    <title>Payment Verification | brainboxX</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -172,12 +172,12 @@
     </header>
 
     <main class="success-container">
-        <div class="success-icon">✅</div>
-        <h1 class="success-title">Payment Successful!</h1>
-        <p class="success-subtitle">Your order has been confirmed and is being processed.</p>
+        <div class="success-icon" aria-hidden="true">💳</div>
+        <h1 class="success-title" id="verification-title">Checking payment</h1>
+        <p class="success-subtitle" id="verification-status" role="status" aria-live="polite">Please wait while we verify your payment with Paystack.</p>
 
-        <div class="success-message">
-            <strong>Thank you for your order!</strong> A confirmation email has been sent to your registered email address. You can track your order status anytime in your account dashboard.
+        <div class="success-message" id="verification-message">
+            Keep your payment reference until the payment has been verified.
         </div>
 
         <div class="success-details">
@@ -187,72 +187,88 @@
             </div>
             <div class="detail-row">
                 <span class="detail-label">Amount Paid:</span>
-                <span class="detail-value" id="amount">₦0</span>
-            </div>
-            <div class="detail-row">
-                <span class="detail-label">Date & Time:</span>
-                <span class="detail-value" id="timestamp">—</span>
+                <span class="detail-value" id="amount">—</span>
             </div>
             <div class="detail-row">
                 <span class="detail-label">Status:</span>
-                <span class="detail-value" style="color: #4caf50;">Confirmed</span>
+                <span class="detail-value" id="payment-status">Checking</span>
             </div>
         </div>
 
         <div class="next-steps">
             <h3>📝 What's Next?</h3>
             <ol>
-                <li>Check your email for order confirmation</li>
-                <li>Track your order in your account dashboard</li>
-                <li>Our support team will contact you if needed</li>
-                <li>Enjoy your purchase!</li>
+                <li>Keep your payment reference for your records.</li>
+                <li>Contact support with the reference to follow up on your order.</li>
             </ol>
         </div>
 
         <div class="action-buttons">
+            <button type="button" class="btn primary-btn" id="retry-verification" hidden>Retry verification</button>
+            <a href="https://wa.me/message/YDNRHAYWZTXXD1" target="_blank" rel="noopener noreferrer" class="btn primary-btn">Contact support</a>
             <a href="marketplace.html" class="btn secondary-btn">← Continue Shopping</a>
             <a href="brainboxtools.html" class="btn primary-btn">Back to Home →</a>
         </div>
     </main>
 
     <script>
-        // Display payment details from URL parameter
-        function displayPaymentDetails() {
-            const params = new URLSearchParams(window.location.search);
-            const reference = params.get('reference');
-
-            if (reference) {
-                document.getElementById('reference').textContent = reference;
+        async function verifyPayment() {
+            const title = document.getElementById('verification-title');
+            const status = document.getElementById('verification-status');
+            const message = document.getElementById('verification-message');
+            const retry = document.getElementById('retry-verification');
+            let payment;
+            try {
+                payment = JSON.parse(sessionStorage.getItem('brainboxX-pending-verification'));
+            } catch (error) {
+                console.error('Unable to read payment verification details:', error);
+            }
+            if (!payment || typeof payment.reference !== 'string' ||
+                typeof payment.email !== 'string' || !Number.isSafeInteger(payment.amount) ||
+                payment.amount <= 0) {
+                title.textContent = 'Payment not verified';
+                status.textContent = 'Payment details are unavailable in this browser session.';
+                message.textContent = 'Contact support with your Paystack reference. Do not make another payment until its status is checked.';
+                document.getElementById('payment-status').textContent = 'Not verified';
+                retry.hidden = true;
+                return;
             }
 
-            // Get last payment from localStorage
-            const lastPayment = localStorage.getItem('brainboxX-last-payment');
-            if (lastPayment) {
-                try {
-                    const payment = JSON.parse(lastPayment);
-                    document.getElementById('amount').textContent = 
-                        '₦' + (payment.amount || 0).toLocaleString();
-                    
-                    const date = new Date(payment.timestamp);
-                    document.getElementById('timestamp').textContent = 
-                        date.toLocaleDateString() + ' at ' + date.toLocaleTimeString();
-                } catch (e) {
-                    console.error('Error parsing payment data:', e);
+            document.getElementById('reference').textContent = payment.reference;
+            title.textContent = 'Checking payment';
+            status.textContent = 'Please wait while we verify your payment with Paystack.';
+            document.getElementById('payment-status').textContent = 'Checking';
+            document.getElementById('amount').textContent = '—';
+            retry.hidden = true;
+            try {
+                const response = await fetch('payment-verify.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payment)
+                });
+                const result = await response.json();
+                if (!response.ok || result.verified !== true ||
+                    result.reference !== payment.reference || result.amount !== payment.amount ||
+                    result.currency !== 'NGN') {
+                    throw new Error(result.message || 'Payment verification failed.');
                 }
-            }
-
-            // Clear cart after successful payment
-            if (typeof cartManager !== 'undefined' && cartManager.clearCart) {
-                cartManager.clearCart();
+                title.textContent = 'Payment verified';
+                status.textContent = 'Paystack confirmed this payment.';
+                message.textContent = 'Keep your reference and contact support to follow up on your order. An order confirmation email is not currently sent.';
+                document.getElementById('amount').textContent = '₦' + (result.amount / 100).toLocaleString();
+                document.getElementById('payment-status').textContent = 'Payment verified';
+            } catch (error) {
+                console.error('Payment verification failed:', error);
+                title.textContent = 'Payment not yet verified';
+                status.textContent = 'We could not verify your payment. Please retry or contact support.';
+                message.textContent = 'Keep your reference. Do not pay again until its status is checked.';
+                document.getElementById('payment-status').textContent = 'Not verified';
+                retry.hidden = false;
             }
         }
 
-        // Initialize on page load
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', displayPaymentDetails);
-        } else {
-            displayPaymentDetails();
-        }
+        document.getElementById('retry-verification').addEventListener('click', verifyPayment);
+        verifyPayment();
     </script>
 </body>
 </html>

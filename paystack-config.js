@@ -13,10 +13,7 @@ const PaystackConfig = {
   // Replace these with your actual keys
   credentials: {
     // Public Key - Safe to expose in frontend (used for payment initialization)
-    publicKey: 'pk_test_YOUR_PUBLIC_KEY_HERE', // e.g., pk_test_4a7f7k2x9c1b8d5e
-    
-    // Secret Key - KEEP PRIVATE! Use only on backend/server
-    secretKey: 'sk_test_YOUR_SECRET_KEY_HERE',  // e.g., sk_test_9m2k5l8p1q3r6v9w
+    publicKey: 'pk_test_e9785f2a427b2eb9cae3bfd8d7eb7a09576fb372',
   },
 
   // ========================

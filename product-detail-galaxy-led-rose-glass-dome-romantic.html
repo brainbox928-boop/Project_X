@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -177,6 +177,7 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="gift-detail-cart.css">
 </head>
 <body>
     <header class="site-header">
@@ -211,7 +212,10 @@
                     📦 Delivery: 2-4 days
                 </div>
                 
-                <button class="add-to-cart" style="margin-top: 24px; padding: 14px 32px; background: var(--gold); color: var(--white); border: none; border-radius: 6px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: background 0.3s; display: block; width: 100%;">Add to Cart</button>
+                          <div class="checkout-actions">
+            <button class="btn btn-primary" onclick="addToCart()">Add to Cart</button>
+            <button class="btn btn-secondary" onclick="buyNow()">Buy Now</button>
+          </div>
                 
                 <div style="margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--line);">
                     <h3>About This Product</h3>
@@ -228,5 +232,43 @@
     <footer class="site-footer" style="margin-top: 80px; padding: 30px 20px; color: var(--muted); text-align: center; background: var(--mist); font-size: 0.85rem; font-weight: 700;">
         <p>&copy; 2024 brainboxX Marketplace. All rights reserved.</p>
     </footer>
+  <script>
+    function getProductData() {
+      const title = document.querySelector('.product-title').textContent;
+      const priceText = document.querySelector('.price').textContent.replace(/[^0-9]/g, '');
+      const price = parseInt(priceText);
+      const quantity = parseInt(document.getElementById('quantity').value);
+      const color = document.getElementById('color-variant')?.value || 'Default';
+      const description = document.querySelector('.product-summary').textContent;
+      
+      return {
+        id: Math.random().toString(36).substr(2, 9),
+        name: title,
+        description: description.substring(0, 100),
+        price: price,
+        quantity: quantity,
+        color: color,
+        icon: '🎁'
+      };
+    }
+
+    function addToCart() {
+      const product = getProductData();
+      const cart = [product];
+      localStorage.setItem('brainboxX-pending-order', JSON.stringify(cart));
+      window.location.href = 'checkout.html';
+    }
+
+    function buyNow() {
+      const product = getProductData();
+      const cart = [product];
+      localStorage.setItem('brainboxX-pending-order', JSON.stringify(cart));
+      window.location.href = 'checkout.html';
+    }
+  </script>
+  <script src="gift-detail-cart-init.js"></script>
+  <script src="gifts-cart.js"></script>
 </body>
 </html>
+
+

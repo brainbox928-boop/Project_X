@@ -10,6 +10,21 @@
 
 ## Quick Start - Testing Payment Flow
 
+### Gifts catalogue cart
+1. Open `gifts-delivery.html`, choose a product's View details link, and use Add to Cart on its detail page. Open the cart from either page's header.
+2. Verify quantities and subtotal, remove an item, and proceed to `checkout.html`. Shipping and VAT are shown at checkout.
+3. Use Buy Now on a product detail page to send that product directly to checkout. Starting a checkout warns before replacing an existing pending order.
+4. The gift cart is stored separately in the browser and is not automatically cleared after payment. This is a test-mode flow, not a server-side order record.
+
+### Pro Hub service checkout
+1. Open `brainboxX-pro-hub.html`, choose a career or communication service, and fill in the service form.
+2. Continue to `checkout.html`. Confirm the service subtotal, zero shipping, 7.5% VAT and total appear.
+3. Complete the billing form and open Paystack using the configured test public key. Service details are included in Paystack transaction metadata; do not enter sensitive documents or passwords.
+4. On a PHP-enabled server with cURL and `PAYSTACK_SECRET_KEY` configured, complete a test payment. The result page requests server verification and shows the verified payment reference and amount; failed verification offers retry and support.
+5. Verification checks the transaction against checkout-supplied values, not an authoritative server-side order. No order database or confirmation email is connected. Do not rely on this flow for live fulfillment until server-side pricing, order storage and payment reconciliation are implemented.
+
+Digital Studio quote and maintenance links open the existing WhatsApp support contact. They do not create an order or subscription.
+
 ### Step 1: Test Direct "Buy Now" (Marketplace.html)
 1. Open `marketplace.html` in browser
 2. Find any product card

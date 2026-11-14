@@ -1,406 +1,634 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout | brainboxX Marketplace</title>
+    <title>Secure Checkout | brainboxX Marketplace</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text-primary: #2d3748;
+            --text-secondary: #718096;
+            --border-color: #e2e8f0;
+            --blue-primary: #0066ff;
+            --blue-dark: #0052cc;
+            --green-success: #10b981;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+        
+        html.dark {
+            --bg-primary: #1a202c;
+            --bg-secondary: #2d3748;
+            --text-primary: #f7fafc;
+            --text-secondary: #cbd5e0;
+            --border-color: #4a5568;
+            --blue-primary: #3b82f6;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .site-header {
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--blue-primary);
+            text-decoration: none;
+        }
+
+        .brand-badge {
+            display: inline-block;
+            background: var(--blue-primary);
+            opacity: 0.1;
+            color: var(--blue-primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .checkout-progress {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .progress-step {
+            text-align: center;
+            flex: 1;
+        }
+
+        .progress-step.active .step-circle {
+            background: var(--blue-primary);
+            color: white;
+        }
+
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-primary);
+            border: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .step-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .checkout-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 2rem;
+        }
+
+        .cart-section {
+            background: var(--bg-primary);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: var(--blue-primary);
+            border-radius: 2px;
+        }
+
+        .cart-items {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .item-image {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--blue-primary) 0%, #764ba2 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .item-description {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .item-price {
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: var(--blue-primary);
+        }
+
+        .order-summary {
+            background: var(--bg-primary);
+            border-radius: 12px;
+            padding: 2rem;
+            height: fit-content;
+            border: 1px solid var(--border-color);
+            position: sticky;
+            top: 100px;
+        }
+
+        .summary-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .summary-row.total {
+            border-top: 2px solid var(--border-color);
+            padding-top: 1rem;
+            margin-top: 1rem;
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--blue-primary);
+        }
+
+        .summary-row .value {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            width: 100%;
+            background: var(--blue-primary);
+            color: white;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            background: var(--blue-dark);
+            opacity: 0.9;
+        }
+
+        .security-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--green-success);
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        form { margin-top: 1.5rem; }
+        label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        input, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-family: inherit;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--blue-primary);
+            box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
+        }
+
+        .site-footer {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            margin-top: 4rem;
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-section a {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .footer-section a:hover {
+            color: var(--blue-primary);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        /* Theme Toggle Button Styles */
+        .theme-toggle {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+
+        .theme-toggle:hover {
+            opacity: 0.7;
+            transform: scale(1.1);
+        }
+
+        .theme-toggle svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            stroke-width: 2;
+        }
+
+        html.dark .theme-toggle {
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 768px) {
+            .checkout-container { grid-template-columns: 1fr; }
+            .order-summary { position: static; top: auto; }
+        }
+    </style>
 </head>
 <body>
     <header class="site-header">
-      <div class="container nav">
-        <a href="brainboxtools.html" class="brand" aria-label="brainboxX home">
-          <span>brainboxX</span>
-        </a>
-        <nav class="nav-links" aria-label="Main navigation">
-          <a href="brainboxtools.html#home">Home</a>
-          <a href="brainboxtools.html#services">Services</a>
-          <a href="brainboxtools.html#marketplace">Marketplace</a>
-          <a href="brainboxtools.html#contact">Contact</a>
-        </nav>
-        <div class="nav-buttons">
-          <button class="nav-btn login-toggle" onclick="toggleModal('login-modal')" style="background-color: #f5c76b; color: #1a2733;">Login</button>
-          <button class="nav-btn signup-toggle" onclick="toggleModal('signup-modal')" style="background-color: transparent; color: #f5c76b; border: 2px solid #f5c76b;">Sign Up</button>
+        <div class="header-container nav">
+            <a href="brainboxtools.html" class="brand">brainboxX</a>
+            <span class="brand-badge">Secure Checkout</span>
         </div>
-      </div>
     </header>
 
-    <div id="login-modal" class="modal" style="display: none;">
-      <div class="modal-overlay" onclick="closeModal('login-modal')"></div>
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2>Welcome Back</h2>
-          <button class="modal-close" onclick="closeModal('login-modal')">&times;</button>
+    <div class="checkout-progress">
+        <div class="progress-step active">
+            <div class="step-circle">1</div>
+            <div class="step-label">Cart</div>
         </div>
-        <form class="auth-form" id="login-form">
-          <div class="form-group">
-            <label for="login-email">Email Address</label>
-            <input type="email" id="login-email" name="email" placeholder="your@email.com" required />
-          </div>
-          <div class="form-group">
-            <label for="login-password">Password</label>
-            <input type="password" id="login-password" name="password" placeholder="Your password" required />
-          </div>
-          <button type="submit" class="submit-btn">Login</button>
-          <p class="form-footer">
-            Don't have an account?
-            <button type="button" class="link-btn" onclick="switchModal('login-modal', 'signup-modal')">Sign up here</button>
-          </p>
-        </form>
-      </div>
+        <div class="progress-step">
+            <div class="step-circle">2</div>
+            <div class="step-label">Billing</div>
+        </div>
+        <div class="progress-step">
+            <div class="step-circle">3</div>
+            <div class="step-label">Payment</div>
+        </div>
+        <div class="progress-step">
+            <div class="step-circle">4</div>
+            <div class="step-label">Confirm</div>
+        </div>
     </div>
 
-    <div id="signup-modal" class="modal" style="display: none;">
-      <div class="modal-overlay" onclick="closeModal('signup-modal')"></div>
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2>Create Your Account</h2>
-          <button class="modal-close" onclick="closeModal('signup-modal')">&times;</button>
-        </div>
-        <form class="auth-form" id="signup-form">
-          <div class="form-group">
-            <label for="signup-name">Full Name</label>
-            <input type="text" id="signup-name" name="fullName" placeholder="Your full name" required />
-          </div>
-          <div class="form-group">
-            <label for="signup-email">Email Address</label>
-            <input type="email" id="signup-email" name="email" placeholder="your@email.com" required />
-          </div>
-          <div class="form-group">
-            <label for="signup-password">Password</label>
-            <input type="password" id="signup-password" name="password" placeholder="Create a strong password" required />
-          </div>
-          <div class="form-group">
-            <label for="signup-confirm">Confirm Password</label>
-            <input type="password" id="signup-confirm" name="confirmPassword" placeholder="Confirm your password" required />
-          </div>
-          <button type="submit" class="submit-btn">Create Account</button>
-          <p class="form-footer">
-            Already have an account?
-            <button type="button" class="link-btn" onclick="switchModal('signup-modal', 'login-modal')">Login here</button>
-          </p>
-        </form>
-      </div>
-    </div>
+    <div class="checkout-container">
+        <div>
+            <div class="cart-section">
+                <h2 class="section-title">Order Items</h2>
+                <div class="cart-items" id="cart-items">
+                    <div style="text-align: center; padding: 2rem; color: var(--text-secondary);">
+                        <p>Loading cart items...</p>
+                    </div>
+                </div>
+            </div>
 
-    <main style="padding: 60px 20px; text-align: center;">
-      <h1>Checkout Page</h1>
-      <p style="color: #5f6f7a; font-size: 1.1rem;">Review your items and proceed to payment.</p>
-      <p style="margin-top: 40px; color: #999;">This page will display your cart summary and payment options.</p>
-    </main>
+            <div class="cart-section" style="margin-top: 2rem;">
+                <h2 class="section-title">Billing Address</h2>
+                <form id="billing-form">
+                    <label for="first-name">First Name *</label>
+                    <input type="text" id="first-name" placeholder="John" required>
+                    <label for="last-name">Last Name *</label>
+                    <input type="text" id="last-name" placeholder="Doe" required>
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" placeholder="john@example.com" required>
+                    <label for="phone">Phone *</label>
+                    <input type="tel" id="phone" placeholder="+234 (0) 123-456-7890" required>
+                    <label for="address">Address *</label>
+                    <input type="text" id="address" placeholder="123 Main St" required>
+                    <label for="city">City *</label>
+                    <input type="text" id="city" placeholder="Lagos" required>
+                    <label for="country">Country *</label>
+                    <select id="country" required>
+                        <option value="">Select Country</option>
+                        <option value="NG">Nigeria</option>
+                        <option value="ZA">South Africa</option>
+                        <option value="KE">Kenya</option>
+                        <option value="GH">Ghana</option>
+                    </select>
+                </form>
+            </div>
+        </div>
+
+        <div class="order-summary">
+            <h3 class="summary-title">Order Summary</h3>
+            
+            <div class="summary-row">
+                <span>Subtotal:</span>
+                <span class="value" id="subtotal">₦0.00</span>
+            </div>
+
+            <div class="summary-row">
+                <span>Shipping:</span>
+                <span class="value" id="shipping">₦0.00</span>
+            </div>
+
+            <div class="summary-row">
+                <span>Tax (VAT):</span>
+                <span class="value" id="tax">₦0.00</span>
+            </div>
+
+            <div class="summary-row total">
+                <span>Total:</span>
+                <span id="total">₦0.00</span>
+            </div>
+
+            <button class="btn" id="checkout-btn">💳 Proceed to Payment</button>
+
+            <div class="security-badge">
+                <span>✓ 100% Secure • SSL Encrypted</span>
+            </div>
+        </div>
+    </div>
 
     <footer class="site-footer">
-      <div class="container footer-inner">
-        <div class="footer-brand">
-          <span>brainboxX</span>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>brainboxX</h4>
+                <p style="font-size: 0.875rem;">Leading digital marketplace in Nigeria</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="brainboxtools.html#home">Home</a>
+                <a href="brainboxtools.html#services">Services</a>
+                <a href="brainboxtools.html#marketplace">Marketplace</a>
+            </div>
+            <div class="footer-section">
+                <h4>Support</h4>
+                <a href="#">Help Center</a>
+                <a href="#">Contact Us</a>
+                <a href="#">FAQs</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="#">Terms of Service</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Security</a>
+            </div>
         </div>
-
-        <div class="footer-links">
-          <div>
-            <h4>Company</h4>
-            <a href="brainboxtools.html#home">Home</a>
-            <a href="brainboxtools.html#services">Services</a>
-            <a href="brainboxtools.html#courses">Courses</a>
-          </div>
-          <div>
-            <h4>Support</h4>
-            <a href="brainboxtools.html#contact">Contact</a>
-            <a href="brainboxtools.html">Help Center</a>
-          </div>
-          <div>
-            <h4>Legal</h4>
-            <a href="brainboxtools.html">Terms of Service</a>
-            <a href="brainboxtools.html">Privacy Policy</a>
-          </div>
-        </div>
-
         <div class="footer-bottom">
-          <p>&copy; 2024 brainboxX. All rights reserved.</p>
+            <p>&copy; 2024 brainboxX Marketplace. All rights reserved.</p>
         </div>
-      </div>
     </footer>
 
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <script src="paystack-config.js"></script>
+    <script src="theme-toggle.js"></script>
     <script>
-        /**
-         * brainboxX Marketplace - Authentication & Checkout API Integration
-         * Professional Frontend-Backend Communication Layer
-         */
+        const SHIPPING_FEE = 5000;
+        const TAX_RATE = 0.075;
+        
+        const sampleCart = [
+            { id: 1, name: "Web Development Course", description: "Learn modern web development", price: 50000, quantity: 1, icon: "📚" },
+            { id: 2, name: "UI/UX Design Package", description: "Complete UI/UX guide", price: 35000, quantity: 1, icon: "🎨" }
+        ];
 
-        // ==========================================
-        // CONFIGURATION
-        // ==========================================
-        const API_BASE_URL = 'http://localhost:5000/api';
-        const STORAGE_PREFIX = 'brainboxx_';
-        const AUTH_TOKEN_KEY = `${STORAGE_PREFIX}authToken`;
-        const USER_KEY = `${STORAGE_PREFIX}user`;
-        const CART_KEY = `${STORAGE_PREFIX}cart`;
-
-        // ==========================================
-        // UTILITY FUNCTIONS
-        // ==========================================
-        function showNotification(message, type = 'info') {
-            const notification = document.createElement('div');
-            notification.className = `notification notification-${type}`;
-            notification.textContent = message;
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: ${type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#2196F3'};
-                color: white;
-                padding: 15px 20px;
-                border-radius: 4px;
-                z-index: 9999;
-                animation: slideIn 0.3s ease;
-            `;
-            document.body.appendChild(notification);
-            setTimeout(() => notification.remove(), 4000);
+        function initCheckout() {
+            loadCart();
+            updateOrderSummary();
+            const service = window.orderData.items.length === 1 && window.orderData.items[0].serviceDetails;
+            if (service) {
+                const names = service.fullName.trim().split(/\s+/);
+                document.getElementById('first-name').value = names.shift();
+                document.getElementById('last-name').value = names.join(' ');
+                document.getElementById('email').value = service.email;
+                document.getElementById('phone').value = service.phone;
+            }
+            document.getElementById('checkout-btn').addEventListener('click', handleCheckout);
         }
 
-        function getAuthToken() {
-            return localStorage.getItem(AUTH_TOKEN_KEY);
+        function loadCart() {
+            const savedCart = localStorage.getItem('brainboxX-pending-order');
+            const cart = savedCart ? JSON.parse(savedCart) : sampleCart;
+            const cartContainer = document.getElementById('cart-items');
+            
+            if (cart.length === 0) {
+                cartContainer.innerHTML = '<p style="text-align: center; padding: 2rem;">Your cart is empty</p>';
+                return;
+            }
+
+            cartContainer.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <div class="item-image">${item.icon}</div>
+                    <div class="item-details">
+                        <div class="item-title">${item.name}</div>
+                        <div class="item-description">${item.description}</div>
+                        <div class="item-price">₦${(item.price * item.quantity).toLocaleString()}</div>
+                    </div>
+                </div>
+            `).join('');
         }
 
-        function saveAuthToken(token) {
-            localStorage.setItem(AUTH_TOKEN_KEY, token);
+        function updateOrderSummary() {
+            const savedCart = JSON.parse(localStorage.getItem('brainboxX-pending-order') || JSON.stringify(sampleCart));
+            const subtotal = savedCart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const isService = savedCart.length === 1 && Boolean(savedCart[0].serviceDetails);
+            const shipping = isService ? 0 : SHIPPING_FEE;
+            const tax = Math.round(subtotal * TAX_RATE);
+            const total = subtotal + shipping + tax;
+
+            document.getElementById('subtotal').textContent = `₦${subtotal.toLocaleString()}`;
+            document.getElementById('shipping').textContent = `₦${shipping.toLocaleString()}`;
+            document.getElementById('tax').textContent = `₦${tax.toLocaleString()}`;
+            document.getElementById('total').textContent = `₦${total.toLocaleString()}`;
+
+            window.orderData = { items: savedCart, subtotal, shipping, tax, total };
         }
 
-        function clearAuthToken() {
-            localStorage.removeItem(AUTH_TOKEN_KEY);
-        }
+        function handleCheckout() {
+            const form = document.getElementById('billing-form');
+            if (!form.reportValidity()) {
+                alert('Please fill in all required fields');
+                return;
+            }
 
-        function getUser() {
-            const user = localStorage.getItem(USER_KEY);
-            return user ? JSON.parse(user) : null;
-        }
+            if (!window.orderData || window.orderData.items.length === 0) {
+                alert('Your cart is empty');
+                return;
+            }
 
-        function saveUser(user) {
-            localStorage.setItem(USER_KEY, JSON.stringify(user));
-        }
+            if (typeof PaystackPop === 'undefined') {
+                alert('Paystack could not load. Check your internet connection and refresh the page.');
+                return;
+            }
 
-        function isAuthenticated() {
-            return !!getAuthToken();
-        }
+            if (typeof PaystackConfig === 'undefined' || !PaystackConfig.isConfigured()) {
+                alert('Paystack is not configured. Please check the public key.');
+                return;
+            }
 
-        // ==========================================
-        // API CALLS
-        // ==========================================
-        async function apiCall(endpoint, options = {}) {
-            const url = `${API_BASE_URL}${endpoint}`;
-            const headers = {
-                'Content-Type': 'application/json',
-                ...options.headers
+            const billingInfo = {
+                firstName: document.getElementById('first-name').value,
+                lastName: document.getElementById('last-name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
             };
 
-            const token = getAuthToken();
-            if (token) {
-                headers['Authorization'] = `Bearer ${token}`;
-            }
-
-            try {
-                const response = await fetch(url, {
-                    ...options,
-                    headers
-                });
-
-                const data = await response.json();
-
-                if (!response.ok) {
-                    throw new Error(data.message || `API Error: ${response.status}`);
+            const service = window.orderData.items.length === 1 && window.orderData.items[0].serviceDetails;
+            const handler = PaystackPop.setup({
+                key: PaystackConfig.credentials.publicKey,
+                email: billingInfo.email,
+                amount: window.orderData.total * 100,
+                ref: 'BX-' + Math.floor(Math.random() * 1000000000) + 1,
+                currency: 'NGN',
+                ...(service ? {
+                    metadata: {
+                        custom_fields: [
+                            { display_name: 'Service', variable_name: 'service', value: window.orderData.items[0].name },
+                            { display_name: 'Customer name', variable_name: 'customer_name', value: service.fullName },
+                            { display_name: 'WhatsApp number', variable_name: 'whatsapp_number', value: service.phone },
+                            { display_name: 'Service requirements', variable_name: 'service_requirements', value: service.details }
+                        ]
+                    }
+                } : {}),
+                onClose: () => alert('Payment cancelled'),
+                callback: (response) => {
+                    try {
+                        sessionStorage.setItem('brainboxX-pending-verification', JSON.stringify({
+                            reference: response.reference,
+                            email: billingInfo.email,
+                            amount: window.orderData.total * 100
+                        }));
+                    } catch (error) {
+                        console.error('Unable to save payment details for verification:', error);
+                        alert('Your payment reference is ' + response.reference + '. Save it and contact support for verification.');
+                        return;
+                    }
+                    window.location.href = 'payment-success.html';
                 }
-
-                return data;
-            } catch (error) {
-                console.error('API Call Error:', error);
-                throw error;
-            }
-        }
-
-        async function registerUser(email, password, fullName) {
-            return apiCall('/auth/register', {
-                method: 'POST',
-                body: JSON.stringify({ email, password, fullName })
             });
+
+            handler.openIframe();
         }
 
-        async function loginUser(email, password) {
-            return apiCall('/auth/login', {
-                method: 'POST',
-                body: JSON.stringify({ email, password })
-            });
-        }
-
-        async function logoutUser() {
-            clearAuthToken();
-            localStorage.removeItem(USER_KEY);
-            updateAuthUI();
-            showNotification('Logged out successfully', 'success');
-        }
-
-        async function createOrder(cartItems, deliveryAddress) {
-            return apiCall('/orders', {
-                method: 'POST',
-                body: JSON.stringify({ items: cartItems, deliveryAddress })
-            });
-        }
-
-        // ==========================================
-        // FORM HANDLERS
-        // ==========================================
-        document.addEventListener('DOMContentLoaded', function() {
-            const loginForm = document.getElementById('login-form');
-            const signupForm = document.getElementById('signup-form');
-
-            if (loginForm) {
-                loginForm.addEventListener('submit', handleLogin);
-            }
-
-            if (signupForm) {
-                signupForm.addEventListener('submit', handleSignup);
-            }
-
-            // Initialize UI based on auth state
-            updateAuthUI();
-        });
-
-        async function handleLogin(e) {
-            e.preventDefault();
-
-            const email = document.getElementById('login-email').value.trim();
-            const password = document.getElementById('login-password').value;
-
-            if (!email || !password) {
-                showNotification('Please fill in all fields', 'error');
-                return;
-            }
-
-            try {
-                showNotification('Logging in...', 'info');
-                const response = await loginUser(email, password);
-
-                if (response.token && response.user) {
-                    saveAuthToken(response.token);
-                    saveUser(response.user);
-                    
-                    showNotification(`Welcome back, ${response.user.fullName || email}!`, 'success');
-                    document.getElementById('login-form').reset();
-                    closeModal('login-modal');
-                    updateAuthUI();
-                } else {
-                    showNotification('Login failed. Please try again.', 'error');
-                }
-            } catch (error) {
-                showNotification(`Login error: ${error.message}`, 'error');
-            }
-        }
-
-        async function handleSignup(e) {
-            e.preventDefault();
-
-            const fullName = document.getElementById('signup-name').value.trim();
-            const email = document.getElementById('signup-email').value.trim();
-            const password = document.getElementById('signup-password').value;
-            const confirmPassword = document.getElementById('signup-confirm').value;
-
-            if (!fullName || !email || !password || !confirmPassword) {
-                showNotification('Please fill in all fields', 'error');
-                return;
-            }
-
-            if (password !== confirmPassword) {
-                showNotification('Passwords do not match', 'error');
-                return;
-            }
-
-            if (password.length < 6) {
-                showNotification('Password must be at least 6 characters', 'error');
-                return;
-            }
-
-            try {
-                showNotification('Creating account...', 'info');
-                const response = await registerUser(email, password, fullName);
-
-                if (response.token && response.user) {
-                    saveAuthToken(response.token);
-                    saveUser(response.user);
-                    
-                    showNotification(`Welcome to brainboxX, ${fullName}!`, 'success');
-                    document.getElementById('signup-form').reset();
-                    closeModal('signup-modal');
-                    updateAuthUI();
-                } else {
-                    showNotification('Account creation failed. Please try again.', 'error');
-                }
-            } catch (error) {
-                showNotification(`Signup error: ${error.message}`, 'error');
-            }
-        }
-
-        // ==========================================
-        // UI MANAGEMENT
-        // ==========================================
-        function updateAuthUI() {
-            const user = getUser();
-            const loginBtn = document.querySelector('.login-toggle');
-            const signupBtn = document.querySelector('.signup-toggle');
-
-            if (loginBtn) {
-                if (user) {
-                    loginBtn.textContent = `${user.fullName || user.email} ?`;
-                    loginBtn.style.background = '#4CAF50';
-                    loginBtn.onclick = () => showUserMenu();
-                } else {
-                    loginBtn.textContent = 'Login';
-                    loginBtn.style.background = '#f5c76b';
-                    loginBtn.onclick = () => toggleModal('login-modal');
-                }
-            }
-
-            if (signupBtn) {
-                signupBtn.style.display = user ? 'none' : 'block';
-            }
-        }
-
-        function showUserMenu() {
-            const user = getUser();
-            if (confirm(`Logged in as: ${user.fullName || user.email}\n\nClick OK to logout`)) {
-                logoutUser();
-            }
-        }
-
-        function toggleModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.style.display = modal.style.display === 'none' ? 'flex' : 'none';
-            }
-        }
-
-        function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.style.display = 'none';
-            }
-        }
-
-        function switchModal(closeModalId, openModalId) {
-            closeModal(closeModalId);
-            toggleModal(openModalId);
-        }
-
-        // ==========================================
-        // PAGE LOAD
-        // ==========================================
-        console.log('? brainboxX Marketplace Authentication & Checkout System Loaded');
-        console.log('API Endpoint:', API_BASE_URL);
-        console.log('Status:', isAuthenticated() ? 'Authenticated' : 'Not Authenticated');
+        document.addEventListener('DOMContentLoaded', initCheckout);
     </script>
-    <script src="checkout-handler.js"></script>
-    <script src="payment-handler.js"></script>
-<script src="theme-toggle.js"></script>
 </body>
 </html>
-

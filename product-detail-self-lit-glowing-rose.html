@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -9,7 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="product-detail.css">
-  </head>
+      <link rel="stylesheet" href="gift-detail-cart.css">
+</head>
   <body>
     <header class="site-header">
       <a class="brand" href="brainboxtools.html">brainboxX</a>
@@ -70,8 +71,8 @@
           </div>
 
           <div class="checkout-actions">
-            <a class="btn btn-primary" href="checkout.html">Add to Cart</a>
-            <a class="btn btn-secondary" href="checkout.html">Buy Now</a>
+            <button class="btn btn-primary" onclick="addToCart()">Add to Cart</button>
+            <button class="btn btn-secondary" onclick="buyNow()">Buy Now</button>
           </div>
 
           <div class="trust-footer">
@@ -84,9 +85,47 @@
 
     <div class="mobile-action-bar" aria-label="Quick purchase actions">
       <button class="wishlist-btn" type="button" aria-label="Add to wishlist">&#9825;</button>
-      <a class="btn btn-primary mobile-cart-btn" href="checkout.html">Add to Cart</a>
+      <button class="btn btn-primary mobile-cart-btn" onclick="addToCart()">Add to Cart</button>
     </div>
 
     <footer class="site-footer">brainboxX Marketplace</footer>
-  </body>
+    <script>
+    function getProductData() {
+      const title = document.querySelector('.product-title').textContent;
+      const priceText = document.querySelector('.price').textContent.replace(/[^0-9]/g, '');
+      const price = parseInt(priceText);
+      const quantity = parseInt(document.getElementById('quantity').value);
+      const color = document.getElementById('color-variant')?.value || 'Default';
+      const description = document.querySelector('.product-summary').textContent;
+      
+      return {
+        id: Math.random().toString(36).substr(2, 9),
+        name: title,
+        description: description.substring(0, 100),
+        price: price,
+        quantity: quantity,
+        color: color,
+        icon: '🎁'
+      };
+    }
+
+    function addToCart() {
+      const product = getProductData();
+      const cart = [product];
+      localStorage.setItem('brainboxX-pending-order', JSON.stringify(cart));
+      window.location.href = 'checkout.html';
+    }
+
+    function buyNow() {
+      const product = getProductData();
+      const cart = [product];
+      localStorage.setItem('brainboxX-pending-order', JSON.stringify(cart));
+      window.location.href = 'checkout.html';
+    }
+  </script>
+  <script src="gift-detail-cart-init.js"></script>
+  <script src="gifts-cart.js"></script>
+</body>
 </html>
+
+

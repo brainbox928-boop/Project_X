@@ -7,18 +7,21 @@
     <meta name="description" content="Gift products and delivery services from brainboxX.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="gifts-delivery.css">
+    <link rel="stylesheet" href="gifts-modern.css">
   </head>
   <body>
     <header class="site-header">
       <a class="brand" href="brainboxtools.html">brainboxX</a>
-      <nav class="site-nav" aria-label="Main navigation">
+      <nav class="site-nav nav" aria-label="Main navigation">
         <a href="marketplace.html">All Categories</a>
         <a href="communication.html">Communication</a>
         <a href="courses.html">Courses</a>
         <a href="gifts-delivery.html" aria-current="page">Gifts & Delivery</a>
         <a href="brainboxX-pro-hub.html">Professional Services</a>
+        <button class="gift-cart-toggle" type="button" aria-controls="gift-cart" aria-expanded="false">Cart <span id="gift-cart-count">0</span></button>
       </nav>
     </header>
 
@@ -9532,6 +9535,66 @@
           </div>
         </section>
       </section>
+
+      <section class="social-links" id="social">
+        <div class="container">
+          <div class="section-head center">
+            <p class="tagline">Connect With Us</p>
+            <h2>Find brainboxX across all platforms</h2>
+            <p>Join our community on WhatsApp, Telegram, and social media for updates, support, and exclusive offers.</p>
+          </div>
+
+          <div class="social-grid">
+            <a href="https://brainbox-x.netlify.app" target="_blank" class="social-card" title="Visit Portfolio">
+              <div class="social-icon">🖇️</div>
+              <h3>Portfolio</h3>
+              <p>View our work and services</p>
+            </a>
+
+            <a href="https://wa.me/message/YDNRHAYWZTXXD1" target="_blank" class="social-card" title="WhatsApp Support">
+              <div class="social-icon">🖇️</div>
+              <h3>Support 🔗</h3>
+              <p>WhatsApp messaging</p>
+            </a>
+
+            <a href="https://chat.whatsapp.com/GsTxCUesppBF0Qcx4Iez3P" target="_blank" class="social-card" title="Broadcast Link">
+              <div class="social-icon">🔗🖇️</div>
+              <h3>Broadcast Link</h3>
+              <p>Latest updates & offers</p>
+            </a>
+
+            <a href="https://chat.whatsapp.com/F6AKpV8dTba9DwYqaaEumW" target="_blank" class="social-card" title="Join Main Group">
+              <div class="social-icon">👥</div>
+              <h3>Brainbox_X Group</h3>
+              <p>Main community group</p>
+            </a>
+
+            <a href="https://chat.whatsapp.com/Ex9ykt5oJ2N9fnAo6uM5Qc" target="_blank" class="social-card" title="Join General Group">
+              <div class="social-icon">💬</div>
+              <h3>General Group</h3>
+              <p>Community discussions</p>
+            </a>
+
+            <a href="https://whatsapp.com/channel/0029VbDLFtIKbYMU2PDTPY1N" target="_blank" class="social-card" title="WhatsApp Channel">
+              <div class="social-icon">🖇️</div>
+              <h3>WhatsApp Channel</h3>
+              <p>Announcements & news</p>
+            </a>
+
+            <a href="https://t.me/Brianbox928" target="_blank" class="social-card" title="Telegram Chat">
+              <div class="social-icon">💬</div>
+              <h3>Telegram Chat</h3>
+              <p>Join our telegram community</p>
+            </a>
+
+            <a href="https://t.me/brainbox_X" target="_blank" class="social-card" title="Telegram Channel">
+              <div class="social-icon">📢</div>
+              <h3>Telegram Channel</h3>
+              <p>Channel updates & news</p>
+            </a>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer class="site-footer">
@@ -9559,9 +9622,19 @@
       </div>
     </footer>
 
-    <script src="script.js"></script>
+    <dialog id="gift-cart" class="gift-cart" aria-labelledby="gift-cart-title">
+      <div class="gift-cart-header">
+        <h2 id="gift-cart-title">Your cart</h2>
+        <button type="button" class="gift-cart-close" aria-label="Close cart">&times;</button>
+      </div>
+      <div id="gift-cart-items"></div>
+      <p class="gift-cart-total">Subtotal: <strong id="gift-cart-subtotal">₦0</strong></p>
+      <p class="gift-cart-note">Shipping and VAT are calculated at checkout.</p>
+      <button type="button" class="gift-cart-checkout">Proceed to checkout</button>
+    </dialog>
+    <script src="gifts-cart.js"></script>
+    <script src="theme-toggle.js"></script>
   </body>
 </html>
-
 
 

@@ -62,7 +62,7 @@ const PaystackHandler = {
         this.handlePaymentClosed(orderData);
       },
 
-      onSuccess: (response) => {
+      callback: (response) => {
         console.log('✅ Payment successful:', response);
         this.verifyPaymentOnServer(response.reference, orderData, onSuccess);
       }
@@ -115,13 +115,18 @@ const PaystackHandler = {
       body: JSON.stringify({
         reference: data.reference,
         email: data.email,
-        orderId: data.orderId
+        amount: PaystackConfig.formatAmountForPaystack(data.amount)
       })
     })
     .then(response => response.json())
     .then(result => {
       if (result.status === 'success' && result.verified) {
         console.log('✅ Payment verified on server');
+        sessionStorage.setItem('brainboxX-pending-verification', JSON.stringify({
+          reference: data.reference,
+          email: data.email,
+          amount: PaystackConfig.formatAmountForPaystack(data.amount)
+        }));
         this.handlePaymentSuccess({
           reference: data.reference,
           verified: true,
