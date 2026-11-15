@@ -714,7 +714,7 @@
             </div>
             <form class="order-form" id="orderFormElement" onsubmit="submitOrder(event)">
                 <div class="form-group">
-                    <label for="serviceId">Course *</label>
+                    <label for="serviceName">Course</label>
                     <input type="hidden" id="serviceId" name="serviceId" required>
                     <input type="text" id="serviceName" name="serviceName" readonly style="background: var(--border); cursor: not-allowed;">
                 </div>
@@ -734,18 +734,11 @@
                     <label for="requirements">Learning Goals & Experience Level</label>
                     <textarea id="requirements" name="requirements" placeholder="Tell us about your goals and current experience level..."></textarea>
                 </div>
-                <button type="submit" class="submit-btn">Confirm Enrollment</button>
+                <p>VAT of 7.5% is added at checkout. No shipping fee applies to courses. Your contact details and learning goals will be included with your Paystack payment; do not enter passwords or sensitive documents.</p>
+                <p>Continuing does not confirm enrolment. Keep your payment reference and contact support after payment.</p>
+                <button type="submit" class="submit-btn">Continue to checkout</button>
             </form>
         </div>
-    </div>
-
-    <!-- Success Modal -->
-    <div class="success-modal" id="successModal">
-        <h3>✅ Enrollment Confirmed!</h3>
-        <p>Your enrollment has been successfully processed and assigned an Enrollment ID.</p>
-        <div class="order-id-display" id="orderIdDisplay"></div>
-        <p>Access to course materials will be available within <strong>1 hour</strong>.</p>
-        <p style="color: var(--text-muted); margin-top: 30px;">Check your email for login credentials and course syllabus.</p>
     </div>
 
     <script>
@@ -784,21 +777,21 @@
 
         function openOrderForm(serviceId) {
             const service = services[serviceId];
-            if (!service) return;
+            if (!service) {
+                alert('This course could not be found. Please select it again.');
+                return;
+            }
 
+            document.getElementById('orderFormElement').reset();
             document.getElementById('serviceId').value = serviceId;
             document.getElementById('serviceName').value = `${service.name} (${service.price})`;
             document.getElementById('orderModal').classList.add('show');
-            document.getElementById('orderFormElement').reset();
+            document.getElementById('fullName').focus();
         }
 
         function closeOrderForm() {
             document.getElementById('orderModal').classList.remove('show');
             document.getElementById('orderFormElement').reset();
-        }
-
-        function generateOrderId() {
-            return 'CRS-' + Date.now();
         }
 
         function submitOrder(event) {
@@ -820,32 +813,36 @@
                 return;
             }
 
-            const orderId = generateOrderId();
-            const order = {
-                orderId,
-                serviceId,
-                serviceName: services[serviceId].name,
-                price: services[serviceId].price,
-                fullName,
-                email,
-                whatsapp,
-                requirements,
-                timestamp: new Date().toLocaleString(),
-                status: 'enrolled'
-            };
+            const service = services[serviceId];
+            if (!service || !/^₦[\d,]+$/.test(service.price)) {
+                alert('This course could not be found. Please select it again.');
+                return;
+            }
+            const price = Number(service.price.slice(1).replace(/,/g, ''));
+            if (!Number.isSafeInteger(price) || price <= 0) {
+                alert('The course price is invalid. Please contact support.');
+                return;
+            }
 
-            let orders = JSON.parse(localStorage.getItem('courseEnrollments')) || [];
-            orders.push(order);
-            localStorage.setItem('courseEnrollments', JSON.stringify(orders));
-            localStorage.setItem('latestCourseEnrollment', JSON.stringify(order));
-
-            document.getElementById('orderIdDisplay').textContent = orderId;
-            document.getElementById('orderModal').classList.remove('show');
-            document.getElementById('successModal').classList.add('show');
-
-            setTimeout(() => {
-                window.location.reload();
-            }, 4000);
+            const order = [{
+                id: 'course-' + serviceId,
+                name: service.name,
+                description: 'Course enrolment',
+                price,
+                quantity: 1,
+                icon: 'COURSE',
+                serviceDetails: { fullName, email, phone: whatsapp, details: requirements }
+            }];
+            try {
+                if (localStorage.getItem('brainboxX-pending-order') &&
+                    !confirm('This will replace your current pending checkout. Continue?')) return;
+                localStorage.setItem('brainboxX-pending-order', JSON.stringify(order));
+            } catch (error) {
+                console.error('Unable to start course checkout:', error);
+                alert('Checkout could not be started. Please check browser storage and try again.');
+                return;
+            }
+            window.location.href = 'checkout.html';
         }
 
         document.addEventListener('click', (e) => {

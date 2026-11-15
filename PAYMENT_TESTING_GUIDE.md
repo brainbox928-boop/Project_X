@@ -22,6 +22,12 @@
 
 Digital Studio quote and maintenance links open the existing WhatsApp support contact. They do not create an order or subscription.
 
+### Digital exchange manual quotes
+1. Open `crypto.html` and prepare a buy or sell request for a digital currency, physical gift card or e-gift code. Rates and availability are confirmed manually; no rates are promised on the page.
+2. Copy the generated message, open the existing WhatsApp support link, paste it and send it. Preparing or copying the message does not submit an order or notify the team.
+3. Seller cash-outs are manual: Nigerian bank transfer, or a requested crypto cash-out for an estimated trade value over USD 500, subject to team confirmation. Do not enter gift-card codes, passwords, wallet recovery phrases, bank details or identity documents in the initial request.
+4. The page does not process payments, validate gift cards, transfer crypto, or automatically pay sellers.
+
 The function validates a transaction against browser-supplied values, not a trusted order. It and the linked checkouts intentionally reject live keys. A database-backed order, server-side prices, signed webhook reconciliation, and end-to-end testing on Netlify are required before enabling live payments.
 
 Run the local verification tests with `node --test backend/tests/payment-verify.test.mjs`. These use simulated Paystack responses, not real transactions.
@@ -42,10 +48,10 @@ Run the local verification tests with `node --test backend/tests/payment-verify.
 5. Order summary should show all items, quantities, and total
 
 ### Step 3: Test Courses Page
-1. Open `courses.html`
-2. Scroll to course offerings
-3. Verify "Enroll Now" or purchase buttons work
-4. ✅ Should integrate with payment handler
+1. Open `courses.html`, select a course and complete the enrolment form.
+2. Continue to checkout and check the selected course name and price, zero shipping, 7.5% VAT, and total. An existing pending checkout requires confirmation before replacement.
+3. Complete the billing form and open Paystack in test mode. Contact details and optional learning goals are included in Paystack metadata; do not enter passwords or sensitive documents.
+4. Payment alone does not confirm enrolment, create a durable order, grant course access, or send an email. Keep the payment reference and contact support.
 
 ### Step 4: Verify localStorage Integration
 1. Open browser DevTools (F12)

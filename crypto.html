@@ -1,1002 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto & Gift Cards Trading | brainboxX</title>
-    <meta name="description" content="Buy and sell cryptocurrencies, physical gift cards, and e-gift codes with instant 45-minute response time">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #f5c76b;
-            --primary-dark: #d9a73f;
-            --bg: #f5fbff;
-            --surface: #ffffff;
-            --surface-alt: #eaf7ff;
-            --text: #1a2733;
-            --text-muted: #5f6f7a;
-            --border: #dfeaf4;
-            --success: #4ade80;
-            --error: #ff6b6b;
-            --warning: #ffa500;
-            --accent: #00d9ff;
-            --crypto-gold: #ffd700;
-        }
-
-        * { box-sizing: border-box; }
-
-        body {
-            margin: 0;
-            font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            color: var(--text);
-            background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%);
-            line-height: 1.6;
-            min-height: 100vh;
-        }
-
-        a { color: inherit; text-decoration: none; }
-
-        /* Header */
-        .header {
-            position: sticky;
-            top: 0;
-            z-index: 40;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-            padding: 16px 24px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--text);
-        }
-
-        .nav {
-            display: flex;
-            gap: 32px;
-            flex: 1;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .nav a {
-            font-weight: 600;
-            color: var(--text-muted);
-            transition: color 0.2s;
-        }
-
-        .nav a:hover,
-        .nav a.active {
-            color: var(--primary-dark);
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
-            color: var(--text);
-            padding: 60px 24px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 20% 50%, rgba(0, 217, 255, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(255, 0, 110, 0.05) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        .hero-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin: 0 0 16px;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            margin: 0;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            opacity: 0.95;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            background: rgba(74, 222, 128, 0.1);
-            border: 1px solid var(--success);
-            color: var(--text);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-        }
-
-        /* Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 1.8rem;
-            font-weight: 800;
-            margin-bottom: 50px;
-            color: var(--text);
-        }
-
-        /* Trading Grid */
-        .trading-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
-        }
-
-        .trading-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 30px;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .trading-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent 0%, rgba(245, 199, 107, 0.1) 50%, transparent 100%);
-            transition: left 0.5s;
-        }
-
-        .trading-card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 8px 32px rgba(245, 199, 107, 0.15), inset 0 1px 0 rgba(245, 199, 107, 0.1);
-            transform: translateY(-4px);
-        }
-
-        .trading-card:hover::before {
-            left: 100%;
-        }
-
-        .card-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-        }
-
-        .card-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--text);
-        }
-
-        .card-desc {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-
-        .card-badge {
-            display: inline-block;
-            background: rgba(245, 199, 107, 0.1);
-            border: 1px solid var(--primary);
-            color: var(--primary-dark);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        /* Form Section */
-        .form-section {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 50px;
-            margin-bottom: 60px;
-            box-shadow: 0 8px 32px rgba(245, 199, 107, 0.1);
-        }
-
-        .form-tabs {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 40px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .tab-btn {
-            padding: 12px 24px;
-            background: transparent;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.2s;
-            font-family: inherit;
-        }
-
-        .tab-btn:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        .tab-btn.active {
-            background: linear-gradient(135deg, var(--accent) 0%, var(--crypto-gold) 100%);
-            border-color: transparent;
-            color: var(--primary);
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group.full {
-            grid-column: 1 / -1;
-        }
-
-        .form-group label {
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: var(--text-light);
-            font-size: 0.95rem;
-        }
-
-        .form-group label .required {
-            color: var(--accent);
-            margin-left: 4px;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            padding: 12px 15px;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            font-size: 1rem;
-            font-family: inherit;
-            transition: all 0.3s;
-            background: linear-gradient(135deg, rgba(45, 95, 141, 0.2) 0%, rgba(26, 31, 46, 0.2) 100%);
-            color: var(--text-light);
-        }
-
-        .form-group input::placeholder,
-        .form-group select::placeholder,
-        .form-group textarea::placeholder {
-            color: var(--text-muted);
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.2);
-            background: linear-gradient(135deg, rgba(45, 95, 141, 0.4) 0%, rgba(26, 31, 46, 0.4) 100%);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .form-group select option {
-            background: var(--primary);
-            color: var(--text-light);
-        }
-
-        /* Buttons */
-        .btn {
-            padding: 14px 32px;
-            border: none;
-            border-radius: 6px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: inline-block;
-            text-align: center;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent) 0%, #00ffcc 100%);
-            color: var(--primary);
-            width: 100%;
-            font-weight: 700;
-        }
-
-        .btn-primary:hover {
-            box-shadow: 0 8px 32px rgba(0, 217, 255, 0.4);
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: linear-gradient(135deg, var(--accent-secondary) 0%, var(--accent) 100%);
-            color: white;
-            padding: 10px 20px;
-            font-size: 0.9rem;
-        }
-
-        /* Response Time Badge */
-        .response-time {
-            text-align: center;
-            padding: 20px;
-            background: linear-gradient(135deg, rgba(0, 255, 65, 0.1) 0%, transparent 100%);
-            border: 1px solid rgba(0, 255, 65, 0.3);
-            border-radius: 8px;
-            margin-bottom: 30px;
-            color: var(--success);
-        }
-
-        .response-time strong {
-            font-size: 1.2rem;
-        }
-
-        /* FAQ */
-        .faq-item {
-            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            margin-bottom: 15px;
-            overflow: hidden;
-            transition: all 0.3s;
-        }
-
-        .faq-item:hover {
-            border-color: var(--accent);
-            box-shadow: 0 4px 16px rgba(0, 217, 255, 0.15);
-        }
-
-        .faq-question {
-            padding: 20px;
-            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
-            transition: all 0.3s;
-            color: var(--text-light);
-        }
-
-        .faq-question:hover {
-            background: linear-gradient(135deg, #2a3142 0%, #1a1f2e 100%);
-            color: var(--accent);
-        }
-
-        .faq-answer {
-            padding: 20px;
-            background: rgba(0, 217, 255, 0.05);
-            color: var(--text-muted);
-            display: none;
-            border-top: 1px solid var(--border);
-        }
-
-        .faq-item.active .faq-answer {
-            display: block;
-        }
-
-        /* Footer */
-        .footer {
-            background: linear-gradient(180deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
-            color: var(--text-light);
-            padding: 40px 20px;
-            text-align: center;
-            margin-top: 80px;
-            border-top: 2px solid var(--border);
-        }
-
-        .footer p {
-            margin: 0;
-            opacity: 0.8;
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            .trading-grid { grid-template-columns: 1fr; }
-            .form-section { padding: 30px; }
-            .form-grid { grid-template-columns: 1fr; }
-            .form-tabs { flex-direction: column; }
-        }
-    </style>
-    <link rel="stylesheet" href="category-brand.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Request a manual quote to buy or sell digital currencies and gift cards with brainboxX.">
+  <title>Digital Exchange | brainboxX</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="exchange.css">
+  <script src="theme-toggle.js" defer></script>
+  <script src="exchange.js" defer></script>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <a class="logo" href="brainboxtools.html">brainboxX</a>
-            <nav class="nav">
-                <a href="brainboxtools.html">Home</a>
-                <a href="gifts-delivery.html">Marketplace</a>
-                <a href="marketing.html">Marketing</a>
-                <a href="crypto.html" class="active">Crypto</a>
-            </nav>
-        </div>
-    </header>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="brainboxtools.html" aria-label="brainboxX home">brainboxX</a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="brainboxtools.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="marketplace.html">Marketplace</a>
+        <a href="brainboxtools.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <div class="hero-badge">? Fast & Secure Trading</div>
-            <h1>Buy & Sell Crypto, Gift Cards & E-Codes</h1>
-            <p>Instant cryptocurrency trading, physical gift cards, and digital e-gift codes. Guaranteed response within 45 minutes!</p>
-        </div>
+  <main>
+    <section class="exchange-hero">
+      <div class="exchange-container">
+        <p class="exchange-eyebrow">brainboxX Digital Exchange</p>
+        <h1>Buy and sell digital assets with a personal quote.</h1>
+        <p>Trade digital currencies, physical gift cards and e-gift codes with our team. Ask for the current rate before deciding to proceed.</p>
+        <a class="exchange-button" href="#request">Request a rate</a>
+      </div>
     </section>
 
-    <!-- Quick Options -->
-    <section class="container">
-        <h2 class="section-title">What We Trade</h2>
-        <div class="trading-grid">
-            <div class="trading-card" onclick="switchTab('crypto-buy')">
-                <div class="card-icon">?</div>
-                <div class="card-title">Cryptocurrency</div>
-                <div class="card-badge">Bitcoin, Ethereum, USDT & More</div>
-                <div class="card-desc">Buy and sell major cryptocurrencies instantly. All transactions verified and secure.</div>
-                <button class="btn btn-secondary">Trade Now</button>
-            </div>
-
-            <div class="trading-card" onclick="switchTab('giftcard-buy')">
-                <div class="card-icon">??</div>
-                <div class="card-title">Physical Gift Cards</div>
-                <div class="card-badge">iTunes, Google Play, Amazon & More</div>
-                <div class="card-desc">Buy and sell official physical gift cards. Fast delivery and competitive rates.</div>
-                <button class="btn btn-secondary">Trade Now</button>
-            </div>
-
-            <div class="trading-card" onclick="switchTab('ecode-buy')">
-                <div class="card-icon">??</div>
-                <div class="card-title">E-Gift Codes</div>
-                <div class="card-badge">Digital Codes Delivered Instantly</div>
-                <div class="card-desc">Instant e-gift codes for all major platforms. Redeem immediately after purchase.</div>
-                <button class="btn btn-secondary">Trade Now</button>
-            </div>
-        </div>
+    <section class="exchange-container exchange-section" aria-labelledby="rates-title">
+      <p class="exchange-eyebrow">Popular options</p>
+      <h2 id="rates-title">Ask for today's rate</h2>
+      <p class="exchange-intro">Rates and availability vary by asset, card region and value. Select an option or enter another asset below. A listing is not a guaranteed offer or rate.</p>
+      <div class="exchange-cards">
+        <article class="exchange-card">
+          <h3>Digital currencies</h3>
+          <p>Bitcoin, USDT, Ethereum, USDC and other currencies.</p>
+          <a href="#request" data-category="crypto">Get current rate <span aria-hidden="true">&rarr;</span></a>
+        </article>
+        <article class="exchange-card">
+          <h3>Physical gift cards</h3>
+          <p>Popular brands such as Amazon, Apple, Google Play and Steam.</p>
+          <a href="#request" data-category="physical">Get current rate <span aria-hidden="true">&rarr;</span></a>
+        </article>
+        <article class="exchange-card">
+          <h3>E-gift codes</h3>
+          <p>Ask about digital gift codes, their region and availability.</p>
+          <a href="#request" data-category="digital">Get current rate <span aria-hidden="true">&rarr;</span></a>
+        </article>
+      </div>
     </section>
 
-    <!-- Trading Forms Section -->
-    <section class="container">
-        <div class="form-section">
-            <h2 class="section-title">Place Your Trade</h2>
-            
-            <div class="response-time">
-                <p><strong>?? 45-Minute Response Guarantee!</strong></p>
-                <p>We respond to all buy and sell requests within 45 minutes maximum. Fast, reliable, and professional service.</p>
-            </div>
-
-            <!-- Tab Buttons -->
-            <div class="form-tabs">
-                <button class="tab-btn active" onclick="switchTab('crypto-buy', this)">?? Buy Crypto</button>
-                <button class="tab-btn" onclick="switchTab('crypto-sell', this)">?? Sell Crypto</button>
-                <button class="tab-btn" onclick="switchTab('giftcard-buy', this)">?? Buy Gift Cards</button>
-                <button class="tab-btn" onclick="switchTab('giftcard-sell', this)">?? Sell Gift Cards</button>
-                <button class="tab-btn" onclick="switchTab('ecode-buy', this)">?? Buy E-Codes</button>
-                <button class="tab-btn" onclick="switchTab('ecode-sell', this)">?? Sell E-Codes</button>
-            </div>
-
-            <!-- BUY CRYPTO FORM -->
-            <form id="crypto-buy-form" class="trade-form" style="display: block;">
-                <h3 style="color: var(--text-light); margin-top: 0;">Buy Cryptocurrency</h3>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="crypto-coin">Cryptocurrency <span class="required">*</span></label>
-                        <select id="crypto-coin" required>
-                            <option value="">-- Select Cryptocurrency --</option>
-                            <option value="Bitcoin (BTC)">Bitcoin (BTC)</option>
-                            <option value="Ethereum (ETH)">Ethereum (ETH)</option>
-                            <option value="USDT (Tether)">USDT (Tether)</option>
-                            <option value="USDC (USD Coin)">USDC (USD Coin)</option>
-                            <option value="XRP (Ripple)">XRP (Ripple)</option>
-                            <option value="Litecoin (LTC)">Litecoin (LTC)</option>
-                            <option value="Dogecoin (DOGE)">Dogecoin (DOGE)</option>
-                            <option value="Solana (SOL)">Solana (SOL)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="crypto-amount">Amount (Naira ?) <span class="required">*</span></label>
-                        <input type="number" id="crypto-amount" placeholder="e.g., 50000" min="1000" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="crypto-wallet">Wallet Address <span class="required">*</span></label>
-                        <input type="text" id="crypto-wallet" placeholder="Your crypto wallet address" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="crypto-name">Full Name <span class="required">*</span></label>
-                        <input type="text" id="crypto-name" placeholder="Your full name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="crypto-email">Email Address <span class="required">*</span></label>
-                        <input type="email" id="crypto-email" placeholder="your@email.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="crypto-phone">Phone Number <span class="required">*</span></label>
-                        <input type="tel" id="crypto-phone" placeholder="+234..." required>
-                    </div>
-                    <div class="form-group full">
-                        <label for="crypto-notes">Additional Notes (Optional)</label>
-                        <textarea id="crypto-notes" placeholder="Any special instructions..."></textarea>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit Buy Request</button>
-            </form>
-
-            <!-- SELL CRYPTO FORM -->
-            <form id="crypto-sell-form" class="trade-form" style="display: none;">
-                <h3 style="color: var(--text-light); margin-top: 0;">Sell Cryptocurrency</h3>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="sell-crypto-coin">Cryptocurrency <span class="required">*</span></label>
-                        <select id="sell-crypto-coin" required>
-                            <option value="">-- Select Cryptocurrency --</option>
-                            <option value="Bitcoin (BTC)">Bitcoin (BTC)</option>
-                            <option value="Ethereum (ETH)">Ethereum (ETH)</option>
-                            <option value="USDT (Tether)">USDT (Tether)</option>
-                            <option value="USDC (USD Coin)">USDC (USD Coin)</option>
-                            <option value="XRP (Ripple)">XRP (Ripple)</option>
-                            <option value="Litecoin (LTC)">Litecoin (LTC)</option>
-                            <option value="Dogecoin (DOGE)">Dogecoin (DOGE)</option>
-                            <option value="Solana (SOL)">Solana (SOL)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="sell-crypto-amount">Amount to Sell <span class="required">*</span></label>
-                        <input type="number" id="sell-crypto-amount" placeholder="e.g., 0.5 BTC" step="0.01" min="0.01" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="sell-crypto-bank">Bank Account Name <span class="required">*</span></label>
-                        <input type="text" id="sell-crypto-bank" placeholder="Account holder name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="sell-crypto-banknum">Bank Account Number <span class="required">*</span></label>
-                        <input type="text" id="sell-crypto-banknum" placeholder="Your account number" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="sell-crypto-bankname">Bank Name <span class="required">*</span></label>
-                        <input type="text" id="sell-crypto-bankname" placeholder="e.g., First Bank, GTB" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="sell-crypto-name">Full Name <span class="required">*</span></label>
-                        <input type="text" id="sell-crypto-name" placeholder="Your full name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="sell-crypto-email">Email Address <span class="required">*</span></label>
-                        <input type="email" id="sell-crypto-email" placeholder="your@email.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="sell-crypto-phone">Phone Number <span class="required">*</span></label>
-                        <input type="tel" id="sell-crypto-phone" placeholder="+234..." required>
-                    </div>
-                    <div class="form-group full">
-                        <label for="sell-crypto-notes">Additional Notes (Optional)</label>
-                        <textarea id="sell-crypto-notes" placeholder="Any special instructions..."></textarea>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit Sell Request</button>
-            </form>
-
-            <!-- BUY GIFT CARDS FORM -->
-            <form id="giftcard-buy-form" class="trade-form" style="display: none;">
-                <h3 style="color: var(--text-light); margin-top: 0;">Buy Physical Gift Cards</h3>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="gc-type">Gift Card Type <span class="required">*</span></label>
-                        <select id="gc-type" required>
-                            <option value="">-- Select Card Type --</option>
-                            <option value="iTunes Card">iTunes Card</option>
-                            <option value="Google Play Card">Google Play Card</option>
-                            <option value="Amazon Card">Amazon Card</option>
-                            <option value="Netflix Card">Netflix Card</option>
-                            <option value="PlayStation Card">PlayStation Card</option>
-                            <option value="Xbox Card">Xbox Card</option>
-                            <option value="Razer Card">Razer Card</option>
-                            <option value="Steam Card">Steam Card</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="gc-value">Card Value (?) <span class="required">*</span></label>
-                        <input type="number" id="gc-value" placeholder="e.g., 5000, 10000" min="1000" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="gc-quantity">Quantity <span class="required">*</span></label>
-                        <input type="number" id="gc-quantity" placeholder="Number of cards" min="1" value="1" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="gc-delivery">Delivery Method <span class="required">*</span></label>
-                        <select id="gc-delivery" required>
-                            <option value="">-- Select Method --</option>
-                            <option value="Pickup">Pickup (Lagos)</option>
-                            <option value="Courier">Courier Delivery</option>
-                            <option value="Instant Digital">Instant (Digital Photo)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="gc-name">Full Name <span class="required">*</span></label>
-                        <input type="text" id="gc-name" placeholder="Your full name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="gc-email">Email Address <span class="required">*</span></label>
-                        <input type="email" id="gc-email" placeholder="your@email.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="gc-phone">Phone Number <span class="required">*</span></label>
-                        <input type="tel" id="gc-phone" placeholder="+234..." required>
-                    </div>
-                    <div class="form-group">
-                        <label for="gc-address">Delivery Address (if applicable) <span class="required">*</span></label>
-                        <input type="text" id="gc-address" placeholder="Your delivery address" required>
-                    </div>
-                    <div class="form-group full">
-                        <label for="gc-notes">Additional Notes (Optional)</label>
-                        <textarea id="gc-notes" placeholder="Any special instructions..."></textarea>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit Buy Request</button>
-            </form>
-
-            <!-- SELL GIFT CARDS FORM -->
-            <form id="giftcard-sell-form" class="trade-form" style="display: none;">
-                <h3 style="color: var(--text-light); margin-top: 0;">Sell Physical Gift Cards</h3>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="sell-gc-type">Gift Card Type <span class="required">*</span></label>
-                        <select id="sell-gc-type" required>
-                            <option value="">-- Select Card Type --</option>
-                            <option value="iTunes Card">iTunes Card</option>
-                            <option value="Google Play Card">Google Play Card</option>
-                            <option value="Amazon Card">Amazon Card</option>
-                            <option value="Netflix Card">Netflix Card</option>
-                            <option value="PlayStation Card">PlayStation Card</option>
-                            <option value="Xbox Card">Xbox Card</option>
-                            <option value="Razer Card">Razer Card</option>
-                            <option value="Steam Card">Steam Card</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="sell-gc-value">Card Value <span class="required">*</span></label>
-                        <input type="number" id="sell-gc-value" placeholder="e.g., 5000, 10000" min="1000" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="sell-gc-quantity">Quantity <span class="required">*</span></label>
-                        <input type="number" id="sell-gc-quantity" placeholder="Number of cards" min="1" value="1" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="sell-gc-code">Gift Card PIN/Code (First 10 digits) <span class="required">*</span></label>
-                        <input type="text" id="sell-gc-code" placeholder="Don't reveal full code yet" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="sell-gc-name">Full Name <span class="required">*</span></label>
-                        <input type="text" id="sell-gc-name" placeholder="Your full name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="sell-gc-email">Email Address <span class="required">*</span></label>
-                        <input type="email" id="sell-gc-email" placeholder="your@email.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="sell-gc-phone">Phone Number <span class="required">*</span></label>
-                        <input type="tel" id="sell-gc-phone" placeholder="+234..." required>
-                    </div>
-                    <div class="form-group">
-                        <label for="sell-gc-bankname">Bank Account Name <span class="required">*</span></label>
-                        <input type="text" id="sell-gc-bankname" placeholder="Your bank account name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="sell-gc-banknum">Bank Account Number <span class="required">*</span></label>
-                        <input type="text" id="sell-gc-banknum" placeholder="Your account number" required>
-                    </div>
-                    <div class="form-group full">
-                        <label for="sell-gc-notes">Additional Notes (Optional)</label>
-                        <textarea id="sell-gc-notes" placeholder="Any special instructions..."></textarea>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit Sell Request</button>
-            </form>
-
-            <!-- BUY E-CODES FORM -->
-            <form id="ecode-buy-form" class="trade-form" style="display: none;">
-                <h3 style="color: var(--text-light); margin-top: 0;">Buy E-Gift Codes</h3>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="ecode-type">E-Code Type <span class="required">*</span></label>
-                        <select id="ecode-type" required>
-                            <option value="">-- Select Code Type --</option>
-                            <option value="iTunes Digital">iTunes Digital Code</option>
-                            <option value="Google Play Digital">Google Play Digital Code</option>
-                            <option value="Amazon Digital">Amazon Digital Code</option>
-                            <option value="Netflix Digital">Netflix Digital Code</option>
-                            <option value="Spotify Digital">Spotify Digital Code</option>
-                            <option value="PlayStation Network">PlayStation Network Code</option>
-                            <option value="Xbox Live">Xbox Live Code</option>
-                            <option value="Steam Wallet">Steam Wallet Code</option>
-                            <option value="Other">Other Digital Code</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="ecode-value">Code Value (?) <span class="required">*</span></label>
-                        <input type="number" id="ecode-value" placeholder="e.g., 1000, 5000, 10000" min="500" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="ecode-quantity">Quantity <span class="required">*</span></label>
-                        <input type="number" id="ecode-quantity" placeholder="Number of codes" min="1" value="1" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="ecode-name">Full Name <span class="required">*</span></label>
-                        <input type="text" id="ecode-name" placeholder="Your full name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="ecode-email">Email Address <span class="required">*</span></label>
-                        <input type="email" id="ecode-email" placeholder="your@email.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="ecode-phone">Phone Number <span class="required">*</span></label>
-                        <input type="tel" id="ecode-phone" placeholder="+234..." required>
-                    </div>
-                    <div class="form-group full">
-                        <label for="ecode-notes">Delivery Instructions (Optional)</label>
-                        <textarea id="ecode-notes" placeholder="e.g., Send codes via email, WhatsApp, etc."></textarea>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit Buy Request (Codes Sent Instantly)</button>
-            </form>
-
-            <!-- SELL E-CODES FORM -->
-            <form id="ecode-sell-form" class="trade-form" style="display: none;">
-                <h3 style="color: var(--text-light); margin-top: 0;">Sell E-Gift Codes</h3>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="sell-ecode-type">E-Code Type <span class="required">*</span></label>
-                        <select id="sell-ecode-type" required>
-                            <option value="">-- Select Code Type --</option>
-                            <option value="iTunes Digital">iTunes Digital Code</option>
-                            <option value="Google Play Digital">Google Play Digital Code</option>
-                            <option value="Amazon Digital">Amazon Digital Code</option>
-                            <option value="Netflix Digital">Netflix Digital Code</option>
-                            <option value="Spotify Digital">Spotify Digital Code</option>
-                            <option value="PlayStation Network">PlayStation Network Code</option>
-                            <option value="Xbox Live">Xbox Live Code</option>
-                            <option value="Steam Wallet">Steam Wallet Code</option>
-                            <option value="Other">Other Digital Code</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="sell-ecode-value">Code Value <span class="required">*</span></label>
-                        <input type="number" id="sell-ecode-value" placeholder="e.g., 1000, 5000, 10000" min="500" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="sell-ecode-quantity">Quantity <span class="required">*</span></label>
-                        <input type="number" id="sell-ecode-quantity" placeholder="Number of codes" min="1" value="1" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="sell-ecode-sample">Sample Code (First 10 chars) <span class="required">*</span></label>
-                        <input type="text" id="sell-ecode-sample" placeholder="Don't reveal complete codes" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="sell-ecode-name">Full Name <span class="required">*</span></label>
-                        <input type="text" id="sell-ecode-name" placeholder="Your full name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="sell-ecode-email">Email Address <span class="required">*</span></label>
-                        <input type="email" id="sell-ecode-email" placeholder="your@email.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="sell-ecode-phone">Phone Number <span class="required">*</span></label>
-                        <input type="tel" id="sell-ecode-phone" placeholder="+234..." required>
-                    </div>
-                    <div class="form-group">
-                        <label for="sell-ecode-bankname">Bank Account Name <span class="required">*</span></label>
-                        <input type="text" id="sell-ecode-bankname" placeholder="Your bank account name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="sell-ecode-banknum">Bank Account Number <span class="required">*</span></label>
-                        <input type="text" id="sell-ecode-banknum" placeholder="Your account number" required>
-                    </div>
-                    <div class="form-group full">
-                        <label for="sell-ecode-notes">Additional Notes (Optional)</label>
-                        <textarea id="sell-ecode-notes" placeholder="Any special instructions..."></textarea>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit Sell Request</button>
-            </form>
+    <section class="exchange-container exchange-section" id="request" aria-labelledby="request-title">
+      <div class="exchange-request">
+        <div>
+          <p class="exchange-eyebrow">Manual quote request</p>
+          <h2 id="request-title">Tell us what you want to trade.</h2>
+          <p class="exchange-intro">Complete the form to prepare a message. Copy it, open our WhatsApp support chat, and send it yourself. A request is not an order or a payment.</p>
+          <p class="exchange-notice"><strong>Protect your information:</strong> Do not include gift-card codes, PINs, wallet recovery phrases, passwords, bank details or identity documents in this form or initial message.</p>
         </div>
+        <form id="exchange-form">
+          <div class="exchange-fields">
+            <label>I'd like to
+              <select id="trade-action" required>
+                <option value="Buy">Buy from brainboxX</option>
+                <option value="Sell">Sell to brainboxX</option>
+              </select>
+            </label>
+            <label>Asset type
+              <select id="asset-type" required>
+                <option value="">Select an asset type</option>
+                <option value="crypto">Digital currency</option>
+                <option value="physical">Physical gift card</option>
+                <option value="digital">E-gift code</option>
+              </select>
+            </label>
+            <label>Currency or card brand
+              <input id="asset-name" list="asset-suggestions" maxlength="80" placeholder="e.g. USDT or Amazon" required>
+              <datalist id="asset-suggestions"></datalist>
+            </label>
+            <label>Amount or card value
+              <input id="trade-amount" type="number" min="0" step="any" placeholder="e.g. 100" required>
+            </label>
+            <label>Amount unit
+              <input id="amount-unit" maxlength="30" placeholder="e.g. USDT, USD or NGN" required>
+            </label>
+            <label id="region-label">Card country or region
+              <input id="region" maxlength="80" placeholder="e.g. United States">
+            </label>
+            <label id="network-label">Currency network
+              <input id="network" maxlength="80" placeholder="e.g. ERC-20 or TRC-20">
+            </label>
+            <label id="payout-label">Preferred cash-out
+              <select id="payout">
+                <option value="Nigerian bank transfer">Nigerian bank transfer</option>
+                <option value="Crypto payout">Crypto payout (over $500)</option>
+              </select>
+            </label>
+            <label id="usd-label">Estimated trade value in USD
+              <input id="usd-estimate" type="number" min="0.01" step="any" placeholder="e.g. 600">
+              <span class="exchange-help">Crypto cash-out requests must be over $500. The team will confirm the value and availability.</span>
+            </label>
+          </div>
+          <label>Additional request details <span class="exchange-optional">(optional)</span>
+            <textarea id="trade-notes" maxlength="500" rows="5" placeholder="Share relevant non-sensitive details, such as the number of cards."></textarea>
+          </label>
+          <p id="form-error" class="exchange-error" role="alert" hidden></p>
+          <button class="exchange-button" type="submit">Prepare WhatsApp request</button>
+        </form>
+
+        <div id="request-result" class="exchange-result" hidden>
+          <h3>Your request is ready to copy</h3>
+          <p>This has not been sent. Copy the text, open WhatsApp, paste it into the chat and send it to our team.</p>
+          <label for="request-message">Request message</label>
+          <textarea id="request-message" rows="8" readonly></textarea>
+          <div class="exchange-actions">
+            <button type="button" class="exchange-button" id="copy-request">Copy request</button>
+            <a class="exchange-secondary" href="https://wa.me/message/YDNRHAYWZTXXD1" target="_blank" rel="noopener noreferrer">Open WhatsApp support</a>
+          </div>
+          <p id="copy-status" role="status"></p>
+        </div>
+      </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section class="container">
-        <h2 class="section-title">Frequently Asked Questions</h2>
-        <div style="max-width: 900px; margin: 0 auto 60px;">
-            <div class="faq-item">
-                <div class="faq-question">
-                    How fast do you respond? <span>+</span>
-                </div>
-                <div class="faq-answer">
-                    We respond to all trading requests within 45 minutes maximum! This includes verifying your order, confirming rates, and arranging payment or delivery.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    Is it safe to trade with you? <span>+</span>
-                </div>
-                <div class="faq-answer">
-                    Yes! We use secure payment methods, verify all transactions, and have been operating legitimately for years. All trades are protected with escrow service when needed.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    What payment methods do you accept? <span>+</span>
-                </div>
-                <div class="faq-answer">
-                    We accept bank transfers, card payments, mobile money, and direct payment. Payment method is discussed based on your trading type and preference.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    Do you buy/sell incomplete or used gift cards? <span>+</span>
-                </div>
-                <div class="faq-answer">
-                    We only accept complete, unused, and verified gift cards and e-codes. All products must be authentic and have original value intact.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    What's the minimum and maximum amount I can trade? <span>+</span>
-                </div>
-                <div class="faq-answer">
-                    Minimum: ?1,000. Maximum: Unlimited! We handle small and large trades. Contact us for bulk or special orders.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    Can I track my order status? <span>+</span>
-                </div>
-                <div class="faq-answer">
-                    Yes! After submission, you'll receive an Order ID via email. Use this to track your order status in real-time through your email updates.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    What if there's an issue with my order? <span>+</span>
-                </div>
-                <div class="faq-answer">
-                    Our customer support team is available 24/7. Contact us immediately with your Order ID and we'll resolve any issues within 24 hours.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    Do you offer bulk discounts? <span>+</span>
-                </div>
-                <div class="faq-answer">
-                    Yes! For large volume trades (?100,000+), we offer special bulk rates. Submit your request and our team will provide a custom quote.
-                </div>
-            </div>
-        </div>
+    <section class="exchange-container exchange-section" aria-labelledby="process-title">
+      <h2 id="process-title">How it works</h2>
+      <div class="exchange-cards">
+        <article class="exchange-card"><h3>1. Request a quote</h3><p>Tell us the asset, amount and region or network.</p></article>
+        <article class="exchange-card"><h3>2. Review the rate</h3><p>Our team confirms availability, the applicable rate and any fees before you agree.</p></article>
+        <article class="exchange-card"><h3>3. Complete the trade</h3><p>For sales, cash-out is handled manually by Nigerian bank transfer or, for eligible requests over $500, crypto. Our team confirms the arrangements.</p></article>
+      </div>
     </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <p>&copy; 2024 brainboxX. All rights reserved. | Crypto & Digital Assets Trading</p>
-    </footer>
-
-    <script>
-        // Tab switching
-        function switchTab(tabName, button) {
-            // Hide all forms
-            document.querySelectorAll('.trade-form').forEach(form => {
-                form.style.display = 'none';
-            });
-
-            // Remove active class from all buttons
-            if (button) {
-                document.querySelectorAll('.tab-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                button.classList.add('active');
-            }
-
-            // Show selected form
-            const formId = tabName + '-form';
-            const form = document.getElementById(formId);
-            if (form) {
-                form.style.display = 'block';
-                form.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-
-        // Form submissions
-        document.querySelectorAll('.trade-form').forEach(form => {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-
-                const formData = new FormData(this);
-                const data = Object.fromEntries(formData);
-                const orderId = 'ORD-' + Math.random().toString(36).substr(2, 9).toUpperCase();
-                const timestamp = new Date().toLocaleString('en-NG');
-
-                const order = {
-                    orderId,
-                    timestamp,
-                    type: this.id.replace('-form', ''),
-                    ...data
-                };
-
-                // Store in localStorage
-                const allOrders = JSON.parse(localStorage.getItem('cryptoOrders')) || [];
-                allOrders.push(order);
-                localStorage.setItem('cryptoOrders', JSON.stringify(allOrders));
-                localStorage.setItem('latestCryptoOrder', JSON.stringify(order));
-
-                alert(`? Order Submitted Successfully!\n\nOrder ID: ${orderId}\n\nWe will respond within 45 minutes.\nCheck your email for updates.`);
-
-                this.reset();
-                console.log('Order:', order);
-            });
-        });
-
-        // FAQ toggle
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', function() {
-                this.parentElement.classList.toggle('active');
-            });
-        });
-    </script>
-    <script src="payment-handler.js"></script>
-<script src="theme-toggle.js"></script>
-  </body>
+  </main>
+  <footer class="exchange-footer"><div class="exchange-container">brainboxX Digital Exchange &middot; <a href="brainboxtools.html">Back to home</a></div></footer>
+</body>
 </html>
